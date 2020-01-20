@@ -1,49 +1,52 @@
 import React, { Component } from 'react';
-import  './Welcome.css';
+import './Welcome.css';
 import { BrowserRouter as Router } from "react-router-dom";
 import {
-    MDBNavbar,
-    MDBNavbarBrand,
-    MDBNavbarNav,
-    MDBNavItem,
-    MDBNavLink,
-    MDBNavbarToggler,
-    MDBCollapse,
-    MDBMask,
-    MDBRow,
-    MDBCol,
-    MDBIcon,
-    MDBBtn,
-    MDBView,
-    MDBContainer,
-    MDBCard,
-    MDBCardBody,
-    MDBInput,
-    MDBFormInline,
-    MDBAnimation
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBNavbarNav,
+  MDBNavItem,
+  MDBNavLink,
+  MDBNavbarToggler,
+  MDBCollapse,
+  MDBMask,
+  MDBRow,
+  MDBCol,
+  MDBIcon,
+  MDBBtn,
+  MDBView,
+  MDBContainer,
+  MDBCard,
+  MDBCardBody,
+  MDBInput,
+  MDBFormInline,
+  MDBAnimation
 } from "mdbreact";
 
-
 class Welcome extends Component {
-    state = {
-        collapseID: ""
-      };
-    
-      toggleCollapse = collapseID => () =>
-        this.setState(prevState => ({
-          collapseID: prevState.collapseID !== collapseID ? collapseID : ""
-        }));
+  state = {
+    collapseID: ""
+  };
 
-    render() {
-        const overlay = (
-            <div
-              id="sidenav-overlay"
-              style={{ backgroundColor: "transparent" }}
-              onClick={this.toggleCollapse("navbarCollapse")}
-            />
-          );
-        return(
-             <div id="classicformpage">
+  toggleCollapse = collapseID => () =>
+    this.setState(prevState => ({
+      collapseID: prevState.collapseID !== collapseID ? collapseID : ""
+    }));
+
+  componentDidMount() {
+    console.log('print');
+  };
+
+  render() {
+    const overlay = (
+      <div
+        id="sidenav-overlay"
+        style={{ backgroundColor: "transparent" }}
+        onClick={this.toggleCollapse("navbarCollapse")}
+      />
+    );
+    return (
+      <div id="classicformpage">
         <Router>
           <div>
             <MDBNavbar dark expand="md" fixed="top">
@@ -85,8 +88,8 @@ class Welcome extends Component {
                   </h1>
                   <hr className="hr-light" />
                   <h6 className="mb-4">
-                  Request for Startup - Share and discover great startup ideas people actually want.
-                  Below is an updated Request for Startups (RFS), which outlines some of those ideas in general terms.
+                    Request for Startup - Share and discover great startup ideas people actually want.
+                    Below is an updated Request for Startups (RFS), which outlines some of those ideas in general terms.
                   </h6>
                   <MDBBtn outline color="white">
                     Learn More
@@ -113,12 +116,12 @@ class Welcome extends Component {
                           label="Your email"
                           icon="envelope"
                         />
-                       
+
                         <div className="text-center mt-4 black-text">
                           <MDBBtn color="indigo">Sign Up</MDBBtn>
                           <hr className="hr-light" />
                           <div className="text-center d-flex justify-content-center white-text">
-                           <p>subscribe to get all weekly updates</p>
+                            <p>subscribe to get all weekly updates</p>
                           </div>
                         </div>
                       </MDBCardBody>
@@ -130,8 +133,8 @@ class Welcome extends Component {
           </MDBMask>
         </MDBView>
       </div>
-        );
-    }
+    );
+  }
 }
 
 

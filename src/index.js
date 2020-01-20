@@ -8,6 +8,10 @@ import App from "./App";
 
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render( <App /> , document.getElementById('root'));
+// Import Bootstrap CSS and JS
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
+
+ReactDOM.render(<App />, document.getElementById('root'));
 
 registerServiceWorker();

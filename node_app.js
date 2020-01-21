@@ -9,4 +9,5 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(authRoute);
 
-app.length(5000);
+app.listen(5000);
+

@@ -8,12 +8,12 @@ class Forms extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ideas: [],
+            ideas: []
         };
     }
 
     componentDidMount() {
-        base('Table 1')
+        base('ideas')
             .select({
                 view: "Grid view",
                 cellFormat: "json"
@@ -36,6 +36,7 @@ class Forms extends Component {
                     <div className="col">
                         <div className="card-deck">
                             {this.state.ideas.map(idea => <ideaCard {...idea} />)}
+
                         </div>
                     </div>
                 </div>

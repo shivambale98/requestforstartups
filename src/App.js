@@ -6,9 +6,8 @@ import Forms from './containers/Forms';
 function App() {
   return (
     <div>
-      <Layout>
-        <Forms />
-      </Layout>
+      <Layout />
+      <Forms />
     </div>
   );
 }

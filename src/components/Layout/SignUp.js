@@ -21,7 +21,7 @@ class SignUp extends Component {
       <div>
         <MDBContainer>
           <MDBRow>
-            <MDBCol md="6">
+            <MDBCol md="12">
               <form class="login-form" action="http://localhost:5000/signup" method="POST">
                 <p className="h2 text-center mb-4">Sign up</p>
                 <div className="grey-text">

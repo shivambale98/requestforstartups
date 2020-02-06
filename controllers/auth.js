@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 const axios = require('axios');
 const path = require('path');
 //airtable
@@ -10,6 +10,10 @@ exports.postSignup = (req, res, next) => {
     const password = req.body.password;
     const confirmpassword = req.body.confirmPassword;
 
+    console.log(email);
+    console.log(password);
+    console.log(confirmpassword);
+/*
     if (password == confirmpassword) {
         var exist = false;
         base('users').select({
@@ -52,6 +56,7 @@ exports.postSignup = (req, res, next) => {
     } else {
         console.log("password does not match");
     }
+    */
 };
 
 exports.postLogin = (req, res, next) => {
@@ -60,7 +65,7 @@ exports.postLogin = (req, res, next) => {
     console.log(password);
     var exist = false;
     var topPassword;
-
+/*
     base('users').select({
         fields: ["Email", "Password"],
         cellFormat: "json",
@@ -96,4 +101,6 @@ exports.postLogin = (req, res, next) => {
         }, err => {
             //console.log(err);
         });
+        */
+
 };

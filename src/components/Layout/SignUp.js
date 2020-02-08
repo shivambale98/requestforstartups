@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-/*import './SignUp.css';*/
+import classes from './SignUp.module.css';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
+
 
 class SignUp extends Component {
   state = {
@@ -18,24 +19,51 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div>
+      <div className={classes.area}>
+      <h1 className={classes.header2}>Request for startups </h1> 
+      <div className={classes.Signupstyle}>
         <MDBContainer>
           <MDBRow>
             <MDBCol md="12">
               <form class="login-form" action="http://localhost:5000/signup" method="POST">
                 <p className="h2 text-center mb-4">Sign up</p>
                 <div className="grey-text">
-                  <input class="form-control" type="text" id="username" name="username" placeholder="username" />
-                  <input class="form-control" type="email" id="email" name="email" placeholder="email" />
-                  <input class="form-control" type="password" id="password" name="password" placeholder="password" />
-                  <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" placeholder="confirmpassword" />
+                  <MDBInput class="form-control" 
+                         label="User Name"
+                         type="text"
+                         icon="user"
+                         id="username" 
+                         name="username" 
+                         placeholder="username" />
+                  <MDBInput class="form-control" 
+                          label="Email"
+                          icon="envelope"
+                         type="email" 
+                         id="email" 
+                         name="email" 
+                         placeholder="email" />
+                  <MDBInput class="form-control" 
+                         label="Password"
+                         type="password" 
+                         icon="lock"
+                         id="password" 
+                         name="password" 
+                         placeholder="password" />
+                  <MDBInput class="form-control" 
+                         type="password" 
+                         label="confirm-password"
+                         icon="lock"
+                         id="confirmPassword" 
+                         name="confirmPassword" 
+                         placeholder="confirmpassword" />
                 </div>
-                <button type="submit">SignUp</button>
+                <MDBBtn type="submit">SignUp</MDBBtn>
               </form>
             </MDBCol>
           </MDBRow>
         </MDBContainer>
-      </div >
+     </div>
+     </div>
     )
   }
 

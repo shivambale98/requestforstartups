@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from './Ideaforms.module.css';
 import { MDBRow, MDBContainer, MDBCol } from 'mdbreact';
 
+
 const Ideaforms = (props) => (
     <div className={classes.parent}>
         <div className={classes.container}>
@@ -12,7 +13,7 @@ const Ideaforms = (props) => (
                     </MDBContainer>
                 </MDBRow>
             </MDBCol>
-            <button className={classes.btn}>
+            <button className={classes.btn} onClick={props.onUpvote}>
                 {props.upvote} upvotes
             </button>
         </div>

@@ -48,7 +48,7 @@ class Welcome extends Component {
   }
 
 
-  upvotebutton = recordid => {
+  upvotebuttonHandler = recordid => {
     const url = "http://localhost:5000/idea/upvote/" + recordid;
     fetch(url)
       .then(res => {
@@ -57,12 +57,19 @@ class Welcome extends Component {
       .then(resdata => {
         var { record } = resdata;
         var { id } = record;
-        this.state.redords.forEach(record => {
-          if (record.id === id) {
-            record.id = id;
-            console.log(record.id);
+        console.log(resdata);
+        var temp = [];
+        this.state.records.map(recordt => {
+          if (recordt.id === id) {
+            recordt = record;
+            temp.push(recordt);
+          } else {
+            temp.push(recordt);
           }
         });
+        console.log(temp);
+
+        this.setState({ records: temp });
 
       })
       .catch(err => {
@@ -88,6 +95,7 @@ class Welcome extends Component {
       return <Ideaforms
         problem={record.data.Problem}
         upvote={record.data.upvote}
+        onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
       />
     });
 

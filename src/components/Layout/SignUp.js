@@ -22,6 +22,7 @@ class SignUp extends Component {
       <div className={classes.area}>
         <h1 className={classes.header2}>Request for startups </h1>
         <div className={classes.Signupstyle}>
+          <p value='message'></p>
           <MDBContainer>
             <MDBRow>
               <MDBCol md="12">

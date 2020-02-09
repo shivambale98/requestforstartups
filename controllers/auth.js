@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 //airtable
@@ -9,6 +9,7 @@ exports.postSignup = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
     const confirmpassword = req.body.confirmPassword;
+    const username = req.body.username;
 
     if (password == confirmpassword) {
         var exist = false;
@@ -27,11 +28,14 @@ exports.postSignup = (req, res, next) => {
                 });
                 if (exist) {
                     console.log('user alredy exists');
+                    res.cookie('email_already_exits', true);
+                    res.redirect('http://localhost:3000/signup');
                 } else {
                     bcrypt.hash(password, 12)
                         .then(hashedpassword => {
                             base('users').create([{
                                 "fields": {
+                                    "Name": username,
                                     "Email": email,
                                     "Password": hashedpassword,
                                     "ideas": [],
@@ -40,9 +44,9 @@ exports.postSignup = (req, res, next) => {
                             }], (records, err) => {
                                 if (err) {
                                     console.log(err);
-                                    res.redirect('http://localhost:3000/');
                                 } else {
                                     console.log('new user added');
+                                    res.redirect('http://localhost:3000/');
                                 }
                             })
                         });

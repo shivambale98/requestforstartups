@@ -12,11 +12,12 @@ exports.Postidea = (req, res, next) => {
     try {
         decodedtoken = jwt.verify(token, 'heyphil123');
     } catch (err) {
-        err.statusCode = 500;
-        throw err;
+        //res.json({ messege: 'Login in to submit ideas' });
+        res.redirect('http://localhost:3000/login');
     }
     if (!decodedtoken) {
-        res.statusCode(402).json({ messege: 'Login in to submit ideas' });
+        //res.json({ messege: 'Login in to submit ideas' });
+        res.redirect('http://localhost:3000/login');
     } else {
         const email = decodedtoken.email;
         let toprecord;
@@ -38,11 +39,10 @@ exports.Postidea = (req, res, next) => {
                 if (exist) {
                     base('ideas').create([{
                         "fields": {
-                            "Name": name,
-                            "Solution": solution,
                             "user": [toprecord.id],
                             "Domain": domain,
-                            "Problem": problem
+                            "Problem": problem,
+                            "upvote": 0
                         }
                     }], (err, results) => {
                         if (err) {
@@ -71,10 +71,11 @@ exports.getideas = (req, res, next) => {
         records.forEach((record) => {
             var { fields } = record;
             var { id } = record;
+
             var parsedrecord = {
                 id: id,
                 data: fields
-            };
+            }
             recordlist.push(parsedrecord);
         });
 
@@ -94,6 +95,19 @@ exports.getideas = (req, res, next) => {
     });
 
 };
+
+exports.getuser = (req, res, next) => {
+    var userid = req.params.userid;
+    base('users').find(userid, (err, record) => {
+        if (err) { console.error(err); return; }
+        var email = record.fields.Email;
+        res.json({
+            email: email
+        });
+    });
+
+};
+
 
 exports.putupvote = (req, res, next) => {
     const ideaId = req.params.ideaid;

@@ -8,6 +8,8 @@ router.post('/addidea', ideacontoler.Postidea);
 
 router.get('/', ideacontoler.getideas);
 
+router.get('/getusers/:userid', ideacontoler.getuser);
+
 router.get('/idea/upvote/:ideaid', ideacontoler.putupvote);
 
 module.exports = router;

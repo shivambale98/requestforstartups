@@ -33,20 +33,43 @@ class Welcome extends Component {
   };
 
   componentDidMount() {
-    const url = 'http://localhost:5000/';
-    fetch(url)
+    const ideasurl = 'http://localhost:5000/';
+    fetch(ideasurl)
       .then(res => {
         return res.json();
       })
       .then(resdata => {
         this.setState({ records: resdata.recordlist });
-        console.log(this.state.records);
+        return this.state.records;
+      })
+      .then(records => {
+        records.map(((record, index) => {
+          this.getuser(record.data.user[0], index);
+        }));
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+  }
+
+  getuser = (userid, index) => {
+    //console.log(userid);
+    var url = 'http://localhost:5000/getusers/' + userid;
+    fetch(url)
+      .then(res => {
+        return res.json();
+      })
+      .then(resdata => {
+        var email = resdata.email;
+        //console.log(email);
+        this.state.records[index].email = email;
+        this.setState({});
       })
       .catch(err => {
         console.log(err);
       });
   }
-
 
   upvotebuttonHandler = recordid => {
 
@@ -62,7 +85,9 @@ class Welcome extends Component {
         var temp = [];
         this.state.records.map(recordt => {
           if (recordt.id === id) {
+            var temprecord = recordt;
             recordt = record;
+            recordt.email = temprecord.email;
             temp.push(recordt);
           } else {
             temp.push(recordt);
@@ -92,8 +117,9 @@ class Welcome extends Component {
       />
     );
 
-    const ideas = this.state.records.map(record => {
+    const ideas = this.state.records.map((record, index) => {
       return <Ideaforms
+        email={record.email}
         problem={record.data.Problem}
         upvote={record.data.upvote}
         onUpvote={this.upvotebuttonHandler.bind(this, record.id)}

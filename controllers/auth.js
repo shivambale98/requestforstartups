@@ -90,7 +90,8 @@ exports.postLogin = (req, res, next) => {
                         if (exist && doMatch) {
                             console.log('loggedin');
                             const token = jwt.sign({
-                                email: email
+                                email: email,
+                                loggedin: true
                             }, 'heyphil123');
                             console.log(token);
                             res.cookie('jwttoken', token);

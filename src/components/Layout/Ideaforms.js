@@ -12,7 +12,7 @@ const Ideaforms = (props) => (
                 <MDBRow>
                     <MDBContainer>
                         <div>
-                            <p className={classes.head}>problem: </p>
+                            <p className={classes.head}>{props.email + ":"} </p>
                             <p className={classes.title}>{props.problem} </p>
                         </div>
                     </MDBContainer>

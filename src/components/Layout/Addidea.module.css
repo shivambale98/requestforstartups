@@ -1,0 +1,32 @@
+.idea{
+    background:#c5cae9 ;  
+    background: -webkit-linear-gradient(to left, #8f94fb, #c5cae9);  
+    height: 100vh;
+}
+
+
+.head{
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #1a237e;
+    text-align: center;
+    margin-bottom: 30px;
+    padding-top: 5px;
+}
+
+
+.para{
+    font-weight: lighter;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: inherit;
+    color: #1a237e;
+    text-align: left;    
+}
+
+.lab{
+    font-weight: lighter;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: inherit;
+    color: #1a237e;
+    text-align: left;
+}

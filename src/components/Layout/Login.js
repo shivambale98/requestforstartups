@@ -16,12 +16,12 @@ class Login extends Component {
               <p className="h2 text-center mb-4">Sign in</p>
                 <div className="grey-text">
                     <MDBInput class="form-control" 
-                      label="User Name"
+                      label="Email"
                       type="text"
                       icon="user"
                       id="username" 
-                      name="username" 
-                      placeholder="username" />
+                      name="Email" 
+                      placeholder="Email"/>
                     <MDBInput class="form-control"
                       label="Password"
                       icon="lock" 

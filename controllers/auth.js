@@ -1,6 +1,6 @@
-//const bcrypt = require('bcrypt');
-const axios = require('axios');
+const bcrypt = require('bcrypt');
 const path = require('path');
+const jwt = require('jsonwebtoken');
 //airtable
 var Airtable = require('airtable');
 var base = new Airtable({ apiKey: 'key6g32DRULc2ELR4' }).base('appTIhrtdSQzoGMIf');
@@ -10,10 +10,6 @@ exports.postSignup = (req, res, next) => {
     const password = req.body.password;
     const confirmpassword = req.body.confirmPassword;
 
-    console.log(email);
-    console.log(password);
-    console.log(confirmpassword);
-/*
     if (password == confirmpassword) {
         var exist = false;
         base('users').select({
@@ -38,7 +34,8 @@ exports.postSignup = (req, res, next) => {
                                 "fields": {
                                     "Email": email,
                                     "Password": hashedpassword,
-                                    "ideas": []
+                                    "ideas": [],
+                                    "comments": []
                                 }
                             }], (records, err) => {
                                 if (err) {
@@ -56,16 +53,15 @@ exports.postSignup = (req, res, next) => {
     } else {
         console.log("password does not match");
     }
-    */
+
 };
 
 exports.postLogin = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
-    console.log(password);
     var exist = false;
     var topPassword;
-/*
+
     base('users').select({
         fields: ["Email", "Password"],
         cellFormat: "json",
@@ -88,6 +84,11 @@ exports.postLogin = (req, res, next) => {
                         console.log(doMatch);
                         if (exist && doMatch) {
                             console.log('loggedin');
+                            const token = jwt.sign({
+                                email: email
+                            }, 'heyphil123');
+                            console.log(token);
+                            res.cookie('jwttoken', token);
                             res.redirect('http://localhost:3000/');
                         } else {
                             console.log('wrong password');
@@ -99,8 +100,6 @@ exports.postLogin = (req, res, next) => {
             }
 
         }, err => {
-            //console.log(err);
+            console.log(err);
         });
-        */
-
 };

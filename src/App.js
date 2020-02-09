@@ -4,20 +4,18 @@ import Welcome from './components/Layout/Welcome';
 import SignUp from './components/Layout/SignUp';
 import Login from './components/Layout/Login';
 import Addidea from './components/Layout/Addidea';
-import {BrowserRouter, Route, Switch } from 'react-router-dom';
-import Ideaforms from './components/Layout/Ideaforms';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
     <BrowserRouter>
-    <div>
+      <div>
         <Menu />
-        <Route path="/" exact component= {Welcome} />
+        <Route path="/" exact component={Welcome} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
-        <Route path="/addidea" component={Addidea}/>
-        <Ideaforms />
-    </div>
+        <Route path="/addidea" component={Addidea} />
+      </div>
     </BrowserRouter>
   );
 }

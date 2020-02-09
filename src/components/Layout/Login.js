@@ -1,45 +1,46 @@
-import React from 'react';
-import './Login.css';
+import React, { Component } from 'react';
+import classes from './Login.module.css';
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 
 
-const Login = () => {
+class Login extends Component {
+  render() {
     return (
-        <div className="Loginstyle">
-            <MDBContainer>
-                <MDBRow>
-                    <MDBCol md="6">
-                        <form action='http://localhost:5000/login' method='POST'>
-                            <p className="h2 text-center mb-4">Login</p>
-                            <div className="grey-text">
-                                <MDBInput
-                                    label="Type your email"
-                                    icon="envelope"
-                                    group
-                                    type="email"
-                                    validate
-                                    error="wrong"
-                                    success="right"
-                                    name="email"
-                                />
-                                <MDBInput
-                                    label="Type your password"
-                                    icon="lock"
-                                    group
-                                    type="password"
-                                    validate
-                                    name="password"
-                                />
-                            </div>
-                            <div className="text-center">
-                                <MDBBtn type="submit">Login</MDBBtn>
-                            </div>
-                        </form>
-                    </MDBCol>
-                </MDBRow>
-            </MDBContainer>
-        </div>
+      <div className={classes.back}>
+        <h1 className={classes.header}>Request for startups </h1>
+        <div className={classes.Loginstyle}>
+          <MDBContainer>
+            <MDBRow>
+              <MDBCol md="12">
+                <form class="login-form" action="http://localhost:5000/login" method="POST">
+                  <p className="h2 text-center mb-4">Sign in</p>
+                  <div className="grey-text">
+                    <MDBInput class="form-control"
+                      label="User Name"
+                      type="text"
+                      icon="user"
+                      id="username"
+                      name="username"
+                      placeholder="username" />
+                    <MDBInput class="form-control"
+                      label="Password"
+                      icon="lock"
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="password" />
+                  </div>
+                  <div className="text-center">
+                    <MDBBtn type="submit">Login</MDBBtn>
+                  </div>
+                </form>
+              </MDBCol>
+            </MDBRow>
+          </MDBContainer>
+        </div >
+      </div>
     )
+  };
 }
 
 

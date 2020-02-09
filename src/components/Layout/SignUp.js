@@ -1,56 +1,72 @@
-import React from 'react';
-/*import './SignUp.css';*/
+import React, { Component } from 'react';
+import classes from './SignUp.module.css';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
 
 
-const SignUp = () => {
-  return (
-    <div>
-      <MDBContainer>
-        <MDBRow>
-          <MDBCol md="6">
-            <form action="http://localhost:5000/signup" method="POST">
-              <p className="h2 text-center mb-4">Sign up</p>
-              <div className="grey-text">
-                <MDBInput
-                  label="Your email"
-                  icon="envelope"
-                  group
-                  type="email"
-                  validate
-                  error="wrong"
-                  success="right"
-                  name="email"
-                />
-                <MDBInput
-                  label="Password"
-                  icon="exclamation-triangle"
-                  group
-                  type="text"
-                  validate
-                  error="wrong"
-                  success="right"
-                  name="password"
-                />
-                <MDBInput
-                  label="Confirm password"
-                  icon="lock"
-                  group
-                  type="password"
-                  validate
-                  name="confirmPassword"
-                />
-              </div>
-              <div className="text-center">
-                <MDBBtn color="primary" type='submit'>SignUp</MDBBtn>
-              </div>
-            </form>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
-    </div>
-  )
-}
+class SignUp extends Component {
+  state = {
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  }
 
+  handleChange = e => {
+    const inputId = e.target.name;
+    const value = e.target.value;
+    this.setState({ [inputId]: value })
+  }
+
+  render() {
+    return (
+      <div className={classes.area}>
+        <h1 className={classes.header2}>Request for startups </h1>
+        <div className={classes.Signupstyle}>
+          <MDBContainer>
+            <MDBRow>
+              <MDBCol md="12">
+                <form class="login-form" action="http://localhost:5000/signup" method="POST">
+                  <p className="h2 text-center mb-4">Sign up</p>
+                  <div className="grey-text">
+                    <MDBInput class="form-control"
+                      label="User Name"
+                      type="text"
+                      icon="user"
+                      id="username"
+                      name="username"
+                      placeholder="username" />
+                    <MDBInput class="form-control"
+                      label="Email"
+                      icon="envelope"
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="email" />
+                    <MDBInput class="form-control"
+                      label="Password"
+                      type="password"
+                      icon="lock"
+                      id="password"
+                      name="password"
+                      placeholder="password" />
+                    <MDBInput class="form-control"
+                      type="password"
+                      label="confirm-password"
+                      icon="lock"
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      placeholder="confirmpassword" />
+                  </div>
+                  <MDBBtn type="submit">SignUp</MDBBtn>
+                </form>
+              </MDBCol>
+            </MDBRow>
+          </MDBContainer>
+        </div>
+      </div>
+    )
+  }
+
+};
 
 export default SignUp;

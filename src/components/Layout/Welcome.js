@@ -121,8 +121,11 @@ class Welcome extends Component {
             </MDBMask>
           </MDBView>
         </div>
+        <div id="text">
+        <h1>This is where we provide the solution to every problem </h1>
+        </div>
         {ideas}
-      </Aux>
+       </Aux>
     );
   }
 }

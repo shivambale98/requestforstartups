@@ -22,8 +22,8 @@ import {
     MDBFormInline,
     MDBAnimation
 } from "mdbreact";
-
-
+import Ideaforms from './Ideaforms';
+import Aux from '../../hoc/Auxiliary';
 
 
 class Welcome extends Component {
@@ -45,12 +45,10 @@ class Welcome extends Component {
             />
           );
         return(
+          <Aux>
              <div id="classicformpage">
-       
-        
-        <MDBView>
-        
-          <MDBMask className="d-flex justify-content-center align-items-center gradient">
+       <MDBView>
+         <MDBMask className="d-flex justify-content-center align-items-center gradient">
             <MDBContainer>
               <MDBRow>
              
@@ -76,6 +74,8 @@ class Welcome extends Component {
           </MDBMask>
         </MDBView>
       </div>
+      <Ideaforms  />
+      </Aux>
         );
     }
 }

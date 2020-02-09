@@ -34,7 +34,8 @@ exports.postSignup = (req, res, next) => {
                                 "fields": {
                                     "Email": email,
                                     "Password": hashedpassword,
-                                    "ideas": []
+                                    "ideas": [],
+                                    "comments": []
                                 }
                             }], (records, err) => {
                                 if (err) {

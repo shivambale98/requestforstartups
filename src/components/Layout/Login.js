@@ -20,7 +20,7 @@ class Login extends Component {
                       type="text"
                       icon="user"
                       id="username"
-                      name="username"
+                      name="email"
                       placeholder="username" />
                     <MDBInput class="form-control"
                       label="Password"

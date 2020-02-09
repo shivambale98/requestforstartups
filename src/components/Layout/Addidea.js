@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon } from 'mdbreact';
 //import Cookies from 'universal-cookie';
 import Cookies from 'js-cookie';
+import classes from './Addidea.module.css';
 
 class Addidea extends Component {
   state = {
@@ -46,7 +47,6 @@ class Addidea extends Component {
                   <textarea name="solution" class="form-control" id="exampleFormControlTextarea2" rows="3" placeholder="Solution"></textarea>
                 </div>
 
-                <input type='hidden' name='jwttoken' value={this.state.token}></input>
 
                 <div className="text-center mt-4">
                   <MDBBtn color="warning" outline type="submit">

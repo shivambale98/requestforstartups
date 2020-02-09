@@ -6,6 +6,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 class Login extends Component {
   render() {
     return (
+
       <div className={classes.back}>
         <h1 className={classes.header}>Request for startups </h1>
         <div className={classes.Loginstyle}>
@@ -16,12 +17,12 @@ class Login extends Component {
                   <p className="h2 text-center mb-4">Sign in</p>
                   <div className="grey-text">
                     <MDBInput class="form-control"
-                      label="User Name"
+                      label="Email"
                       type="text"
                       icon="user"
-                      id="username"
+                      id="email"
                       name="email"
-                      placeholder="username" />
+                      placeholder="Email" />
                     <MDBInput class="form-control"
                       label="Password"
                       icon="lock"

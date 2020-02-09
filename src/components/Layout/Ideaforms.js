@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 import classes from './Ideaforms.module.css';
+import { MDBRow, MDBContainer, MDBCol } from 'mdbreact';
 
-
-
-
-class Ideaforms extends Component {
-
-
-    render () {
-        return (
-        <div className={classes.parent}>    
-           <div className={classes.container}>
-            <h4 className={classes.title}> startup 1 </h4>
+const Ideaforms = (props) => (
+    <div className={classes.parent}>
+        <div className={classes.container}>
+            <MDBCol md="10">
+                <MDBRow>
+                    <MDBContainer>
+                        <h4 className={classes.title}> {props.problem} </h4>
+                    </MDBContainer>
+                </MDBRow>
+            </MDBCol>
             <button className={classes.btn}>
-            {this.props.upvote} upvotes
+                {props.upvote} upvotes
             </button>
-           </div>
-       </div>
-        );
-    }
-}
+        </div>
+    </div>
+);
 
 export default Ideaforms;

@@ -4,10 +4,8 @@ var Airtable = require('airtable');
 var base = new Airtable({ apiKey: 'key6g32DRULc2ELR4' }).base('appTIhrtdSQzoGMIf');
 
 exports.Postidea = (req, res, next) => {
-    const name = req.body.name;
     const domain = req.body.domain;
     const problem = req.body.problem;
-    const solution = req.body.solution;
     const token = req.body.jwttoken;
 
     var decodedtoken;

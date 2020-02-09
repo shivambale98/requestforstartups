@@ -21,9 +21,9 @@ class Addidea extends Component {
           <MDBRow>
             <MDBCol md="12">
               <form action='http://localhost:5000/addidea' method='POST'>
-                <p class="h4 mb-4">Startup Idea</p>
-                <p class="h6 mb-6">Tell us about your idea</p><br /><br />
-                <label>Select the domain of your startup</label>
+                <h3 className={classes.head}>Startup Idea</h3>
+                <h5 className={classes.para}>Tell us about your idea</h5><br /><br />
+                <label className={classes.lab}>Select the domain of your startup</label>
                 <select class="browser-default custom-select mb-4" name='domain' required>
                   <option value="" disabled selected hidden>Select domain</option>
                   <option value="AI/ML" >AI/ML</option>
@@ -35,22 +35,16 @@ class Addidea extends Component {
                   <option value="Game Development">Game Development</option>
                 </select>
 
+                <label className={classes.lab}>Add your problem statement here!</label>
                 <div class="form-group">
-                  <input type='text' name="name" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Name"></input>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="6" placeholder="Problem" name="problem"></textarea>
                 </div>
 
-                <div class="form-group">
-                  <textarea name="problem" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Problem"></textarea>
-                </div>
-
-                <div class="form-group">
-                  <textarea name="solution" class="form-control" id="exampleFormControlTextarea2" rows="3" placeholder="Solution"></textarea>
-                </div>
-
+                <input type='hidden' value={this.state.token} name='jwttoken' />
 
                 <div className="text-center mt-4">
-                  <MDBBtn color="warning" outline type="submit">
-                    Send
+                  <MDBBtn color="primary" outline type="submit">
+                    Submit
                     <MDBIcon far icon="paper-plane" className="ml-2" />
                   </MDBBtn>
                 </div>

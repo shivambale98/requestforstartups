@@ -3,21 +3,35 @@ import classes from './Ideaforms.module.css';
 import { MDBRow, MDBContainer, MDBCol } from 'mdbreact';
 
 
+
 const Ideaforms = (props) => (
+
     <div className={classes.parent}>
         <div className={classes.container}>
             <MDBCol md="10">
                 <MDBRow>
                     <MDBContainer>
-                        <h4 className={classes.title}> {props.problem} </h4>
+                        <div>
+                            <p className={classes.head}>problem: </p>
+                            <p className={classes.title}>{props.problem} </p>
+                        </div>
                     </MDBContainer>
                 </MDBRow>
             </MDBCol>
+            <div className={classes.comments}>
+
+                <p>
+                    <i class="fas fa-comment"> Comments
+            </i>
+                </p>
+            </div>
             <button className={classes.btn} onClick={props.onUpvote}>
-                {props.upvote} upvotes
+                {props.upvote}   Upvote
             </button>
+
         </div>
     </div>
+
 );
 
 export default Ideaforms;

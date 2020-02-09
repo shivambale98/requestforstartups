@@ -6,6 +6,7 @@ var Airtable = require('airtable');
 var base = new Airtable({ apiKey: 'key6g32DRULc2ELR4' }).base('appTIhrtdSQzoGMIf');
 
 exports.postSignup = (req, res, next) => {
+
     const email = req.body.email;
     const password = req.body.password;
     const confirmpassword = req.body.confirmPassword;
@@ -106,4 +107,6 @@ exports.postLogin = (req, res, next) => {
         }, err => {
             console.log(err);
         });
+
 };
+

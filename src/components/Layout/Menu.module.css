@@ -2,18 +2,33 @@
 .Menustyle{
     width:100%;
     height: 80px;
-    background: #290066;
+    background: #1a237e;
     color: white;
 } 
 
 .Menustyle ul {
-    height: 100px;
+    background:#c5cae9 ; 
+    list-style: none;
     display: flex;
+    width: 50%;
+    height: 100%;
     justify-content: space-around;
     align-items: center;
+    margin-left: auto;
+    border-radius: 10px 0px 0px 10px ;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+
 }
 .Menustyle ul li {
     list-style: none;
     text-transform: uppercase;
-    color: blue;
+    color: white;
+}
+
+.links{
+    list-style: none;
+    text-transform: uppercase;
+    color: white;
 }

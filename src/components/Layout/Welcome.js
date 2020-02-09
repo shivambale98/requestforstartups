@@ -49,6 +49,7 @@ class Welcome extends Component {
 
 
   upvotebuttonHandler = recordid => {
+
     const url = "http://localhost:5000/idea/upvote/" + recordid;
     fetch(url)
       .then(res => {
@@ -129,6 +130,9 @@ class Welcome extends Component {
               </MDBContainer>
             </MDBMask>
           </MDBView>
+        </div>
+        <div id="text">
+          <h1>This is where we provide the solution to every problem </h1>
         </div>
         {ideas}
       </Aux>

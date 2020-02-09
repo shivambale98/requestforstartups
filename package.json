@@ -7,11 +7,16 @@
     "airtable": "^0.8.1",
     "axios": "^0.19.2",
     "bcrypt": "^3.0.7",
+    "js-cookie": "^2.2.1",
+    "js-cookies": "^1.0.4",
+    "jsonwebtoken": "^8.5.1",
     "mdbreact": "4.24.0",
     "react": "^16.9.0",
+    "react-cookie": "^4.0.3",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "universal-cookie": "^4.0.3"
   },
   "scripts": {
     "start": "react-scripts start",

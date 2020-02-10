@@ -6,10 +6,10 @@ import Cookies from 'js-cookie';
 class Menu extends Component {
     state = {
         token: '',
-        loglink: '',
-        logstatus: '',
-        signlink: '',
-        signstatus: ''
+        loglink: '/login',
+        logstatus: 'Login',
+        signlink: '/signup',
+        signstatus: 'Signup'
     };
 
     componentDidMount() {
@@ -20,13 +20,11 @@ class Menu extends Component {
     }
 
     linkassign = (token) => {
-        const url = 'http://localhost:5000/menu';
-        const formdata = new FormData();
-        formdata.append('token', token);
-        fetch(url, {
-            method: 'POST',
-            body: formdata
-        })
+        console.log(token);
+        const url = 'http://localhost:5000/getmenu/' + token;
+        //const formdata = new FormData();
+        //formdata.append('toks', token);
+        fetch(url)
             .then(res => {
                 return res.json();
             })
@@ -45,11 +43,15 @@ class Menu extends Component {
     }
 
     render() {
+        // if (this.state.loglink === '/login') {
+        //     console.log('hey');
+        //     Cookies.remove('jwttoken');
+        // }
         return (
             <div className={classes.Menustyle}>
                 <ul className={classes.ul}>
                     <li className={classes.li}> <Link className={classes.links} to="/"> HOME </Link> </li>
-                    <li className={classes.li}> <Link className={classes.links} to={this.state.loglink}> {this.state.logstatus} </Link> </li>
+                    <li className={classes.li}> <Link className={classes.links} to={this.state.loglink}> {this.state.logstatus}</Link> </li>
                     <li className={classes.li}> <Link className={classes.links} to={this.state.signlink}> {this.state.signstatus} </Link> </li>
                     <li className={classes.li}> <Link className={classes.links} to="/addidea">ADD-IDEA </Link></li>
                 </ul>

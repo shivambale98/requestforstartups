@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Welcome.css';
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Redirect } from "react-router-dom";
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -29,7 +29,8 @@ import Aux from '../../hoc/Auxiliary';
 class Welcome extends Component {
   state = {
     collapseID: "",
-    records: []
+    records: [],
+    link: ''
   };
 
   componentDidMount() {
@@ -81,6 +82,7 @@ class Welcome extends Component {
       .then(resdata => {
         var { record } = resdata;
         var { id } = record;
+        var { link } = resdata;
         console.log(resdata);
         var temp = [];
         this.state.records.map(recordt => {
@@ -96,7 +98,7 @@ class Welcome extends Component {
         console.log(temp);
 
         this.setState({ records: temp });
-
+        this.setState({ link: link });
       })
       .catch(err => {
         console.log(err);

@@ -4,6 +4,6 @@ const router = express.Router();
 
 const menucontoler = require('../controllers/menu');
 
-router.post('/menu', menucontoler.getmenu);
+router.get('/getmenu/:token', menucontoler.postmenu);
 
 module.exports = router;

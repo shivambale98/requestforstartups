@@ -96,6 +96,7 @@ exports.postLogin = (req, res, next) => {
                             console.log(token);
                             res.cookie('jwttoken', token);
                             res.redirect('http://localhost:3000/');
+
                         } else {
                             console.log('wrong password');
                         }
@@ -110,4 +111,3 @@ exports.postLogin = (req, res, next) => {
         });
 
 };
-

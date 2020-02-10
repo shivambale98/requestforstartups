@@ -138,7 +138,8 @@ exports.putupvote = (req, res, next) => {
                             };
                             res.json({
                                 messege: 'sent',
-                                record: parsedrecord
+                                record: parsedrecord,
+                                link: '/'
                             });
 
                         }

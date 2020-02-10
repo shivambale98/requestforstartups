@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken');
 
-exports.getmenu = (req, res, next) => {
-    const token = req.body.token;
-    console.log(req.body);
+exports.postmenu = (req, res, next) => {
+    const token = req.params.token;
     var decodedtoken;
     try {
         decodedtoken = jwt.verify(token, 'heyphil123');

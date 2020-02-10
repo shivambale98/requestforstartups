@@ -19,9 +19,10 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(bodyParser.json());
-
-app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(menuRoute);
 app.use(authRoute);

@@ -42,11 +42,16 @@ class Menu extends Component {
 
     }
 
+    logout = () => {
+        if (this.state.loglink === '/logout') {
+            if (this.state.token) {
+                console.log('hey');
+                Cookies.remove('jwttoken');
+            }
+        }
+    }
+
     render() {
-        // if (this.state.loglink === '/login') {
-        //     console.log('hey');
-        //     Cookies.remove('jwttoken');
-        // }
         return (
             <div className={classes.Menustyle}>
                 <ul className={classes.ul}>

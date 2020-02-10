@@ -42,14 +42,18 @@ exports.postSignup = (req, res, next) => {
                                     "ideas": [],
                                     "comments": []
                                 }
-                            }], (records, err) => {
-                                if (err) {
-                                    console.log(err);
+                            }], (record, err) => {
+                                if (record) {
+                                    console.log(record);
+                                    return record;
                                 } else {
-                                    console.log('new user added');
-                                    res.redirect('http://localhost:3000/');
+                                    console.log(err);
                                 }
                             })
+                        })
+                        .then(rec => {
+                            console.log('new user added');
+                            res.redirect('http://localhost:3000/');
                         });
                 }
             }, err => {

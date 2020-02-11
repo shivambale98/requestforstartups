@@ -24,7 +24,7 @@ import {
 } from "mdbreact";
 import Ideaforms from './Ideaforms';
 import Aux from '../../hoc/Auxiliary';
-
+const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
 
 class Welcome extends Component {
   state = {
@@ -34,7 +34,7 @@ class Welcome extends Component {
   };
 
   componentDidMount() {
-    const ideasurl = process.env.home;
+    const ideasurl = 'https://gentle-retreat-77560.herokuapp.com/';
     fetch(ideasurl)
       .then(res => {
         return res.json();
@@ -47,6 +47,7 @@ class Welcome extends Component {
         records.map(((record, index) => {
           this.getuser(record.data.user[0], index);
         }));
+        console.log('done');
       })
       .catch(err => {
         console.log(err);
@@ -56,7 +57,7 @@ class Welcome extends Component {
 
   getuser = (userid, index) => {
     //console.log(userid);
-    var url = process.env.getusers + userid;
+    var url = mainurl + '/getusers/' + userid;
     fetch(url)
       .then(res => {
         return res.json();
@@ -74,7 +75,7 @@ class Welcome extends Component {
 
   upvotebuttonHandler = recordid => {
 
-    const url = process.env.home + "/idea/upvote/" + recordid;
+    const url = mainurl + "/idea/upvote/" + recordid;
     fetch(url)
       .then(res => {
         return res.json();

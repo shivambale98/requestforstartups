@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './SignUp.module.css';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
-
+const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
 
 class SignUp extends Component {
   state = {
@@ -26,7 +26,7 @@ class SignUp extends Component {
           <MDBContainer>
             <MDBRow>
               <MDBCol md="12">
-                <form class="login-form" action={process.env.home + '/signup'} method="POST">
+                <form class="login-form" action={mainurl + '/signup'} method="POST">
                   <p className="h2 text-center mb-4">Sign up</p>
                   <div className="grey-text">
                     <MDBInput class="form-control"

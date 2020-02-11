@@ -34,7 +34,7 @@ class Welcome extends Component {
   };
 
   componentDidMount() {
-    const ideasurl = 'http://localhost:5000/';
+    const ideasurl = process.env.home;
     fetch(ideasurl)
       .then(res => {
         return res.json();
@@ -56,7 +56,7 @@ class Welcome extends Component {
 
   getuser = (userid, index) => {
     //console.log(userid);
-    var url = 'http://localhost:5000/getusers/' + userid;
+    var url = process.env.getusers + userid;
     fetch(url)
       .then(res => {
         return res.json();
@@ -74,7 +74,7 @@ class Welcome extends Component {
 
   upvotebuttonHandler = recordid => {
 
-    const url = "http://localhost:5000/idea/upvote/" + recordid;
+    const url = process.env.home + "/idea/upvote/" + recordid;
     fetch(url)
       .then(res => {
         return res.json();

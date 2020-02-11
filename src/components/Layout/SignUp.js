@@ -26,7 +26,7 @@ class SignUp extends Component {
           <MDBContainer>
             <MDBRow>
               <MDBCol md="12">
-                <form class="login-form" action="http://localhost:5000/signup" method="POST">
+                <form class="login-form" action={process.env.home + '/signup'} method="POST">
                   <p className="h2 text-center mb-4">Sign up</p>
                   <div className="grey-text">
                     <MDBInput class="form-control"

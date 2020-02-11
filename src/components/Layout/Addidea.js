@@ -21,7 +21,7 @@ class Addidea extends Component {
         <MDBContainer>
           <MDBRow>
             <MDBCol md="12">
-              <form action='http://localhost:5000/addidea' method='POST'>
+              <form action={process.env.home + '/addidea'} method='POST'>
                 <h3 className={classes.head}>Startup Idea</h3>
                 <h5 className={classes.para}>Tell us about your idea</h5><br /><br />
                 <label className={classes.lab}>Select the domain of your startup</label>

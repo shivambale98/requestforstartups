@@ -12,7 +12,7 @@ class Addidea extends Component {
 
   componentDidMount() {
     const token = Cookies.get('jwttoken');
-    //console.log(token);
+    console.log(token);
     this.setState({ token: token });
   }
 

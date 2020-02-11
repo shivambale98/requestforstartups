@@ -16,7 +16,7 @@ class Menu extends Component {
     componentDidMount() {
         const token = Cookies.get('jwttoken');
         this.setState({ token: token });
-        //console.log(token);
+        console.log(token);
         this.linkassign(token);
     }
 

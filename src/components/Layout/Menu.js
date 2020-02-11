@@ -2,6 +2,7 @@ import classes from './Menu.module.css';
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';
+const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
 
 class Menu extends Component {
     state = {
@@ -21,7 +22,7 @@ class Menu extends Component {
 
     linkassign = (token) => {
         console.log(token);
-        const url = 'http://localhost:5000/getmenu/' + token;
+        const url = mainurl + '/getmenu/' + token;
         //const formdata = new FormData();
         //formdata.append('toks', token);
         fetch(url)

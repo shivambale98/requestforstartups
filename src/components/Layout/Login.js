@@ -39,18 +39,8 @@ class Login extends Component {
       })
       .then(resdata => {
         const token = resdata.token;
-        var decodedtoken;
-        try {
-          decodedtoken = jwt.verify(token, 'heyphil123');
-        } catch (err) {
-
-        }
-        if (decodedtoken) {
-          const email = decodedtoken.email;
-          Cookies.set('jwttoken', email);
-          this.props.history.push('/');
-          //this.setState({ redirect: true });
-        }
+        Cookies.set('jwttoken', token);
+        this.props.history.push('/');
 
       })
       .catch(err => {

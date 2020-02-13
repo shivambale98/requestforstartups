@@ -1,0 +1,15 @@
+.Logo{
+    padding: 5px;
+    height: 80%;;
+}
+
+.Logo img {
+    height: 100%;
+}
+
+
+@media only screen and (max-width:767px){
+    .Logo img {
+        width: 60%;
+    }
+}

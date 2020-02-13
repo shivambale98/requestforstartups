@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import classes from './Login.module.css';
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
+import nsVerticalLogo from '../../assets/NS_logo_Vertical.svg';
 
 
 class Login extends Component {
   render() {
     return (
-
-      <div className={classes.back}>
+    <div className={classes.back}>
         <h1 className={classes.header}>Request for startups </h1>
+        <img src={nsVerticalLogo} className={classes.images} alt="NS_Logo" />
         <div className={classes.Loginstyle}>
           <MDBContainer>
             <MDBRow>

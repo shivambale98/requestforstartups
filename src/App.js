@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Menu from './components/Layout/Menu';
 import Welcome from './components/Layout/Welcome';
 import SignUp from './components/Layout/SignUp';
@@ -6,7 +6,10 @@ import Login from './components/Layout/Login';
 import Addidea from './components/Layout/Addidea';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-function App() {
+const App = () => {
+  
+
+
   return (
     <BrowserRouter>
       <div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './SignUp.module.css';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
-
+import nsVerticalLogo from '../../assets/NS_logo_Vertical.svg';
 
 class SignUp extends Component {
   state = {
@@ -21,6 +21,7 @@ class SignUp extends Component {
     return (
       <div className={classes.area}>
         <h1 className={classes.header2}>Request for startups </h1>
+        <img src={nsVerticalLogo} className={classes.images} alt="NS_Logo" />
         <div className={classes.Signupstyle}>
           <MDBContainer>
             <MDBRow>

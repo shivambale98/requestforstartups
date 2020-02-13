@@ -24,6 +24,7 @@ import {
 } from "mdbreact";
 import Ideaforms from './Ideaforms';
 import Aux from '../../hoc/Auxiliary';
+import Pagination from './Pagination';
 
 
 class Welcome extends Component {
@@ -31,7 +32,20 @@ class Welcome extends Component {
     collapseID: "",
     records: []
   };
+//pagination
+//const [currentPage, setCurrentPage] = useState(1);
+  //const [postPerPage, setPostsPerPage] = useState(10);
 
+
+//const indexOfLastPost = currentPage * postPerPage;
+//const indexOfFirstPost = indexOfLastPost - postPerPage;
+//const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+
+//Change page 
+//const paginate = pageNumber => setCurrentPage(pageNumber)
+
+//pagination
   componentDidMount() {
     const url = 'http://localhost:5000/';
     fetch(url)
@@ -123,8 +137,13 @@ class Welcome extends Component {
         </div>
         <div id="text">
         <h1>This is where we provide the solution to every problem </h1>
+       </div>
+       <div id="words">
+        <h2 id="question">Got a startup idea?</h2>
+        <p id="answer">Click the Add Idea Button above and post your startup Idea also get some listen to solutions that other users have to offer</p>
         </div>
         {ideas}
+        <Pagination  />
        </Aux>
     );
   }
@@ -132,3 +151,6 @@ class Welcome extends Component {
 
 
 export default Welcome;
+
+
+//postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} //

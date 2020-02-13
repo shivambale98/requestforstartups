@@ -40,6 +40,35 @@
     background: #424f95 !important;
   }
   
+  #question{
+    display: block;
+    color: #1a237e;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 150px;
+}
+
+#answer{
+  display: block;
+  color: #1a237e;
+  font-size: 16px;
+  margin-left: 160px;
+  justify-content: center;
+  width: 30%;
+}
+
+#words{
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  height: 30vh;
+  justify-content: left;
+}
+
   @media (max-width: 768px) {
     #classicformpage .navbar:not(.top-nav-collapse) {
       background: #424f95 !important;
@@ -62,4 +91,13 @@
     font-size: 20px;
     height: 20vh;
     margin-top: 30px;
+  }
+
+
+  @media only screen and (max-width:767px){
+    #text{
+      font-size: 16px;
+      height: 20vh;
+      margin-top: 25px;
+    }
   }

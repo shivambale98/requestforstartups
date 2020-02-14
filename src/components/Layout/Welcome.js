@@ -24,8 +24,9 @@ import {
 } from "mdbreact";
 import Ideaforms from './Ideaforms';
 import Aux from '../../hoc/Auxiliary';
-const mainurl = 'http://localhost:5000';//'https://gentle-retreat-77560.herokuapp.com';
 import Pagination from './Pagination';
+
+const mainurl = 'http://localhost:5000';//'https://gentle-retreat-77560.herokuapp.com';
 
 class Welcome extends Component {
   state = {

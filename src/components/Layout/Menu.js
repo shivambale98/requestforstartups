@@ -1,9 +1,10 @@
 import classes from './Menu.module.css';
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
+import Logo from './Logo';
+
 import Cookies from 'js-cookie';
 const jwt = require('jsonwebtoken');
-import Logo from './Logo';
 const mainurl = 'http://localhost:5000';//'https://gentle-retreat-77560.herokuapp.com';
 
 class Menu extends Component {

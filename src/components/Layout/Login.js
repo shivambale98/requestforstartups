@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import classes from './Login.module.css';
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
+import nsVerticalLogo from '../../assets/NS_logo_Vertical.svg';
 import Cookies from 'js-cookie';
 import jwt from 'jsonwebtoken';
 const mainurl = 'http://localhost:5000';//'https://gentle-retreat-77560.herokuapp.com';
-import nsVerticalLogo from '../../assets/NS_logo_Vertical.svg';
 
 class Login extends Component {
 

@@ -5,6 +5,8 @@ import Login from './components/Layout/Login';
 import Addidea from './components/Layout/Addidea';
 import Menu from './components/Layout/Menu';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import my_ideas from './components/Layout/my_ideas';
 import Cookies from 'js-cookie';
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/addidea" component={Addidea} />
         <Route path='/logout' component={Welcome} />
+        <Route path='/myideas' component={my_ideas} />
       </div>
     </BrowserRouter>
   );

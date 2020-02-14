@@ -2,6 +2,7 @@ import classes from './Menu.module.css';
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';
+const jwt = require('jsonwebtoken');
 const mainurl = 'http://localhost:5000';//'https://gentle-retreat-77560.herokuapp.com';
 
 class Menu extends Component {
@@ -10,37 +11,28 @@ class Menu extends Component {
         loglink: '/login',
         logstatus: 'Login',
         signlink: '/signup',
-        signstatus: 'Signup'
+        signstatus: 'Signup',
+        email: '',
+        token: undefined
     };
 
     componentDidMount() {
         const token = Cookies.get('jwttoken');
-        this.setState({ token: token });
-        console.log(token);
-        this.linkassign(token);
-    }
-
-    linkassign = (token) => {
-        console.log(token);
-        const url = mainurl + '/getmenu/' + token;
-        //const formdata = new FormData();
-        //formdata.append('toks', token);
-        fetch(url)
-            .then(res => {
-                return res.json();
-            })
-            .then(resdata => {
-                this.setState({
-                    loglink: resdata.loglink,
-                    logstatus: resdata.logstatus,
-                    signlink: resdata.signlink,
-                    signstatus: resdata.signstatus
-                });
-            })
-            .catch(err => {
-                console.log(err);
+        var decodedtoken;
+        try {
+            decodedtoken = jwt.verify(token, 'heyphil123');
+        } catch (err) {
+            console.log(err);
+        }
+        if (decodedtoken) {
+            this.setState({
+                loglink: '/logout',
+                logstatus: 'Logout',
+                signlink: '/myideas',
+                signstatus: 'Myideas',
+                token: decodedtoken
             });
-
+        }
     }
 
     logout = () => {
@@ -48,6 +40,7 @@ class Menu extends Component {
             if (this.state.token) {
                 console.log('hey');
                 Cookies.remove('jwttoken');
+                this.props.history.push('/');
             }
         }
     }
@@ -57,7 +50,7 @@ class Menu extends Component {
             <div className={classes.Menustyle}>
                 <ul className={classes.ul}>
                     <li className={classes.li}> <Link className={classes.links} to="/"> HOME </Link> </li>
-                    <li className={classes.li}> <Link className={classes.links} to={this.state.loglink}> {this.state.logstatus}</Link> </li>
+                    <li className={classes.li}> <Link className={classes.links} onClick={this.logout} to={this.state.loglink}> {this.state.logstatus}</Link> </li>
                     <li className={classes.li}> <Link className={classes.links} to={this.state.signlink}> {this.state.signstatus} </Link> </li>
                     <li className={classes.li}> <Link className={classes.links} to="/addidea">ADD-IDEA </Link></li>
                 </ul>

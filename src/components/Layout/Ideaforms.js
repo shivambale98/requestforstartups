@@ -9,6 +9,7 @@ import {
 
 const Ideaforms = (props) => (
     <Aux>
+<section className={classes.righttoolbar}>    
    <div className={classes.parent}>
        <div className={classes.container}>
             <MDBCol md="6">
@@ -32,6 +33,7 @@ const Ideaforms = (props) => (
             </button>
         </div>
     </div>
+    </section>
     </Aux>
 );
 

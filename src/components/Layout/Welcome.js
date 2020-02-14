@@ -138,10 +138,24 @@ class Welcome extends Component {
         <div id="text">
         <h1>This is where we provide the solution to every problem </h1>
        </div>
-       <div id="words">
+       <aside id="words">
         <h2 id="question">Got a startup idea?</h2>
-        <p id="answer">Click the Add Idea Button above and post your startup Idea also get some listen to solutions that other users have to offer</p>
-        </div>
+        <p id="answer">Click the Add Idea Button above and post your startup Idea also  listen to solutions that other users have to offer.</p>
+        <h2 id="question1">wanna Tweet your idea?</h2>
+        <p id="answers"><a href="#" id="link"><u><b>Tweet it</b></u></a> and include #rfs_india
+        <br/>Upvote if you find the best of the 
+        <br/>solution to your problem.
+        <br/>help developers create better
+        <br/> products.
+        <br />
+        <br />
+        <br />Made by <a href="#" id="link"><u><b>Rohit Martires</b></u></a> and 
+        <br/><a href="#" id="link"><u><b>Shivam Bale</b></u></a> under the 
+        <br/> guidance of <a href="#" id="link"><u><b>Nova Semita.</b></u></a>
+        <br /> Follow us on Twitter to 
+        <br />see other things we do. 
+        </p>
+        </aside>
         {ideas}
         <Pagination  />
        </Aux>

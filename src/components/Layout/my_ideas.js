@@ -27,7 +27,9 @@ import Aux from '../../hoc/Auxiliary';
 import Cookies from 'js-cookie';
 const jwt = require('jsonwebtoken');
 
-const mainurl = 'https://gentle-retreat-77560.herokuapp.com';//'http://localhost:5000';//
+//const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+const mainurl = 'http://localhost:5000';//
+
 
 class my_ideas extends Component {
     state = {

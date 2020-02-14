@@ -4,7 +4,8 @@ import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import nsVerticalLogo from '../../assets/NS_logo_Vertical.svg';
 import Cookies from 'js-cookie';
 import jwt from 'jsonwebtoken';
-const mainurl = 'https://gentle-retreat-77560.herokuapp.com';//'http://localhost:5000';//
+//const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+const mainurl = 'http://localhost:5000';//
 
 class Login extends Component {
 

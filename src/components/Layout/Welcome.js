@@ -26,7 +26,7 @@ import Ideaforms from './Ideaforms';
 import Aux from '../../hoc/Auxiliary';
 import Pagination from './Pagination';
 
-const mainurl = 'http://localhost:5000';//'https://gentle-retreat-77560.herokuapp.com';
+const mainurl = 'https://gentle-retreat-77560.herokuapp.com';//'http://localhost:5000';//
 var recordlist = [];
 
 class Welcome extends Component {

@@ -34,6 +34,7 @@ class Menu extends Component {
                 signstatus: 'Myideas',
                 token: decodedtoken
             });
+            //loggedin so re-render
         }
     }
 
@@ -42,6 +43,7 @@ class Menu extends Component {
             if (this.state.token) {
                 console.log('hey');
                 Cookies.remove('jwttoken');
+                //loogedout so re-render
                 this.props.history.push('/');
             }
         }

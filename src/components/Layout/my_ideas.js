@@ -34,8 +34,7 @@ class my_ideas extends Component {
         collapseID: "",
         records: [],
         link: '',
-        email: '',
-        records: []
+        email: ''
     };
 
     componentDidMount() {
@@ -91,7 +90,8 @@ class my_ideas extends Component {
                 onClick={this.toggleCollapse("navbarCollapse")}
             />
         );
-        console.log(this.state.records);
+
+        //console.log(this.state.records);
         const ideas = this.state.records.map((record, index) => {
             return <Ideaforms
                 email={this.state.email}

@@ -27,6 +27,7 @@ import Aux from '../../hoc/Auxiliary';
 import Pagination from './Pagination';
 
 const mainurl = 'http://localhost:5000';//'https://gentle-retreat-77560.herokuapp.com';
+var recordlist = [];
 
 class Welcome extends Component {
   state = {
@@ -48,6 +49,7 @@ class Welcome extends Component {
   //const paginate = pageNumber => setCurrentPage(pageNumber)
 
   //pagination
+
   componentDidMount() {
     const ideasurl = mainurl + '/';
     fetch(ideasurl)
@@ -55,11 +57,14 @@ class Welcome extends Component {
         return res.json();
       })
       .then(resdata => {
-        this.setState({ records: resdata.recordlist });
-        return this.state.records;
+        //this.setState({ records: resdata.recordlist });
+        //return this.state.records;
+        recordlist = resdata.recordlist;
+        return recordlist;
       })
       .then(records => {
         records.map(((record, index) => {
+          record.email = 'loading...';
           this.getuser(record.data.user[0], index);
         }));
         console.log('done');
@@ -80,8 +85,10 @@ class Welcome extends Component {
       .then(resdata => {
         var email = resdata.email;
         //console.log(email);
-        this.state.records[index].email = email;
-        this.setState({});
+        // this.state.records[index].email = email;
+        // this.setState({});
+        recordlist[index].email = email;
+        this.setState({ records: recordlist });
       })
       .catch(err => {
         console.log(err);

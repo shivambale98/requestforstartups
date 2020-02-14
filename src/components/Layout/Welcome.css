@@ -40,6 +40,95 @@
     background: #424f95 !important;
   }
   
+  #question{
+    display: block;
+    color: #1a237e;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 150px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: normal;
+}
+#question1{
+  display: block;
+    color: #1a237e;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 150px;
+    margin-bottom: 5px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: normal;
+}
+#answer{
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  display: block;
+  color: #1a237e;
+  font-size: 16px;
+  margin-left: 160px;
+  justify-content: center;
+  width: 30%;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-style: normal;
+
+}
+#answers{
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  display: block;
+  color: #1a237e;
+  font-size: 16px;
+  margin-left: 160px;
+  text-align: inherit;
+  height: 0px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-style: normal;
+}
+#answerss{
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  display: block;
+  color: #1a237e;
+  font-size: 16px;
+  margin-left: 160px;
+  text-align: inherit;
+  height: 3vh;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-style: normal;
+}
+
+#words{
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  height: 5vh;
+  justify-content: left;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-style: normal;
+}
+
+#wordss{
+  margin-top: 50px;
+  justify-content: left;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-style: normal;
+
+}
+
+#link{
+color: #1565c0;
+
+}
   @media (max-width: 768px) {
     #classicformpage .navbar:not(.top-nav-collapse) {
       background: #424f95 !important;
@@ -60,6 +149,15 @@
     color: #1a237e;
     text-align: center;
     font-size: 20px;
-    height: 20vh;
+    height: 10vh;
     margin-top: 30px;
+  }
+
+
+  @media only screen and (max-width:767px){
+    #text{
+      font-size: 16px;
+      height: 20vh;
+      margin-top: 25px;
+    }
   }

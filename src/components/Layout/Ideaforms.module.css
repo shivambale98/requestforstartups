@@ -11,27 +11,26 @@ body{
    
 }
 
-
 .container{
     background: white;
-    box-shadow: 
-          0 0  0 2px #9fa8da;
-    height: 20vh;
-    margin: auto;
+    box-shadow: 0 0 20px  #9fa8da;
+    height: 40vh;
+   /* margin: auto; */
     margin-top: auto;
-    margin-bottom: 20px;
+    margin-left: 45%;
+    margin-bottom: 50px;
     display: flex;
     flex-direction: row;
     align-items: left;
-    justify-content: left;
+    justify-content: start;
     box-sizing: border-box;
-    width: 90%;
+    width: 45%;
     padding: 5px;
     overflow-y: scroll;
     scroll-behavior: smooth;
     border-radius: 5px ;
-    
 }
+
 
 .title{
     font-weight: lighter;
@@ -53,10 +52,9 @@ body{
 
 
 .btn{
-  margin-top: 60px;
-  margin-left: auto;
+  margin-top: 0px;
   margin-bottom: auto;
-  margin-right: auto;
+  margin-left: 215px ;
   text-align: center;
   background: #ed2553;
   border-radius: 3px;
@@ -73,8 +71,8 @@ body{
   height: 40px;
   font-size: 10px;
   position: relative;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
 }
 .btn:hover {
     background-color: #b71c1c;
@@ -84,7 +82,41 @@ body{
 
 
 .comments{
-    margin-top: 5px;
+    margin-bottom: auto;
+    margin-right: 0px;
     position: relative;
     color: #1a237e;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 130px;
+}
+
+@media only screen and (max-width:767px){
+    .container{
+        height: 30vh;
+        width: 70%;
+        padding: 5px;
+    }
+    .head {
+        font-size: 15px;
+        margin-top: 2px;
+    }
+    
+.title{
+    font-size: 14px;
+   }
+   .btn{
+    margin-top: 130px;
+    margin-left: auto;
+    margin-bottom: auto;
+    margin-right: auto;
+  }
+  
+.comments{
+   font-size: 12px;
+   margin-top: 140px;
+   margin-right:5px ;
+}
 }

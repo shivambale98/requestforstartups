@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import React from 'react';
+=======
+import React, { useState, useEffect } from 'react';
+import Menu from './components/Layout/Menu';
+>>>>>>> bb37b912c3cee8066eef4ee7c7a09783663bcf1f
 import Welcome from './components/Layout/Welcome';
 import SignUp from './components/Layout/SignUp';
 import Login from './components/Layout/Login';
@@ -6,10 +11,17 @@ import Addidea from './components/Layout/Addidea';
 import Menu from './components/Layout/Menu';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+<<<<<<< HEAD
 import my_ideas from './components/Layout/my_ideas';
 import Cookies from 'js-cookie';
 
 function App() {
+=======
+const App = () => {
+  
+
+
+>>>>>>> bb37b912c3cee8066eef4ee7c7a09783663bcf1f
   return (
     <BrowserRouter>
       <div>

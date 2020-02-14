@@ -3,7 +3,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon } from 'mdbreact';
 //import Cookies from 'universal-cookie';
 import Cookies from 'js-cookie';
 import classes from './Addidea.module.css';
-const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+const mainurl = 'http://localhost:5000';//'https://gentle-retreat-77560.herokuapp.com';
 
 class Addidea extends Component {
   state = {

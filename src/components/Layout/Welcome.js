@@ -24,7 +24,7 @@ import {
 } from "mdbreact";
 import Ideaforms from './Ideaforms';
 import Aux from '../../hoc/Auxiliary';
-const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+const mainurl = 'http://localhost:5000';//'https://gentle-retreat-77560.herokuapp.com';
 
 class Welcome extends Component {
   state = {
@@ -34,7 +34,7 @@ class Welcome extends Component {
   };
 
   componentDidMount() {
-    const ideasurl = 'https://gentle-retreat-77560.herokuapp.com/';
+    const ideasurl = mainurl + '/';
     fetch(ideasurl)
       .then(res => {
         return res.json();

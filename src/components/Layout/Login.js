@@ -43,7 +43,6 @@ class Login extends Component {
         const token = resdata.token;
         Cookies.set('jwttoken', token);
         this.props.history.push('/');
-
       })
       .catch(err => {
         console.log(err);

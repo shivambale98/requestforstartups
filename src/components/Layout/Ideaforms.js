@@ -21,7 +21,7 @@ const Ideaforms = (props) => (
                                 </div>
                                 <div className={classes.comments}>
                                     <p>
-                                        <i class="fas fa-comment"> Comments
+                                        <i onClick={props.onComment} class="fas fa-comment"> Comments
                         </i>
                                     </p>
                                 </div>

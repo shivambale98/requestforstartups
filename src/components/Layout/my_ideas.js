@@ -104,9 +104,9 @@ class my_ideas extends Component {
         });
 
         return (
-            <Aux>
+            <div>
                 {ideas}
-            </Aux>
+            </div>
         );
     }
 }

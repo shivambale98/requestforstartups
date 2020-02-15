@@ -6,6 +6,8 @@ import {
     MDBCol,
     MDBContainer,
   } from "mdbreact";
+  import { Link } from 'react-router-dom';
+
 
 const Ideaforms = (props) => (
     <Aux>
@@ -17,14 +19,11 @@ const Ideaforms = (props) => (
                     <MDBContainer>
                         <div>
                         <p className={classes.head}>problem: </p>   
-                        <p className={classes.title}>{props.problem} </p>
+                        <p className={classes.title}>{props.problem}</p>
                         </div>
                         <div className={classes.comments}>
-                        <p>
-                        <i class="fas fa-comment"> Comments
-                        </i>
-                        </p>
-                       </div> 
+                        <Link className={classes.comment} class="fa fa-comment"  to="/comment"><b> Comment</b></Link>    
+                        </div> 
                     </MDBContainer>
                 </MDBRow>
             </MDBCol>

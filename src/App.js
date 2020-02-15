@@ -5,6 +5,8 @@ import SignUp from './components/Layout/SignUp';
 import Login from './components/Layout/Login';
 import Addidea from './components/Layout/Addidea';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Comment from './components/Layout/Comment';
+
 
 const App = () => {
   
@@ -18,6 +20,7 @@ const App = () => {
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
         <Route path="/addidea" component={Addidea} />
+        <Route path="/comment" component={Comment} />
       </div>
     </BrowserRouter>
   );

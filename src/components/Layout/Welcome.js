@@ -136,11 +136,11 @@ class Welcome extends Component {
           </MDBView>
         </div>
         <div id="text">
-        <h1>This is where we provide the solution to every problem </h1>
+        <h2>This is where we provide the solution to every problem </h2>
        </div>
        <aside id="words">
         <h2 id="question">Got a startup idea?</h2>
-        <p id="answer">Click the Add Idea Button above and post your startup Idea also  listen to solutions that other users have to offer.</p>
+        <p id="answer">Click the Add Idea Button above and post your startup Idea also  listen to solutions that other users have to offer in the comments section.</p>
         <h2 id="question1">wanna Tweet your idea?</h2>
         <p id="answers"><a href="#" id="link"><u><b>Tweet it</b></u></a> and include #rfs_india
         <br/>Upvote if you find the best of the 

@@ -7,6 +7,8 @@ import Menu from './components/Layout/Menu';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import my_ideas from './components/Layout/my_ideas';
 import Cookies from 'js-cookie';
+import Comment from './components/Layout/Comment';
+
 
 const App = () => {
 
@@ -21,6 +23,7 @@ const App = () => {
         <Route path="/addidea" component={Addidea} />
         <Route path='/logout' component={Welcome} />
         <Route path='/myideas' component={my_ideas} />
+        <Route path="/comment" component={Comment} />
       </div>
     </BrowserRouter>
   );

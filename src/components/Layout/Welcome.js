@@ -118,7 +118,7 @@ class Welcome extends Component {
       />
     );
 
-    console.log(this.state.records);
+    //console.log(this.state.records);
     const ideas = this.state.records.map((record, index) => {
       return <Ideaforms
         email={record.data.userlu || record.data.screen_name}

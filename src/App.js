@@ -23,7 +23,7 @@ const App = () => {
         <Route path="/addidea" component={Addidea} />
         <Route path='/logout' component={Welcome} />
         <Route path='/myideas' component={my_ideas} />
-        <Route path="/comment" component={Comment} />
+        <Route path="/comments/:id" component={Comment} />
       </div>
     </BrowserRouter>
   );

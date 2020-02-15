@@ -18,11 +18,11 @@ const Ideaforms = (props) => (
                         <MDBRow>
                             <MDBContainer>
                                 <div>
-                                    <p className={classes.head}>problem: </p>
+                                    <p className={classes.head}>{props.email} </p>
                                     <p className={classes.title}>{props.problem}</p>
                                 </div>
                                 <div className={classes.comments}>
-                                    <Link className={classes.comment} onClick={props.onComment} class="fa fa-comment" to="/comment"><b> Comment</b></Link>
+                                    <Link className={classes.comment} onClick={props.onComment} class="fa fa-comment" ><b> Comment</b></Link>
                                 </div>
                             </MDBContainer>
                         </MDBRow>

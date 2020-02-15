@@ -41,7 +41,7 @@ class Menu extends Component {
     logout = () => {
         if (this.state.loglink === '/logout') {
             if (this.state.token) {
-                console.log('hey');
+                //console.log('hey');
                 Cookies.remove('jwttoken');
                 this.setState({
                     loglink: '/login',
@@ -57,7 +57,7 @@ class Menu extends Component {
     }
 
     render() {
-        console.log(this.state);
+        //console.log(this.state);
         return (
             <div className={classes.Menustyle}>
                 <ul className={classes.ul}>

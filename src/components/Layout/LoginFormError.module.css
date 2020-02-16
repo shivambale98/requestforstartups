@@ -1,0 +1,27 @@
+.container{
+    background: white;
+    box-shadow: 0 0 20px  #9fa8da;
+    height: 20vh;
+   /* margin: auto; */
+    margin-top: 5%;
+    margin-left:auto;
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    justify-content: start;
+    box-sizing: border-box;
+    width: 35%;
+    padding: 5px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    border-radius: 5px ;
+}
+
+.title{
+    font-weight: lighter;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: inherit;
+    color: red;
+    text-align: left;
+    font-size: 12px;
+}

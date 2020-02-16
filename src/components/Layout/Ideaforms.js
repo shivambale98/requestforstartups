@@ -14,7 +14,7 @@ const Ideaforms = (props) => (
 <section className={classes.righttoolbar}>    
    <div className={classes.parent}>
        <div className={classes.container}>
-            <MDBCol md="6">
+            <MDBCol md="10">
                 <MDBRow>
                     <MDBContainer>
                         <div>

@@ -178,8 +178,9 @@ color: #1565c0;
     margin-left: 2px;
     font-size: 14px;
     /*justify-content: center; */
-    width: 50%;
-    height: 60vh;
+    width: 55%;
+    height: 45vh;
+    margin-top: 3px;
   }
   #answers{
     font-size: 14px;

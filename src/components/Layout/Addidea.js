@@ -3,6 +3,8 @@ import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon } from 'mdbreact';
 //import Cookies from 'universal-cookie';
 import Cookies from 'js-cookie';
 import classes from './Addidea.module.css';
+const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+//const mainurl = 'http://localhost:5000';//
 
 class Addidea extends Component {
   state = {
@@ -11,6 +13,7 @@ class Addidea extends Component {
 
   componentDidMount() {
     const token = Cookies.get('jwttoken');
+    console.log(token);
     this.setState({ token: token });
   }
 
@@ -20,7 +23,7 @@ class Addidea extends Component {
         <MDBContainer>
           <MDBRow>
             <MDBCol md="12">
-              <form action='http://localhost:5000/addidea' method='POST'>
+              <form action={mainurl + '/addidea'} method='POST'>
                 <h3 className={classes.head}>Startup Idea</h3>
                 <h5 className={classes.para}>Tell us about your idea</h5><br /><br />
                 <label className={classes.lab}>Select the domain of your startup</label>

@@ -2,11 +2,16 @@
   "name": "your-app",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "13.1.0",
+    "npm": "6.13.4"
+  },
   "// If You want to install mdbreact from our GitLab repository, please replace '4.24.0' with gitURL provided here ->": "git+https://oauth2:<YOUR-TOKEN-GOES-HERE>@git.mdbootstrap.com/mdb/react/re-pro.git",
   "dependencies": {
     "airtable": "^0.8.1",
     "axios": "^0.19.2",
     "bcrypt": "^3.0.7",
+    "bcryptjs": "^2.4.3",
     "js-cookie": "^2.2.1",
     "js-cookies": "^1.0.4",
     "jsonwebtoken": "^8.5.1",
@@ -21,7 +26,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "dev": "concurrently --kill-others \"react-scripts start\" \"node node_app.js\"",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",

@@ -2,43 +2,88 @@ import React, { Component } from 'react';
 import classes from './Login.module.css';
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import nsVerticalLogo from '../../assets/NS_logo_Vertical.svg';
+import Cookies from 'js-cookie';
+import jwt from 'jsonwebtoken';
+const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+//const mainurl = 'http://localhost:5000';//
 //import * as EmailValidator from "email-validator";
 //import * as Yup from "yup";
 
 class Login extends Component {
+
+  state = {
+    email: '',
+    password: '',
+    redirect: false
+  }
+
+  handelchnage = (event) => {
+    if (event.target.name == 'email') {
+      this.setState({ email: event.target.value });
+    }
+    if (event.target.name == 'password') {
+      this.setState({ password: event.target.value });
+    }
+  }
+
+  submit = () => {
+    fetch(mainurl + '/login', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password
+      })
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(resdata => {
+        const token = resdata.token;
+        Cookies.set('jwttoken', token);
+        this.props.history.push('/');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   render() {
-//<Formik
-  // validationSchema = {Yup.object().shape({
+    //<Formik
+    // validationSchema = {Yup.object().shape({
     //   email: Yup.string()
-//        .email()
-//        .required("Required")
-//        .min(6, "Password is too short - should be 6 characters minimum")
-//        .matches(/(?=.*[0-9])/, "Password must contain a number")
-//    })}
-//    >
+    //        .email()
+    //        .required("Required")
+    //        .min(6, "Password is too short - should be 6 characters minimum")
+    //        .matches(/(?=.*[0-9])/, "Password must contain a number")
+    //    })}
+    //    >
 
-// </Formik>  
+    // </Formik>  
 
-//   {props => {
-//     const {
-//       values,
-//       touched,
-//       errors,
-//       handleChange,
-//       handleBlur,
-//       handleSubmit
-//     } = props;
-//   }}
+    //   {props => {
+    //     const {
+    //       values,
+    //       touched,
+    //       errors,
+    //       handleChange,
+    //       handleBlur,
+    //       handleSubmit
+    //     } = props;
+    //   }}
 
     return (
-   <div className={classes.back}>
+      <div className={classes.back}>
         <h1 className={classes.header}>Request for startups </h1>
         <img src={nsVerticalLogo} className={classes.images} alt="NS_Logo" />
         <div className={classes.Loginstyle}>
           <MDBContainer>
             <MDBRow>
               <MDBCol md="12">
-                <form class="login-form" action="http://localhost:5000/login" method="POST">
+                <form class="login-form" action={mainurl + '/login'} method="POST">
                   <p className="h2 text-center mb-4">Sign in</p>
                   <div className="grey-text">
                     <MDBInput class="form-control"
@@ -47,10 +92,10 @@ class Login extends Component {
                       icon="user"
                       id="email"
                       name="email"
-                     // value={values.email}
                       placeholder="Email"
-                     // className={errors.email && touched.email && "errors"} 
-                      />
+                      value={this.state.email}
+                      onChange={this.handelchnage}
+                    />
                     <MDBInput class="form-control"
                       label="Password"
                       icon="lock"
@@ -58,11 +103,12 @@ class Login extends Component {
                       id="password"
                       name="password"
                       placeholder="password"
-                     // className={errors.password && touched.password && "errors"}  
-                      />
+                      value={this.state.password}
+                      onChange={this.handelchnage}
+                    />
                   </div>
                   <div className="text-center">
-                    <MDBBtn type="submit">Login</MDBBtn>
+                    <MDBBtn onClick={this.submit}>Login</MDBBtn>
                   </div>
                 </form>
               </MDBCol>

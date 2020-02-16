@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import classes from './SignUp.module.css';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
 import nsVerticalLogo from '../../assets/NS_logo_Vertical.svg';
+const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+//const mainurl = 'http://localhost:5000';//
 
 class SignUp extends Component {
   state = {
@@ -23,10 +25,11 @@ class SignUp extends Component {
         <h1 className={classes.header2}>Request for startups </h1>
         <img src={nsVerticalLogo} className={classes.images} alt="NS_Logo" />
         <div className={classes.Signupstyle}>
+          <p value='message'></p>
           <MDBContainer>
             <MDBRow>
               <MDBCol md="12">
-                <form class="login-form" action="http://localhost:5000/signup" method="POST">
+                <form class="login-form" action={mainurl + '/signup'} method="POST">
                   <p className="h2 text-center mb-4">Sign up</p>
                   <div className="grey-text">
                     <MDBInput class="form-control"

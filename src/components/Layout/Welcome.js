@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Welcome.css';
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Redirect } from "react-router-dom";
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -26,43 +26,50 @@ import Ideaforms from './Ideaforms';
 import Aux from '../../hoc/Auxiliary';
 import Pagination from './Pagination';
 
+const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+//const mainurl = 'http://localhost:5000';//
+var recordlist = [];
 
 class Welcome extends Component {
   state = {
     collapseID: "",
-    records: []
+    records: [],
+    link: ''
   };
-//pagination
-//const [currentPage, setCurrentPage] = useState(1);
+  //pagination
+  //const [currentPage, setCurrentPage] = useState(1);
   //const [postPerPage, setPostsPerPage] = useState(10);
 
 
-//const indexOfLastPost = currentPage * postPerPage;
-//const indexOfFirstPost = indexOfLastPost - postPerPage;
-//const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  //const indexOfLastPost = currentPage * postPerPage;
+  //const indexOfFirstPost = indexOfLastPost - postPerPage;
+  //const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
 
-//Change page 
-//const paginate = pageNumber => setCurrentPage(pageNumber)
+  //Change page 
+  //const paginate = pageNumber => setCurrentPage(pageNumber)
 
-//pagination
+  //pagination
+
   componentDidMount() {
-    const url = 'http://localhost:5000/';
-    fetch(url)
+    const ideasurl = mainurl + '/';
+    fetch(ideasurl)
       .then(res => {
         return res.json();
       })
       .then(resdata => {
+        console.log(resdata);
         this.setState({ records: resdata.recordlist });
-        console.log(this.state.records);
       })
       .catch(err => {
         console.log(err);
       });
+
   }
 
-  upvotebutton = recordid => {
-    const url = "http://localhost:5000/idea/upvote/" + recordid;
+  upvotebuttonHandler = recordid => {
+
+    const url = mainurl + "/idea/upvote/" + recordid;
     fetch(url)
       .then(res => {
         return res.json();
@@ -70,17 +77,31 @@ class Welcome extends Component {
       .then(resdata => {
         var { record } = resdata;
         var { id } = record;
-        this.state.redords.forEach(record => {
-          if (record.id === id) {
-            record.id = id;
-            console.log(record.id);
+        var { link } = resdata;
+        console.log(resdata);
+        var temp = [];
+        this.state.records.map(recordt => {
+          if (recordt.id === id) {
+            var temprecord = recordt;
+            recordt = record;
+            recordt.email = temprecord.email;
+            temp.push(recordt);
+          } else {
+            temp.push(recordt);
           }
         });
+        console.log(temp);
 
+        this.setState({ records: temp });
+        this.setState({ link: link });
       })
       .catch(err => {
         console.log(err);
       });
+  }
+
+  onComment = (id) => {
+    this.props.history.push('/comments/' + id);
   }
 
   toggleCollapse = collapseID => () =>
@@ -97,10 +118,14 @@ class Welcome extends Component {
       />
     );
 
-    const ideas = this.state.records.map(record => {
+    //console.log(this.state.records);
+    const ideas = this.state.records.map((record, index) => {
       return <Ideaforms
+        email={record.data.userlu || record.data.screen_name}
         problem={record.data.Problem}
         upvote={record.data.upvote}
+        onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
+        onComment={this.onComment.bind(this, record.id)}
       />
     });
 
@@ -136,29 +161,30 @@ class Welcome extends Component {
           </MDBView>
         </div>
         <div id="text">
-        <h2>This is where we provide the solution to every problem </h2>
-       </div>
-       <aside id="words">
-        <h2 id="question">Got a startup idea?</h2>
-        <p id="answer">Click the Add Idea Button above and post your startup Idea also  listen to solutions that other users have to offer in the comments section.</p>
-        <h2 id="question1">wanna Tweet your idea?</h2>
-        <p id="answers"><a href="#" id="link"><u><b>Tweet it</b></u></a> and include #rfs_india
-        <br/>Upvote if you find the best of the 
-        <br/>solution to your problem.
-        <br/>help developers create better
-        <br/> products.
+          <h2>This is where we provide the solution to every problem </h2>
+        </div>
+        <aside id="words">
+          <h2 id="question">Got a startup idea?</h2>
+          <p id="answer">Click the Add Idea Button above and post your startup Idea also  listen to solutions that other users have to offer in the comments section.</p>
+          <h2 id="question1">wanna Tweet your idea?</h2>
+          <p id="answers"><a href="#" id="link"><u><b>Tweet it</b></u></a> and include #rfs_india
+        <br />Upvote if you find the best of the
+        <br />solution to your problem.
+        <br />help developers create better
+        <br /> products.
         <br />
-        <br />
-        <br />Made by <a href="#" id="link"><u><b>Rohit Martires</b></u></a> and 
-        <br/><a href="#" id="link"><u><b>Shivam Bale</b></u></a> under the 
-        <br/> guidance of <a href="#" id="link"><u><b>Nova Semita.</b></u></a>
-        <br /> Follow us on Twitter to 
-        <br />see other things we do. 
+            <br />
+            <br />
+            <br />Made by <a href="#" id="link"><u><b>Rohit Martires</b></u></a> and
+        <br /><a href="#" id="link"><u><b>Shivam Bale</b></u></a> under the
+        <br /> guidance of <a href="#" id="link"><u><b>Nova Semita.</b></u></a>
+            <br /> Follow us on Twitter to
+        <br />see other things we do.
         </p>
         </aside>
         {ideas}
-        <Pagination  />
-       </Aux>
+        <Pagination />
+      </Aux>
     );
   }
 }

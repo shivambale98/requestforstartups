@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import classes from './SignUp.module.css';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
 import nsVerticalLogo from '../../assets/NS_logo_Vertical.svg';
-const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-//const mainurl = 'http://localhost:5000';//
+//const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+const mainurl = 'http://localhost:5000';//
 
 class SignUp extends Component {
   state = {

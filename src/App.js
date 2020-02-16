@@ -56,15 +56,19 @@ class App extends Component {
       return <Login updatestate={this.updatestate} />
     }
 
+    const welcome = () => {
+      return <Welcome loggedin={this.state.loggedin} />
+    }
+
     return (
       <BrowserRouter>
         <div>
           <Route component={menu} />
-          <Route path="/" exact component={Welcome} />
+          <Route path="/" exact component={welcome} />
           <Route path="/signup" component={SignUp} />
           <Route path="/login" component={login} />
           <Route path="/addidea" component={Addidea} />
-          <Route path='/logout' component={Welcome} />
+          <Route path='/logout' component={welcome} />
           <Route path='/myideas' component={my_ideas} />
           <Route path="/comments/:id" component={Comment} />
         </div>

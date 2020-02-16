@@ -64,6 +64,7 @@ class Menu extends Component {
         return (
             <div className={classes.Menustyle}>
                 {this.renderRedirect()}
+                <Logo />
                 <ul className={classes.ul}>
                     <li className={classes.li}> <Link className={classes.links} to="/"> HOME </Link> </li>
                     <li className={classes.li}> <Link className={classes.links} onClick={this.logout} to={this.state.loglink}> {this.state.logstatus}</Link> </li>

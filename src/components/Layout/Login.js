@@ -6,6 +6,8 @@ import Cookies from 'js-cookie';
 import jwt from 'jsonwebtoken';
 const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
 //const mainurl = 'http://localhost:5000';//
+//import * as EmailValidator from "email-validator";
+//import * as Yup from "yup";
 
 class Login extends Component {
 
@@ -50,6 +52,29 @@ class Login extends Component {
   }
 
   render() {
+    //<Formik
+    // validationSchema = {Yup.object().shape({
+    //   email: Yup.string()
+    //        .email()
+    //        .required("Required")
+    //        .min(6, "Password is too short - should be 6 characters minimum")
+    //        .matches(/(?=.*[0-9])/, "Password must contain a number")
+    //    })}
+    //    >
+
+    // </Formik>  
+
+    //   {props => {
+    //     const {
+    //       values,
+    //       touched,
+    //       errors,
+    //       handleChange,
+    //       handleBlur,
+    //       handleSubmit
+    //     } = props;
+    //   }}
+
     return (
       <div className={classes.back}>
         <h1 className={classes.header}>Request for startups </h1>

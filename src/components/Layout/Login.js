@@ -14,7 +14,7 @@ class Login extends Component {
   state = {
     email: '',
     password: '',
-    redirect: false
+    redirect: false,
   }
 
   handelchnage = (event) => {
@@ -44,7 +44,8 @@ class Login extends Component {
       .then(resdata => {
         const token = resdata.token;
         Cookies.set('jwttoken', token);
-        this.props.history.push('/');
+        this.props.updatestate(true);
+        //this.props.history.push('/');
       })
       .catch(err => {
         console.log(err);
@@ -76,7 +77,7 @@ class Login extends Component {
     //   }}
 
     return (
-      <div className={classes.back}>
+      < div className={classes.back} >
         <h1 className={classes.header}>Request for startups </h1>
         <img src={nsVerticalLogo} className={classes.images} alt="NS_Logo" />
         <div className={classes.Loginstyle}>
@@ -115,7 +116,7 @@ class Login extends Component {
             </MDBRow>
           </MDBContainer>
         </div >
-      </div>
+      </div >
     )
   };
 }

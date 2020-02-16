@@ -58,42 +58,13 @@ class Welcome extends Component {
         return res.json();
       })
       .then(resdata => {
-        //this.setState({ records: resdata.recordlist });
-        //return this.state.records;
-        recordlist = resdata.recordlist;
-        return recordlist;
-      })
-      .then(records => {
-        records.map(((record, index) => {
-          record.email = 'loading...';
-          this.getuser(record.data.user[0], index);
-        }));
-        console.log('done');
+        console.log(resdata);
+        this.setState({ records: resdata.recordlist });
       })
       .catch(err => {
         console.log(err);
       });
 
-  }
-
-  getuser = (userid, index) => {
-    //console.log(userid);
-    var url = mainurl + '/getusers/' + userid;
-    fetch(url)
-      .then(res => {
-        return res.json();
-      })
-      .then(resdata => {
-        var email = resdata.email;
-        //console.log(email);
-        // this.state.records[index].email = email;
-        // this.setState({});
-        recordlist[index].email = email;
-        this.setState({ records: recordlist });
-      })
-      .catch(err => {
-        console.log(err);
-      });
   }
 
   upvotebuttonHandler = recordid => {
@@ -129,6 +100,10 @@ class Welcome extends Component {
       });
   }
 
+  onComment = (id) => {
+    this.props.history.push('/comments/' + id);
+  }
+
   toggleCollapse = collapseID => () =>
     this.setState(prevState => ({
       collapseID: prevState.collapseID !== collapseID ? collapseID : ""
@@ -143,13 +118,14 @@ class Welcome extends Component {
       />
     );
 
-    console.log(this.state.records);
+    //console.log(this.state.records);
     const ideas = this.state.records.map((record, index) => {
       return <Ideaforms
-        email={record.email}
+        email={record.data.userlu || record.data.screen_name}
         problem={record.data.Problem}
         upvote={record.data.upvote}
         onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
+        onComment={this.onComment.bind(this, record.id)}
       />
     });
 
@@ -185,11 +161,11 @@ class Welcome extends Component {
           </MDBView>
         </div>
         <div id="text">
-          <h1>This is where we provide the solution to every problem </h1>
+          <h2>This is where we provide the solution to every problem </h2>
         </div>
         <aside id="words">
           <h2 id="question">Got a startup idea?</h2>
-          <p id="answer">Click the Add Idea Button above and post your startup Idea also  listen to solutions that other users have to offer.</p>
+          <p id="answer">Click the Add Idea Button above and post your startup Idea also  listen to solutions that other users have to offer in the comments section.</p>
           <h2 id="question1">wanna Tweet your idea?</h2>
           <p id="answers"><a href="#" id="link"><u><b>Tweet it</b></u></a> and include #rfs_india
         <br />Upvote if you find the best of the
@@ -197,6 +173,7 @@ class Welcome extends Component {
         <br />help developers create better
         <br /> products.
         <br />
+            <br />
             <br />
             <br />Made by <a href="#" id="link"><u><b>Rohit Martires</b></u></a> and
         <br /><a href="#" id="link"><u><b>Shivam Bale</b></u></a> under the

@@ -10,7 +10,6 @@ const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
 
 class Menu extends Component {
     state = {
-        token: '',
         loglink: '/login',
         logstatus: 'Login',
         signlink: '/signup',
@@ -42,15 +41,23 @@ class Menu extends Component {
     logout = () => {
         if (this.state.loglink === '/logout') {
             if (this.state.token) {
-                console.log('hey');
+                //console.log('hey');
                 Cookies.remove('jwttoken');
-                //loogedout so re-render
+                this.setState({
+                    loglink: '/login',
+                    logstatus: 'Login',
+                    signlink: '/signup',
+                    signstatus: 'Signup',
+                    token: undefined
+                });
                 this.props.history.push('/');
+                //rerender
             }
         }
     }
 
     render() {
+        //console.log(this.state);
         return (
             <div className={classes.Menustyle}>
                 <ul className={classes.ul}>

@@ -6,6 +6,8 @@ import {
     MDBCol,
     MDBContainer,
 } from "mdbreact";
+import { Link } from 'react-router-dom';
+
 
 const Ideaforms = (props) => (
     <Aux>
@@ -16,19 +18,15 @@ const Ideaforms = (props) => (
                         <MDBRow>
                             <MDBContainer>
                                 <div>
-                                    <p className={classes.head}>{props.email + ":"} </p>
-                                    <p className={classes.title}>{props.problem} </p>
+                                    <p className={classes.head}>{props.email} </p>
+                                    <p className={classes.title}>{props.problem}</p>
                                 </div>
                                 <div className={classes.comments}>
-                                    <p>
-                                        <i class="fas fa-comment"> Comments
-                        </i>
-                                    </p>
+                                    <Link className={classes.comment} onClick={props.onComment} class="fa fa-comment" ><b> Comment</b></Link>
                                 </div>
                             </MDBContainer>
                         </MDBRow>
                     </MDBCol>
-
                     <button className={classes.btn} onClick={props.onUpvote}>
                         {props.upvote}   Upvote
             </button>

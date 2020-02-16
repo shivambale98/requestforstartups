@@ -96,9 +96,14 @@ class Welcome extends Component {
         loggedin: false
       });
     }
+    var formdate = new FormData();
+    formdate.append('userid', decodedtoken.userid);
     if (this.state.loggedin) {
       const url = mainurl + "/idea/upvote/" + recordid;
-      fetch(url)
+      fetch(url, {
+        method: 'POST',
+        body: formdate
+      })
         .then(res => {
           return res.json();
         })

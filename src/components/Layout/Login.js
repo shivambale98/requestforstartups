@@ -42,9 +42,14 @@ class Login extends Component {
         return res.json();
       })
       .then(resdata => {
-        const token = resdata.token;
-        Cookies.set('jwttoken', token);
-        this.props.updatestate(true);
+        var message = resdata.message;
+        if (message === 'done') {
+          const token = resdata.token;
+          Cookies.set('jwttoken', token);
+          this.props.updatestate(true);
+        } else {
+          console.log(message);
+        }
         //this.props.history.push('/');
       })
       .catch(err => {

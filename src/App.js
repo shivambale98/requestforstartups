@@ -60,12 +60,16 @@ class App extends Component {
       return <Welcome loggedin={this.state.loggedin} />
     }
 
+    const signup = () => {
+      return <SignUp updatestate={this.updatestate} />
+    }
+
     return (
       <BrowserRouter>
         <div>
           <Route component={menu} />
           <Route path="/" exact component={welcome} />
-          <Route path="/signup" component={SignUp} />
+          <Route path="/signup" component={signup} />
           <Route path="/login" component={login} />
           <Route path="/addidea" component={Addidea} />
           <Route path='/logout' component={welcome} />

@@ -2,21 +2,69 @@ import React, { Component } from 'react';
 import classes from './SignUp.module.css';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
 import nsVerticalLogo from '../../assets/NS_logo_Vertical.svg';
+import Cookies from 'js-cookie';
+
 //const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
 const mainurl = 'http://localhost:5000';//
+
+
 
 class SignUp extends Component {
   state = {
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmpassword: ''
   }
 
-  handleChange = e => {
-    const inputId = e.target.name;
-    const value = e.target.value;
-    this.setState({ [inputId]: value })
+  handelchnage = (event) => {
+
+    if (event.target.name == 'name') {
+      this.setState({ name: event.target.value });
+    }
+    if (event.target.name == 'email') {
+      this.setState({ email: event.target.value });
+    }
+    if (event.target.name == 'password') {
+      this.setState({ password: event.target.value });
+    }
+    if (event.target.name == 'confirmpassword') {
+      this.setState({ confirmpassword: event.target.value });
+    }
+  }
+
+  submit = () => {
+    fetch(mainurl + '/signup', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
+        confirmpassword: this.state.confirmpassword
+      })
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(resdata => {
+        console.log(resdata);
+        var message = resdata.message;
+        var token = resdata.token;
+        if (message === 'done') {
+          Cookies.set('jwttoken', token);
+          this.props.updatestate(true);
+        } else {
+
+        }
+
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
@@ -37,31 +85,43 @@ class SignUp extends Component {
                       type="text"
                       icon="user"
                       id="username"
-                      name="username"
-                      placeholder="username" />
+                      name="name"
+                      placeholder="username"
+                      value={this.state.name}
+                      onChange={this.handelchnage}
+                    />
                     <MDBInput class="form-control"
                       label="Email"
                       icon="envelope"
                       type="email"
                       id="email"
                       name="email"
-                      placeholder="email" />
+                      placeholder="email"
+                      value={this.state.email}
+                      onChange={this.handelchnage}
+                    />
                     <MDBInput class="form-control"
                       label="Password"
                       type="password"
                       icon="lock"
                       id="password"
                       name="password"
-                      placeholder="password" />
+                      placeholder="password"
+                      value={this.state.password}
+                      onChange={this.handelchnage}
+                    />
                     <MDBInput class="form-control"
                       type="password"
                       label="confirm-password"
                       icon="lock"
                       id="confirmPassword"
-                      name="confirmPassword"
-                      placeholder="confirmpassword" />
+                      name="confirmpassword"
+                      placeholder="confirmpassword"
+                      value={this.state.confirmpassword}
+                      onChange={this.handelchnage}
+                    />
                   </div>
-                  <MDBBtn type="submit">SignUp</MDBBtn>
+                  <MDBBtn onClick={this.submit}>SignUp</MDBBtn>
                 </form>
               </MDBCol>
             </MDBRow>

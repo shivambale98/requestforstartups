@@ -3,7 +3,7 @@ import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import classes from './Comment.module.css'
 import Aux from '../../hoc/Auxiliary';
 import Comments from './Comments'
-
+import { MDBInput } from 'mdbreact';
 import Cookies from 'js-cookie';
 const jwt = require('jsonwebtoken');
 
@@ -21,12 +21,7 @@ class Comment extends Component {
     commentbox: '',
     email: ''
   };
-  //constructor() {
-  //  super();
-  //this.state = {
-  //placeholder:'you are replying to ...'
-  //};
-  //    }
+
 
 
   componentDidMount() {
@@ -116,22 +111,27 @@ class Comment extends Component {
         <h3 className={classes.lab}>Comments</h3>
         <MDBContainer>
           <MDBRow>
-            <MDBCol md="8">
+            <MDBCol md="6">
               <div class="form-group">
-                <textarea class="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="6"
+                <p className={classes.head}>you are replying to {this.props.email}</p>
+              <MDBInput 
+                   type="textarea" 
+                   rows="5"
+                  id="exampleFormControlTextarea1"  
                   name="comment"
-                  placeholder="you are replying to.."
                   onChange={this.handelchange}
                   value={this.state.commentbox}
-                >
-                </textarea>
-                <button onClick={this.postComment}>post</button>
+                  background="primary"
+                />
+                <button className={classes.btn} onClick={this.postComment}><b>post</b></button>
               </div>
             </MDBCol>
           </MDBRow>
         </MDBContainer>
+        <br />
+        <br />
+        <br />
+        <br />     
         {comments}
       </Aux>
     )
@@ -140,3 +140,9 @@ class Comment extends Component {
 
 
 export default Comment;
+
+
+
+
+
+

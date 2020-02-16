@@ -170,8 +170,8 @@ class Welcome extends Component {
           <p id="answers"><a href="#" id="link"><u><b>Tweet it</b></u></a> and include #rfs_india
         <br />Upvote if you find the best of the
         <br />solution to your problem.
-        <br />help developers create better
-        <br /> products.
+        <br />help developers 
+        <br />create better products.
         <br />
             <br />
             <br />

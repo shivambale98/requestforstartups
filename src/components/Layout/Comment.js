@@ -3,6 +3,7 @@ import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import classes from './Comment.module.css'
 import Aux from '../../hoc/Auxiliary';
 import Comments from './Comments'
+import Ideaforms from './Ideaforms';
 import { MDBInput } from 'mdbreact';
 import Cookies from 'js-cookie';
 const jwt = require('jsonwebtoken');
@@ -19,7 +20,8 @@ class Comment extends Component {
     users: [],
     ideaid: undefined,
     commentbox: '',
-    email: ''
+    email: '',
+    idea: undefined
   };
 
 
@@ -38,7 +40,8 @@ class Comment extends Component {
       .then(resdata => {
         this.setState({
           comments: resdata.comments || [],
-          users: resdata.users || []
+          users: resdata.users || [],
+          idea: resdata.fields
         });
       })
       .catch(err => {
@@ -98,8 +101,64 @@ class Comment extends Component {
     }
   }
 
+  upvotebuttonHandler = recordid => {
+    const token = Cookies.get('jwttoken');
+    var decodedtoken;
+    try {
+      decodedtoken = jwt.verify(token, 'heyphil123');
+    } catch (err) {
+      console.log(err);
+    }
+    if (decodedtoken) {
+      this.setState({
+        loggedin: true
+      });
+    } else {
+      this.setState({
+        loggedin: false
+      });
+    }
+    var formdate = new FormData();
+    formdate.append('userid', decodedtoken.userid);
+    if (this.state.loggedin) {
+      const url = mainurl + "/idea/upvote/" + recordid;
+      fetch(url, {
+        method: 'POST',
+        body: formdate
+      })
+        .then(res => {
+          return res.json();
+        })
+        .then(resdata => {
+          var { record } = resdata;
+          var { id } = record;
+          var { link } = resdata;
+          console.log(resdata);
+          var temp = [];
+          this.state.records.map(recordt => {
+            if (recordt.id === id) {
+              var temprecord = recordt;
+              recordt = record;
+              recordt.email = temprecord.email;
+              temp.push(recordt);
+            } else {
+              temp.push(recordt);
+            }
+          });
+          console.log(temp);
+
+          this.setState({ records: temp });
+          this.setState({ link: link });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }
+
 
   render() {
+    console.log(this.state);
 
     const comments = this.state.comments.map((comment, index) => {
       return <Comments
@@ -107,18 +166,29 @@ class Comment extends Component {
         comment={comment}
       />
     });
+
+    const currentidea = () => {
+      return <Ideaforms
+        email={this.state.idea.userlu || this.state.idea.screen_name}
+        problem={this.state.idea.Problem}
+        upvote={this.state.idea.upvote}
+        onUpvote={this.upvotebuttonHandler.bind(this, this.state.idea.id)}
+        onComment={this.onComment.bind(this, this.state.idea.id)}
+      />
+    }
+
     return (
       <Aux>
+        {currentidea}
         <h3 className={classes.lab}>Comments</h3>
         <MDBContainer>
           <MDBRow>
             <MDBCol md="6">
               <div class="form-group">
-                <p className={classes.head}>you are replying to {this.props.email}</p>
-              <MDBInput 
-                   type="textarea" 
-                   rows="5"
-                  id="exampleFormControlTextarea1"  
+                <MDBInput
+                  type="textarea"
+                  rows="5"
+                  id="exampleFormControlTextarea1"
                   name="comment"
                   onChange={this.handelchange}
                   value={this.state.commentbox}
@@ -132,7 +202,7 @@ class Comment extends Component {
         <br />
         <br />
         <br />
-        <br />     
+        <br />
         {comments}
       </Aux>
     )

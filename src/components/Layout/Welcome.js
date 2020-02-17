@@ -96,41 +96,44 @@ class Welcome extends Component {
         loggedin: false
       });
     }
-    var formdate = new FormData();
-    formdate.append('userid', decodedtoken.userid);
     if (this.state.loggedin) {
-      const url = mainurl + "/idea/upvote/" + recordid;
-      fetch(url, {
-        method: 'POST',
-        body: formdate
-      })
-        .then(res => {
-          return res.json();
+      var formdate = new FormData();
+      formdate.append('userid', decodedtoken.userid);
+      if (this.state.loggedin) {
+        const url = mainurl + "/idea/upvote/" + recordid;
+        fetch(url, {
+          method: 'POST',
+          body: formdate
         })
-        .then(resdata => {
-          var { record } = resdata;
-          var { id } = record;
-          var { link } = resdata;
-          console.log(resdata);
-          var temp = [];
-          this.state.records.map(recordt => {
-            if (recordt.id === id) {
-              var temprecord = recordt;
-              recordt = record;
-              recordt.email = temprecord.email;
-              temp.push(recordt);
-            } else {
-              temp.push(recordt);
-            }
-          });
-          console.log(temp);
+          .then(res => {
+            return res.json();
+          })
+          .then(resdata => {
+            var { record } = resdata;
+            var { id } = record;
+            var { link } = resdata;
+            console.log(resdata);
+            var temp = [];
+            this.state.records.map(recordt => {
+              if (recordt.id === id) {
+                var temprecord = recordt;
+                recordt = record;
+                recordt.email = temprecord.email;
+                temp.push(recordt);
+              } else {
+                temp.push(recordt);
+              }
+            });
+            console.log(temp);
 
-          this.setState({ records: temp });
-          this.setState({ link: link });
-        })
-        .catch(err => {
-          console.log(err);
-        });
+            this.setState({ records: temp });
+            this.setState({ link: link });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+
+      }
     }
   }
 
@@ -209,7 +212,7 @@ class Welcome extends Component {
           <p id="answers"><a href="#" id="link"><u><b>Tweet it</b></u></a> and include #rfs_india
         <br />Upvote if you find the best of the
         <br />solution to your problem.
-        <br />help developers 
+        <br />help developers
         <br />create better products.
         <br />
             <br />

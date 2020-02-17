@@ -4,16 +4,17 @@ import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import nsVerticalLogo from '../../assets/NS_logo_Vertical.svg';
 import Cookies from 'js-cookie';
 import jwt from 'jsonwebtoken';
-const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-//const mainurl = 'http://localhost:5000';//
-
+//const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+const mainurl = 'http://localhost:5000';//
+//import * as EmailValidator from "email-validator";
+//import * as Yup from "yup";
 
 class Login extends Component {
 
   state = {
     email: '',
     password: '',
-    redirect: false
+    redirect: false,
   }
 
   handelchnage = (event) => {
@@ -41,9 +42,15 @@ class Login extends Component {
         return res.json();
       })
       .then(resdata => {
-        const token = resdata.token;
-        Cookies.set('jwttoken', token);
-        this.props.history.push('/');
+        var message = resdata.message;
+        if (message === 'done') {
+          const token = resdata.token;
+          Cookies.set('jwttoken', token);
+          this.props.updatestate(true);
+        } else {
+          console.log(message);
+        }
+        //this.props.history.push('/');
       })
       .catch(err => {
         console.log(err);
@@ -51,10 +58,10 @@ class Login extends Component {
   }
 
   render() {
-    
+
 
     return (
-      <div className={classes.back}>
+      < div className={classes.back} >
         <h1 className={classes.header}>Request for startups </h1>
         <img src={nsVerticalLogo} className={classes.images} alt="NS_Logo" />
         <div className={classes.Loginstyle}>
@@ -93,7 +100,7 @@ class Login extends Component {
             </MDBRow>
           </MDBContainer>
         </div >
-      </div>
+      </div >
     )
   };
 }

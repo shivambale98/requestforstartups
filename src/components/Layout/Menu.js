@@ -1,12 +1,13 @@
 import classes from './Menu.module.css';
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
 import Logo from './Logo';
 
 import Cookies from 'js-cookie';
 const jwt = require('jsonwebtoken');
-const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-//const mainurl = 'http://localhost:5000';//
+//const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+const mainurl = 'http://localhost:5000';//
 
 class Menu extends Component {
     state = {
@@ -15,26 +16,27 @@ class Menu extends Component {
         signlink: '/signup',
         signstatus: 'Signup',
         email: '',
-        token: undefined
+        token: undefined,
+        redirect: false
     };
 
     componentDidMount() {
-        const token = Cookies.get('jwttoken');
-        var decodedtoken;
-        try {
-            decodedtoken = jwt.verify(token, 'heyphil123');
-        } catch (err) {
-            console.log(err);
-        }
-        if (decodedtoken) {
+        if (this.props.loggedin) {
             this.setState({
                 loglink: '/logout',
                 logstatus: 'Logout',
                 signlink: '/myideas',
                 signstatus: 'Myideas',
-                token: decodedtoken
+                token: this.props.loggedin,
+                redirect: true
             });
             //loggedin so re-render
+        }
+    }
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/' />
         }
     }
 
@@ -48,9 +50,10 @@ class Menu extends Component {
                     logstatus: 'Login',
                     signlink: '/signup',
                     signstatus: 'Signup',
+                    redirect: true,
                     token: undefined
                 });
-                this.props.history.push('/');
+                //this.props.history.push('/');
                 //rerender
             }
         }
@@ -60,6 +63,7 @@ class Menu extends Component {
         //console.log(this.state);
         return (
             <div className={classes.Menustyle}>
+                {this.renderRedirect()}
                 <Logo />
                 <ul className={classes.ul}>
                     <li className={classes.li}> <Link className={classes.links} to="/"> HOME </Link> </li>

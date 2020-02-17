@@ -8,8 +8,8 @@ import Cookies from 'js-cookie';
 const jwt = require('jsonwebtoken');
 
 
-const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-//const mainurl = 'http://localhost:5000';//
+//const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+const mainurl = 'http://localhost:5000';//
 
 class Comment extends Component {
   state = {
@@ -61,40 +61,41 @@ class Comment extends Component {
     } catch (err) {
       console.log(err);
     }
-    this.state.email = decodedtoken.email;
-    const ideaid = this.state.ideaid;
-    var formdata = new FormData();
-    formdata.append('comment', this.state.commentbox);
-    formdata.append('email', this.state.email);
+    if (decodedtoken) {
+      this.state.email = decodedtoken.email;
+      const ideaid = this.state.ideaid;
+      var formdata = new FormData();
+      formdata.append('comment', this.state.commentbox);
+      formdata.append('email', this.state.email);
 
-    fetch(mainurl + '/comments/' + ideaid, {
-      method: 'POST',
-      body: formdata,
-    })
-      .then(res => {
-        return res.json();
+      fetch(mainurl + '/comments/' + ideaid, {
+        method: 'POST',
+        body: formdata,
       })
-      .then(resdata => {
-        fetch(mainurl + '/comments/' + this.state.ideaid)
-          .then(res => {
-            return res.json();
-          })
-          .then(resdata => {
-            this.setState({
-              comments: resdata.comments || [],
-              users: resdata.users || [],
-              commentbox: ''
+        .then(res => {
+          return res.json();
+        })
+        .then(resdata => {
+          fetch(mainurl + '/comments/' + this.state.ideaid)
+            .then(res => {
+              return res.json();
+            })
+            .then(resdata => {
+              this.setState({
+                comments: resdata.comments || [],
+                users: resdata.users || [],
+                commentbox: ''
+              });
+            })
+            .catch(err => {
+              console.log(err);
             });
-          })
-          .catch(err => {
-            console.log(err);
-          });
 
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 
 

@@ -27,8 +27,8 @@ import Aux from '../../hoc/Auxiliary';
 import Cookies from 'js-cookie';
 const jwt = require('jsonwebtoken');
 
-const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-//const mainurl = 'http://localhost:5000';//
+//const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+const mainurl = 'http://localhost:5000';//
 
 
 class my_ideas extends Component {
@@ -36,7 +36,8 @@ class my_ideas extends Component {
         collapseID: "",
         records: [],
         link: '',
-        email: ''
+        email: '',
+        Redirect: false
     };
 
     componentDidMount() {
@@ -69,6 +70,9 @@ class my_ideas extends Component {
                         .then(resdata => {
                             this.state.records.push(resdata);
                             //console.log(resdata);
+                            this.setState({
+                                Redirect: true
+                            });
                         });
                 });
             })

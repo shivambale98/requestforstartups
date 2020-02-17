@@ -26,15 +26,21 @@ import Ideaforms from './Ideaforms';
 import Aux from '../../hoc/Auxiliary';
 import Pagination from './Pagination';
 
-const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-//const mainurl = 'http://localhost:5000';//
+
+import Cookies from 'js-cookie';
+const jwt = require('jsonwebtoken');
+
+//const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+const mainurl = 'http://localhost:5000';//
 var recordlist = [];
 
 class Welcome extends Component {
   state = {
     collapseID: "",
     records: [],
-    link: ''
+    link: '',
+    redirect: false,
+    id: ''
   };
   //pagination
   //const [currentPage, setCurrentPage] = useState(1);
@@ -67,41 +73,73 @@ class Welcome extends Component {
 
   }
 
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to={'/comments/' + this.state.id} />
+    }
+  }
+
   upvotebuttonHandler = recordid => {
-
-    const url = mainurl + "/idea/upvote/" + recordid;
-    fetch(url)
-      .then(res => {
-        return res.json();
-      })
-      .then(resdata => {
-        var { record } = resdata;
-        var { id } = record;
-        var { link } = resdata;
-        console.log(resdata);
-        var temp = [];
-        this.state.records.map(recordt => {
-          if (recordt.id === id) {
-            var temprecord = recordt;
-            recordt = record;
-            recordt.email = temprecord.email;
-            temp.push(recordt);
-          } else {
-            temp.push(recordt);
-          }
-        });
-        console.log(temp);
-
-        this.setState({ records: temp });
-        this.setState({ link: link });
-      })
-      .catch(err => {
-        console.log(err);
+    const token = Cookies.get('jwttoken');
+    var decodedtoken;
+    try {
+      decodedtoken = jwt.verify(token, 'heyphil123');
+    } catch (err) {
+      console.log(err);
+    }
+    if (decodedtoken) {
+      this.setState({
+        loggedin: true
       });
+    } else {
+      this.setState({
+        loggedin: false
+      });
+    }
+    var formdate = new FormData();
+    formdate.append('userid', decodedtoken.userid);
+    if (this.state.loggedin) {
+      const url = mainurl + "/idea/upvote/" + recordid;
+      fetch(url, {
+        method: 'POST',
+        body: formdate
+      })
+        .then(res => {
+          return res.json();
+        })
+        .then(resdata => {
+          var { record } = resdata;
+          var { id } = record;
+          var { link } = resdata;
+          console.log(resdata);
+          var temp = [];
+          this.state.records.map(recordt => {
+            if (recordt.id === id) {
+              var temprecord = recordt;
+              recordt = record;
+              recordt.email = temprecord.email;
+              temp.push(recordt);
+            } else {
+              temp.push(recordt);
+            }
+          });
+          console.log(temp);
+
+          this.setState({ records: temp });
+          this.setState({ link: link });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 
   onComment = (id) => {
-    this.props.history.push('/comments/' + id);
+    this.setState({
+      id: id,
+      redirect: true
+    });
+    //this.props.history.push();
   }
 
   toggleCollapse = collapseID => () =>
@@ -131,6 +169,7 @@ class Welcome extends Component {
 
     return (
       <Aux>
+        {this.renderRedirect()}
         <div id="classicformpage">
           <MDBView>
             <MDBMask className="d-flex justify-content-center align-items-center gradient">

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import classes from './SignUp.module.css';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
-import nsVerticalLogo from '../../assets/NS_logo_Vertical.svg';
-const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-//const mainurl = 'http://localhost:5000';//
 import ReactDOM from "react-dom";
+import nsVerticalLogo from '../../assets/NS_logo_Vertical.svg';
+import Cookies from 'js-cookie';
+
+//const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+const mainurl = 'http://localhost:5000';//
 
 
 
@@ -82,19 +84,63 @@ class SignUp extends Component {
   };
 
 
-//validation complete
+  //validation complete
 
   state = {
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmpassword: ''
   }
 
-  handleChange = e => {
-    const inputId = e.target.name;
-    const value = e.target.value;
-    this.setState({ [inputId]: value })
+  handelchnage = (event) => {
+
+    if (event.target.name == 'name') {
+      this.setState({ name: event.target.value });
+    }
+    if (event.target.name == 'email') {
+      this.setState({ email: event.target.value });
+    }
+    if (event.target.name == 'password') {
+      this.setState({ password: event.target.value });
+    }
+    if (event.target.name == 'confirmpassword') {
+      this.setState({ confirmpassword: event.target.value });
+    }
+  }
+
+  submit = () => {
+    fetch(mainurl + '/signup', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
+        confirmpassword: this.state.confirmpassword
+      })
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(resdata => {
+        console.log(resdata);
+        var message = resdata.message;
+        var token = resdata.token;
+        if (message === 'done') {
+          Cookies.set('jwttoken', token);
+          this.props.updatestate(true);
+        } else {
+
+        }
+
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
@@ -115,8 +161,11 @@ class SignUp extends Component {
                       type="text"
                       icon="user"
                       id="username"
-                      name="username"
-                      placeholder="username" />
+                      name="name"
+                      placeholder="username"
+                      value={this.state.name}
+                      onChange={this.handelchnage}
+                    />
                     <MDBInput class="form-control"
                       label="Email"
                       icon="envelope"
@@ -126,11 +175,11 @@ class SignUp extends Component {
                       placeholder="email"
                       className={`form-control ${
                         formErrors.email ? "is-invalid" : ""
-                      }`} 
+                        }`}
                       onChange={this.handleChange}
                       value={formValues.email}
-                      />
-                   <div className="invalid-feedback">{formErrors.email}</div>
+                    />
+                    <div className="invalid-feedback">{formErrors.email}</div>
                     <MDBInput class="form-control"
                       label="Password"
                       type="password"
@@ -140,25 +189,27 @@ class SignUp extends Component {
                       placeholder="password"
                       className={`form-control ${
                         formErrors.password ? "is-invalid" : ""
-                      }`} 
+                        }`}
                       onChange={this.handleChange}
                       value={formValues.password}
-                      />
-               <div className="invalid-feedback">{formErrors.password}</div>     
-    
+                    />
+                    <div className="invalid-feedback">{formErrors.password}</div>
+
 
                     <MDBInput class="form-control"
                       type="password"
                       label="confirm-password"
                       icon="lock"
                       id="confirmPassword"
-                      name="confirmPassword"
-                      placeholder="confirmpassword" 
-                      />
+                      name="confirmpassword"
+                      placeholder="confirmpassword"
+                      value={this.state.confirmpassword}
+                      onChange={this.handelchnage}
+                    />
                   </div>
-                  <MDBBtn   
-                     type="submit"
-                     disabled={isSubmitting}>SignUp
+                  <MDBBtn
+                    onClick={this.submit}
+                    disabled={isSubmitting}>SignUp
                      </MDBBtn>
                 </form>
               </MDBCol>

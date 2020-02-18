@@ -46,7 +46,7 @@ class my_ideas extends Component {
         const token = Cookies.get('jwttoken');
         var decodedtoken;
         try {
-            decodedtoken = jwt.verify(token, process.env.secret);
+            decodedtoken = jwt.verify(token, 'heyphil123');
         } catch (err) {
             console.log(err);
         }

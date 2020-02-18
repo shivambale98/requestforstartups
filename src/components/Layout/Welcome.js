@@ -30,8 +30,8 @@ import Pagination from './Pagination';
 import Cookies from 'js-cookie';
 const jwt = require('jsonwebtoken');
 
-//const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-const mainurl = 'http://localhost:5000';//
+const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+//const mainurl = 'http://localhost:5000';//
 var recordlist = [];
 
 class Welcome extends Component {
@@ -83,7 +83,7 @@ class Welcome extends Component {
     const token = Cookies.get('jwttoken');
     var decodedtoken;
     try {
-      decodedtoken = jwt.verify(token, 'heyphil123');
+      decodedtoken = jwt.verify(token, process.env.secret);
     } catch (err) {
       console.log(err);
     }

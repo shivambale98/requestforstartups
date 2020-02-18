@@ -3,14 +3,13 @@ import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import classes from './Comment.module.css'
 import Aux from '../../hoc/Auxiliary';
 import Comments from './Comments'
-import Ideaforms from './Ideaforms';
 import { MDBInput } from 'mdbreact';
 import Cookies from 'js-cookie';
 const jwt = require('jsonwebtoken');
 
 
-//const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-const mainurl = 'http://localhost:5000';//
+const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+//const mainurl = 'http://localhost:5000';//
 
 class Comment extends Component {
   state = {
@@ -21,7 +20,8 @@ class Comment extends Component {
     ideaid: undefined,
     commentbox: '',
     email: '',
-    idea: undefined
+    Problem: undefined,
+    userlu: undefined
   };
 
 
@@ -38,10 +38,14 @@ class Comment extends Component {
         return res.json();
       })
       .then(resdata => {
+        var { Problem } = resdata.fields;
+        var { userlu } = resdata.fields;
+        var { screen_name } = resdata.fields;
         this.setState({
           comments: resdata.comments || [],
           users: resdata.users || [],
-          idea: resdata.fields
+          Problem: Problem,
+          userlu: userlu || screen_name
         });
       })
       .catch(err => {
@@ -60,7 +64,7 @@ class Comment extends Component {
     const token = Cookies.get('jwttoken');
     var decodedtoken;
     try {
-      decodedtoken = jwt.verify(token, 'heyphil123');
+      decodedtoken = jwt.verify(token, process.env.secret);
     } catch (err) {
       console.log(err);
     }
@@ -101,64 +105,9 @@ class Comment extends Component {
     }
   }
 
-  upvotebuttonHandler = recordid => {
-    const token = Cookies.get('jwttoken');
-    var decodedtoken;
-    try {
-      decodedtoken = jwt.verify(token, 'heyphil123');
-    } catch (err) {
-      console.log(err);
-    }
-    if (decodedtoken) {
-      this.setState({
-        loggedin: true
-      });
-    } else {
-      this.setState({
-        loggedin: false
-      });
-    }
-    var formdate = new FormData();
-    formdate.append('userid', decodedtoken.userid);
-    if (this.state.loggedin) {
-      const url = mainurl + "/idea/upvote/" + recordid;
-      fetch(url, {
-        method: 'POST',
-        body: formdate
-      })
-        .then(res => {
-          return res.json();
-        })
-        .then(resdata => {
-          var { record } = resdata;
-          var { id } = record;
-          var { link } = resdata;
-          console.log(resdata);
-          var temp = [];
-          this.state.records.map(recordt => {
-            if (recordt.id === id) {
-              var temprecord = recordt;
-              recordt = record;
-              recordt.email = temprecord.email;
-              temp.push(recordt);
-            } else {
-              temp.push(recordt);
-            }
-          });
-          console.log(temp);
-
-          this.setState({ records: temp });
-          this.setState({ link: link });
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-  }
-
 
   render() {
-    console.log(this.state);
+    console.log(this.state.userlu);
 
     const comments = this.state.comments.map((comment, index) => {
       return <Comments
@@ -167,20 +116,21 @@ class Comment extends Component {
       />
     });
 
-    const currentidea = () => {
-      return <Ideaforms
-        email={this.state.idea.userlu || this.state.idea.screen_name}
-        problem={this.state.idea.Problem}
-        upvote={this.state.idea.upvote}
-        onUpvote={this.upvotebuttonHandler.bind(this, this.state.idea.id)}
-        onComment={this.onComment.bind(this, this.state.idea.id)}
-      />
-    }
-
     return (
       <Aux>
-        {currentidea}
-        <h3 className={classes.lab}>Comments</h3>
+        <h2 className={classes.lab}>Comments</h2>
+        <div className={classes.container}>
+          <MDBCol md="12">
+            <MDBRow>
+              <MDBContainer>
+                <p className={classes.head}>{this.state.userlu}</p>
+                <div>
+                  <p className={classes.title}><u>{this.state.Problem}</u></p>
+                </div>
+              </MDBContainer>
+            </MDBRow>
+          </MDBCol>
+        </div>
         <MDBContainer>
           <MDBRow>
             <MDBCol md="6">
@@ -193,6 +143,7 @@ class Comment extends Component {
                   onChange={this.handelchange}
                   value={this.state.commentbox}
                   background="primary"
+                  placeholder="write your comment"
                 />
                 <button className={classes.btn} onClick={this.postComment}><b>post</b></button>
               </div>
@@ -211,9 +162,3 @@ class Comment extends Component {
 
 
 export default Comment;
-
-
-
-
-
-

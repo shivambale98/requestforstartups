@@ -25,7 +25,7 @@ class App extends Component {
     const token = Cookies.get('jwttoken');
     var decodedtoken;
     try {
-      decodedtoken = jwt.verify(token, 'heyphil123');
+      decodedtoken = jwt.verify(token, process.env.secret);
     } catch (err) {
       console.log(err);
     }

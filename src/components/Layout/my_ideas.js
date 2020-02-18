@@ -27,8 +27,8 @@ import Aux from '../../hoc/Auxiliary';
 import Cookies from 'js-cookie';
 const jwt = require('jsonwebtoken');
 
-//const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-const mainurl = 'http://localhost:5000';//
+const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+//const mainurl = 'http://localhost:5000';//
 
 
 class my_ideas extends Component {
@@ -37,14 +37,16 @@ class my_ideas extends Component {
         records: [],
         link: '',
         email: '',
-        Redirect: false
+        Redirect: false,
+        comRedirect: false,
+        comid: ''
     };
 
     componentDidMount() {
         const token = Cookies.get('jwttoken');
         var decodedtoken;
         try {
-            decodedtoken = jwt.verify(token, 'heyphil123');
+            decodedtoken = jwt.verify(token, process.env.secret);
         } catch (err) {
             console.log(err);
         }
@@ -68,6 +70,7 @@ class my_ideas extends Component {
                             return res.json();
                         })
                         .then(resdata => {
+                            console.log(resdata);
                             this.state.records.push(resdata);
                             //console.log(resdata);
                             this.setState({
@@ -80,6 +83,22 @@ class my_ideas extends Component {
                 console.log(err);
             });
 
+    }
+
+
+
+    onComment = (id) => {
+        this.setState({
+            comid: id,
+            comredirect: true
+        });
+        //this.props.history.push();
+    }
+
+    rendercomRedirect = () => {
+        if (this.state.comredirect) {
+            return <Redirect to={'/comments/' + this.state.comid} />
+        }
     }
 
 
@@ -103,12 +122,14 @@ class my_ideas extends Component {
                 email={this.state.email}
                 problem={record.idea.Problem}
                 upvote={record.idea.upvote}
+                onComment={this.onComment.bind(this, record.id)}
             //onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
             />
         });
 
         return (
             <div>
+                {this.rendercomRedirect()}
                 {ideas}
             </div>
         );

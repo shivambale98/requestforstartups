@@ -8,8 +8,8 @@ import Cookies from 'js-cookie';
 const jwt = require('jsonwebtoken');
 
 
-//const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-const mainurl = 'http://localhost:5000';//
+const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
+//const mainurl = 'http://localhost:5000';//
 
 class Comment extends Component {
   state = {
@@ -109,20 +109,32 @@ class Comment extends Component {
     });
     return (
       <Aux>
-        <h3 className={classes.lab}>Comments</h3>
-        <MDBContainer>
+        <h2 className={classes.lab}>Comments</h2>
+        <div className={classes.container}>
+        <MDBCol md="12">
+            <MDBRow>
+                <MDBContainer>
+                    <div>
+                        <p className={classes.title}><u>this is the problem</u></p>
+                    </div>
+                </MDBContainer>
+            </MDBRow>
+        </MDBCol>
+    </div>
+       <MDBContainer>
           <MDBRow>
             <MDBCol md="6">
               <div class="form-group">
                 <p className={classes.head}>you are replying to {this.props.email}</p>
               <MDBInput 
-                   type="textarea" 
-                   rows="5"
+                  type="textarea" 
+                  rows="5"
                   id="exampleFormControlTextarea1"  
                   name="comment"
                   onChange={this.handelchange}
                   value={this.state.commentbox}
                   background="primary"
+                  placeholder="write your comment"
                 />
                 <button className={classes.btn} onClick={this.postComment}><b>post</b></button>
               </div>

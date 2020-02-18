@@ -25,3 +25,20 @@
     text-align: left;
     font-size: 12px;
 }
+
+.usermessage {
+    margin: auto;
+    width: 90%;
+    border: 1px solid #4771fa;
+    padding: 0.5rem;
+    border-radius: 3px;
+    background: #b9c9ff;
+    text-align: center;
+  }
+  
+  .usermessageerror {
+    border-color: red;
+    background: rgb(255, 176, 176);
+    color: red;
+    text-align: center;
+  }

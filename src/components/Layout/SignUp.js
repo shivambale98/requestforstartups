@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import classes from './SignUp.module.css';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
-import ReactDOM from "react-dom";
 import nsVerticalLogo from '../../assets/NS_logo_Vertical.svg';
+import LoginFormError from '../Layout/LoginFormError';
 import Cookies from 'js-cookie';
 
 //const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
@@ -11,86 +11,12 @@ const mainurl = 'http://localhost:5000';//
 
 
 class SignUp extends Component {
-  //form validation
-  constructor(props) {
-    super(props);
-    this.state = {
-      formValues: {
-        email: "",
-        password: ""
-      },
-      formErrors: {
-        email: "",
-        password: ""
-      },
-      formValidity: {
-        email: false,
-        password: false
-      },
-      isSubmitting: false
-    };
-  }
-
-  handleValidation = target => {
-    const { name, value } = target;
-    const fieldValidationErrors = this.state.formErrors;
-    const validity = this.state.formValidity;
-    const isEmail = name === "email";
-    const isPassword = name === "password";
-    const emailTest = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-
-    validity[name] = value.length > 0;
-    fieldValidationErrors[name] = validity[name]
-      ? ""
-      : `${name} is required and cannot be empty`;
-
-    if (validity[name]) {
-      if (isEmail) {
-        validity[name] = emailTest.test(value);
-        fieldValidationErrors[name] = validity[name]
-          ? ""
-          : `${name} should be a valid email address`;
-      }
-      if (isPassword) {
-        validity[name] = value.length >= 3;
-        fieldValidationErrors[name] = validity[name]
-          ? ""
-          : `${name} should be 3 characters minimum`;
-      }
-    }
-
-    this.setState({
-      formErrors: fieldValidationErrors,
-      formValidity: validity
-    });
-  };
-  handleSubmit = event => {
-    event.preventDefault();
-    this.setState({ isSubmitting: true });
-    const { formValues, formValidity } = this.state;
-    if (Object.values(formValidity).every(Boolean)) {
-      alert("Form is validated! Submitting the form...");
-      this.setState({ isSubmitting: false });
-    } else {
-      for (let key in formValues) {
-        let target = {
-          name: key,
-          value: formValues[key]
-        };
-        this.handleValidation(target);
-      }
-      this.setState({ isSubmitting: false });
-    }
-  };
-
-
-  //validation complete
-
   state = {
     name: '',
     email: '',
     password: '',
-    confirmpassword: ''
+    confirmpassword: '',
+    errormsg: undefined
   }
 
   handelchnage = (event) => {
@@ -134,7 +60,9 @@ class SignUp extends Component {
           Cookies.set('jwttoken', token);
           this.props.updatestate(true);
         } else {
-
+          this.setState({
+            errormsg: message
+          });
         }
 
       })
@@ -144,6 +72,7 @@ class SignUp extends Component {
   }
 
   render() {
+    const errorb = <LoginFormError error={this.state.errormsg} />
     return (
       <div className={classes.area}>
         <h1 className={classes.header2}>Request for startups </h1>
@@ -153,7 +82,8 @@ class SignUp extends Component {
           <MDBContainer>
             <MDBRow>
               <MDBCol md="12">
-                <form class="login-form" action={mainurl + '/signup'} method="POST" onSubmit={this.handleSubmit}>
+                <form class="login-form" action={mainurl + '/signup'} method="POST">
+                  {errorb}
                   <p className="h2 text-center mb-4">Sign up</p>
                   <div className="grey-text">
                     <MDBInput class="form-control"
@@ -173,13 +103,9 @@ class SignUp extends Component {
                       id="email"
                       name="email"
                       placeholder="email"
-                      className={`form-control ${
-                        formErrors.email ? "is-invalid" : ""
-                        }`}
-                      onChange={this.handleChange}
-                      value={formValues.email}
+                      value={this.state.email}
+                      onChange={this.handelchnage}
                     />
-                    <div className="invalid-feedback">{formErrors.email}</div>
                     <MDBInput class="form-control"
                       label="Password"
                       type="password"
@@ -187,15 +113,9 @@ class SignUp extends Component {
                       id="password"
                       name="password"
                       placeholder="password"
-                      className={`form-control ${
-                        formErrors.password ? "is-invalid" : ""
-                        }`}
-                      onChange={this.handleChange}
-                      value={formValues.password}
+                      value={this.state.password}
+                      onChange={this.handelchnage}
                     />
-                    <div className="invalid-feedback">{formErrors.password}</div>
-
-
                     <MDBInput class="form-control"
                       type="password"
                       label="confirm-password"
@@ -207,10 +127,7 @@ class SignUp extends Component {
                       onChange={this.handelchnage}
                     />
                   </div>
-                  <MDBBtn
-                    onClick={this.submit}
-                    disabled={isSubmitting}>SignUp
-                     </MDBBtn>
+                  <MDBBtn onClick={this.submit}>SignUp</MDBBtn>
                 </form>
               </MDBCol>
             </MDBRow>

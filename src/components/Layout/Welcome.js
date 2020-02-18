@@ -31,7 +31,7 @@ import Cookies from 'js-cookie';
 const jwt = require('jsonwebtoken');
 
 //const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-const mainurl = 'http://localhost:5000';//
+const mainurl = 'http://localhost:5000';
 var recordlist = [];
 
 class Welcome extends Component {
@@ -206,7 +206,7 @@ class Welcome extends Component {
           <h2 id="question">Got a startup idea?</h2>
           <p id="answer">Click the Add Idea Button above and post your startup Idea also  listen to solutions that other users have to offer in the comments section.</p>
           <h2 id="question1">wanna Tweet your idea?</h2>
-          <p id="answers"><a href="#" id="link"><u><b>Tweet it</b></u></a> and include #rfs_india
+          <p id="answers"><a href="#" id="link"><u><b>Tweet it</b></u></a> and include @startuprequest
         <br />Upvote if you find the best of the
         <br />solution to your problem.
         <br />help developers 
@@ -214,9 +214,9 @@ class Welcome extends Component {
         <br />
             <br />
             <br />
-            <br />Made by <a href="#" id="link"><u><b>Rohit Martires</b></u></a> and
-        <br /><a href="#" id="link"><u><b>Shivam Bale</b></u></a> under the
-        <br /> guidance of <a href="#" id="link"><u><b>Nova Semita.</b></u></a>
+            <br />Made by <a href="https://twitter.com/RohitMartires?s=08" id="link"><u><b>Rohit Martires</b></u></a> and
+        <br /><a href="https://twitter.com/BaleShivam" id="link"><u><b>Shivam Bale</b></u></a> under the
+        <br /> guidance of <a href="https://twitter.com/NovaSemitaHQ?s=08" id="link"><u><b>Nova Semita.</b></u></a>
             <br /> Follow us on Twitter to
         <br />see other things we do.
         </p>
@@ -230,6 +230,7 @@ class Welcome extends Component {
 
 
 export default Welcome;
+
 
 
 //postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} //

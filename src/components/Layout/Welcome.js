@@ -32,6 +32,7 @@ const jwt = require('jsonwebtoken');
 
 const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
 //const mainurl = 'http://localhost:5000';//
+
 var recordlist = [];
 
 class Welcome extends Component {
@@ -233,6 +234,7 @@ class Welcome extends Component {
 
 
 export default Welcome;
+
 
 
 //postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} //

@@ -19,7 +19,9 @@ class Comment extends Component {
     users: [],
     ideaid: undefined,
     commentbox: '',
-    email: ''
+    email: '',
+    Problem: undefined,
+    userlu: undefined
   };
 
 
@@ -36,9 +38,14 @@ class Comment extends Component {
         return res.json();
       })
       .then(resdata => {
+        var { Problem } = resdata.fields;
+        var { userlu } = resdata.fields;
+        var { screen_name } = resdata.fields;
         this.setState({
           comments: resdata.comments || [],
-          users: resdata.users || []
+          users: resdata.users || [],
+          Problem: Problem,
+          userlu: userlu || screen_name
         });
       })
       .catch(err => {
@@ -100,6 +107,7 @@ class Comment extends Component {
 
 
   render() {
+    console.log(this.state.userlu);
 
     const comments = this.state.comments.map((comment, index) => {
       return <Comments
@@ -107,29 +115,30 @@ class Comment extends Component {
         comment={comment}
       />
     });
+
     return (
       <Aux>
         <h2 className={classes.lab}>Comments</h2>
         <div className={classes.container}>
-        <MDBCol md="12">
+          <MDBCol md="12">
             <MDBRow>
-                <MDBContainer>
-                    <div>
-                        <p className={classes.title}><u>this is the problem</u></p>
-                    </div>
-                </MDBContainer>
+              <MDBContainer>
+                <p className={classes.head}>{this.state.userlu}</p>
+                <div>
+                  <p className={classes.title}><u>{this.state.Problem}</u></p>
+                </div>
+              </MDBContainer>
             </MDBRow>
-        </MDBCol>
-    </div>
-       <MDBContainer>
+          </MDBCol>
+        </div>
+        <MDBContainer>
           <MDBRow>
             <MDBCol md="6">
               <div class="form-group">
-                <p className={classes.head}>you are replying to {this.props.email}</p>
-              <MDBInput 
-                  type="textarea" 
+                <MDBInput
+                  type="textarea"
                   rows="5"
-                  id="exampleFormControlTextarea1"  
+                  id="exampleFormControlTextarea1"
                   name="comment"
                   onChange={this.handelchange}
                   value={this.state.commentbox}
@@ -144,7 +153,7 @@ class Comment extends Component {
         <br />
         <br />
         <br />
-        <br />     
+        <br />
         {comments}
       </Aux>
     )
@@ -153,9 +162,3 @@ class Comment extends Component {
 
 
 export default Comment;
-
-
-
-
-
-

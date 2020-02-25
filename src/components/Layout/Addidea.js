@@ -33,7 +33,7 @@ class Addidea extends Component {
                   <option value="IOT">IOT</option>
                   <option value="Web/Mobile Development">Web/Mobile Development</option>
                   <option value="Blockchain/Crypto">Blockchain/Crypto</option>
-                  <option value="Electronics">Electronics</option>
+                  <option value="Hardware/Electronics">Hardware/Electronics</option>
                   <option value="Social">Social</option>
                   <option value="Game Development">Game Development</option>
                 </select>

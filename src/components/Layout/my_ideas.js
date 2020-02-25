@@ -37,7 +37,9 @@ class my_ideas extends Component {
         records: [],
         link: '',
         email: '',
-        Redirect: false
+        Redirect: false,
+        comRedirect: false,
+        comid: ''
     };
 
     componentDidMount() {
@@ -68,6 +70,7 @@ class my_ideas extends Component {
                             return res.json();
                         })
                         .then(resdata => {
+                            console.log(resdata);
                             this.state.records.push(resdata);
                             //console.log(resdata);
                             this.setState({
@@ -80,6 +83,22 @@ class my_ideas extends Component {
                 console.log(err);
             });
 
+    }
+
+
+
+    onComment = (id) => {
+        this.setState({
+            comid: id,
+            comredirect: true
+        });
+        //this.props.history.push();
+    }
+
+    rendercomRedirect = () => {
+        if (this.state.comredirect) {
+            return <Redirect to={'/comments/' + this.state.comid} />
+        }
     }
 
 
@@ -103,12 +122,14 @@ class my_ideas extends Component {
                 email={this.state.email}
                 problem={record.idea.Problem}
                 upvote={record.idea.upvote}
+                onComment={this.onComment.bind(this, record.id)}
             //onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
             />
         });
 
         return (
             <div>
+                {this.rendercomRedirect()}
                 {ideas}
             </div>
         );

@@ -31,7 +31,8 @@ import Cookies from 'js-cookie';
 const jwt = require('jsonwebtoken');
 
 const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-//const mainurl = 'http://localhost:5000';
+//const mainurl = 'http://localhost:5000';//
+
 var recordlist = [];
 
 class Welcome extends Component {
@@ -96,41 +97,44 @@ class Welcome extends Component {
         loggedin: false
       });
     }
-    var formdate = new FormData();
-    formdate.append('userid', decodedtoken.userid);
     if (this.state.loggedin) {
-      const url = mainurl + "/idea/upvote/" + recordid;
-      fetch(url, {
-        method: 'POST',
-        body: formdate
-      })
-        .then(res => {
-          return res.json();
+      var formdate = new FormData();
+      formdate.append('userid', decodedtoken.userid);
+      if (this.state.loggedin) {
+        const url = mainurl + "/idea/upvote/" + recordid;
+        fetch(url, {
+          method: 'POST',
+          body: formdate
         })
-        .then(resdata => {
-          var { record } = resdata;
-          var { id } = record;
-          var { link } = resdata;
-          console.log(resdata);
-          var temp = [];
-          this.state.records.map(recordt => {
-            if (recordt.id === id) {
-              var temprecord = recordt;
-              recordt = record;
-              recordt.email = temprecord.email;
-              temp.push(recordt);
-            } else {
-              temp.push(recordt);
-            }
-          });
-          console.log(temp);
+          .then(res => {
+            return res.json();
+          })
+          .then(resdata => {
+            var { record } = resdata;
+            var { id } = record;
+            var { link } = resdata;
+            console.log(resdata);
+            var temp = [];
+            this.state.records.map(recordt => {
+              if (recordt.id === id) {
+                var temprecord = recordt;
+                recordt = record;
+                recordt.email = temprecord.email;
+                temp.push(recordt);
+              } else {
+                temp.push(recordt);
+              }
+            });
+            console.log(temp);
 
-          this.setState({ records: temp });
-          this.setState({ link: link });
-        })
-        .catch(err => {
-          console.log(err);
-        });
+            this.setState({ records: temp });
+            this.setState({ link: link });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+
+      }
     }
   }
 
@@ -183,15 +187,15 @@ class Welcome extends Component {
                   >
                     <h1 className="h1-responsive font-weight-bold">
                       Welcome To Request For Startups
-                  </h1>
+                </h1>
                     <hr className="hr-light" />
                     <h6 className="mb-4">
                       "Bad shit is coming. It always is in a startup. The odds of getting from launch to liquidity without some kind of disaster happening are one in a thousand. So don't get demoralized."--Paul Graham, co-founder of Y Combinator
-                  <br />
+                <br />
                       <br />
                       <br />
                       Please Sign-Up to Add Your startup Idea
-                  </h6>
+                </h6>
 
                   </MDBAnimation>
                 </MDBRow>
@@ -207,19 +211,19 @@ class Welcome extends Component {
           <p id="answer">Click the Add Idea Button above and post your startup Idea also  listen to solutions that other users have to offer in the comments section.</p>
           <h2 id="question1">wanna Tweet your idea?</h2>
           <p id="answers"><a href="#" id="link"><u><b>Tweet it</b></u></a> and include @startuprequest
-        <br />Upvote if you find the best of the
-        <br />solution to your problem.
-        <br />help developers 
-        <br />create better products.
-        <br />
+      <br />Upvote if you find the best of the
+      <br />solution to your problem.
+      <br />help developers
+      <br />create better products.
+      <br />
             <br />
             <br />
             <br />Made by <a href="https://twitter.com/RohitMartires?s=08" id="link"><u><b>Rohit Martires</b></u></a> and
-        <br /><a href="https://twitter.com/BaleShivam" id="link"><u><b>Shivam Bale</b></u></a> under the
-        <br /> guidance of <a href="https://twitter.com/NovaSemitaHQ?s=08" id="link"><u><b>Nova Semita.</b></u></a>
+      <br /><a href="https://twitter.com/BaleShivam" id="link"><u><b>Shivam Bale</b></u></a> under the
+      <br /> guidance of <a href="https://twitter.com/NovaSemitaHQ?s=08" id="link"><u><b>Nova Semita.</b></u></a>
             <br /> Follow us on Twitter to
-        <br />see other things we do.
-        </p>
+      <br />see other things we do.
+      </p>
         </aside>
         {ideas}
         <Pagination />

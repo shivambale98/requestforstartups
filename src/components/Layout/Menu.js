@@ -2,8 +2,10 @@ import classes from './Menu.module.css';
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
-import Logo from './Logo';
-
+import Logo from './vertLogo';
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import Cookies from 'js-cookie';
 const jwt = require('jsonwebtoken');
 const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
@@ -63,14 +65,17 @@ class Menu extends Component {
         //console.log(this.state);
         return (
             <div className={classes.Menustyle}>
-                {this.renderRedirect()}
-                <Logo />
-                <ul className={classes.ul}>
-                    <li className={classes.li}> <Link className={classes.links} to="/"> HOME </Link> </li>
-                    <li className={classes.li}> <Link className={classes.links} onClick={this.logout} to={this.state.loglink}> {this.state.logstatus}</Link> </li>
-                    <li className={classes.li}> <Link className={classes.links} to={this.state.signlink}> {this.state.signstatus} </Link> </li>
-                    <li className={classes.li}> <Link className={classes.links} to="/addidea">ADD-IDEA </Link></li>
+                <Logo className={classes.logs}/>
+                 {this.renderRedirect()}
+                    <ul className={classes.ul}>
+                 <button className={classes.nots}><li className={classes.li}> <Link className={classes.links} to="/"><HomeOutlinedIcon style={{ fontSize: 50 }} />  HOME </Link> </li> </button>              
+                 <button className={classes.nots}> <li className={classes.li}> <Link className={classes.links} onClick={this.logout} to={this.state.loglink}><LockOpenIcon  style={{ fontSize: 50 }}/> {this.state.logstatus}</Link> </li> </button>
+                 <button className={classes.nots}> <li className={classes.li}> <Link className={classes.links} to={this.state.signlink}> {this.state.signstatus} </Link> </li> </button>
                 </ul>
+               <button className={classes.addidea}> 
+               <EmojiObjectsIcon style={{ fontSize: 50 }}/>
+               <Link className={classes.links} to="/addidea">ADD-IDEA </Link>
+               </button>
             </div>
         )
     }

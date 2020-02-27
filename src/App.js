@@ -66,7 +66,7 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-        <div>
+        
           <Route component={menu} />
           <Route path="/" exact component={welcome} />
           <Route path="/signup" component={signup} />
@@ -75,7 +75,6 @@ class App extends Component {
           <Route path='/logout' component={welcome} />
           <Route path='/myideas' component={my_ideas} />
           <Route path="/comments/:id" component={Comment} />
-        </div>
       </BrowserRouter>
     );
   }

@@ -6,8 +6,7 @@ import Logo from './Logo';
 
 import Cookies from 'js-cookie';
 const jwt = require('jsonwebtoken');
-const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-//const mainurl = 'http://localhost:5000';//
+const mainurl = require('../../links');
 
 class Menu extends Component {
     state = {

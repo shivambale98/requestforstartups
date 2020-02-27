@@ -30,8 +30,7 @@ import Pagination from './Pagination';
 import Cookies from 'js-cookie';
 const jwt = require('jsonwebtoken');
 
-const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-//const mainurl = 'http://localhost:5000';//
+const mainurl = require('../../links');
 
 var recordlist = [];
 
@@ -65,7 +64,7 @@ class Welcome extends Component {
         return res.json();
       })
       .then(resdata => {
-        console.log(resdata);
+        //console.log(resdata);
         this.setState({ records: resdata.recordlist });
       })
       .catch(err => {
@@ -83,6 +82,7 @@ class Welcome extends Component {
   upvotebuttonHandler = recordid => {
     const token = Cookies.get('jwttoken');
     var decodedtoken;
+    var loggedin;
     try {
       decodedtoken = jwt.verify(token, 'heyphil123');
     } catch (err) {
@@ -92,15 +92,18 @@ class Welcome extends Component {
       this.setState({
         loggedin: true
       });
+      loggedin = true;
     } else {
       this.setState({
         loggedin: false
       });
+      loggedin = false;
     }
-    if (this.state.loggedin) {
+
+    if (loggedin) {
       var formdate = new FormData();
       formdate.append('userid', decodedtoken.userid);
-      if (this.state.loggedin) {
+      if (loggedin) {
         const url = mainurl + "/idea/upvote/" + recordid;
         fetch(url, {
           method: 'POST',
@@ -113,7 +116,7 @@ class Welcome extends Component {
             var { record } = resdata;
             var { id } = record;
             var { link } = resdata;
-            console.log(resdata);
+            //console.log(resdata);
             var temp = [];
             this.state.records.map(recordt => {
               if (recordt.id === id) {
@@ -125,7 +128,7 @@ class Welcome extends Component {
                 temp.push(recordt);
               }
             });
-            console.log(temp);
+            //console.log(temp);
 
             this.setState({ records: temp });
             this.setState({ link: link });

@@ -2,7 +2,7 @@
 
 
 .Menustyle{
-    width:20%;
+    width:18%;
     height: 98vh;
     background: white;
     color: #1a237e;
@@ -21,11 +21,12 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 50vh;
-    justify-content: space-around;
+    width: auto;
+    height: 30vh;
+    margin-top: 10px;
     align-items: center;
-    margin-left: auto;
+    margin-left: 0px;
+    justify-content: space-evenly;
     border-radius: 10px 0px 0px 10px ;
     color: #1a237e;
     font-weight: bold;
@@ -37,6 +38,7 @@
     text-transform: uppercase;
     color: #1a237e;
     margin-left: 0px;
+    margin-top: 0px;
 }
 
 .links{
@@ -48,8 +50,12 @@
     font-weight: bold;
     margin-left: 0px;
     font-size: 20px;
+    padding-top: 5%;
 }
-
+.links:hover{
+    color: #e0e0e0;
+    text-decoration: none;
+}
 
 .links:active{
     color:#1a237e;
@@ -57,6 +63,7 @@
 
 .links:focus{
     color: #1a237e;
+    text-decoration: none;
 }
 
 @media only screen and (max-width:767px) {
@@ -86,10 +93,10 @@
     background-color: lightseagreen;
     border-radius: 15px;
    height: 65px;
-   width: 80%;
+   width: 78%;
    align-items: center;
-   margin-left: 23px;
-    margin-top: 0px;
+   margin-left: 30px;
+    margin-top: 20px;
 }
 
 .addidea:hover{
@@ -103,6 +110,7 @@
 .logs{
     height: 5vh;
     width: 50%;
+    margin-top: 5px;
 }
 
 
@@ -118,9 +126,9 @@
     background-color: white;
     border-radius: 15px;
    height: 65px;
-   width: 80%;
+   width: 78%;
    align-items: center;
-   margin-left: 23px;
+   margin-left: 22px;
     margin-top: 0px;
     -webkit-transition: 0.3s ease;
     transition: 0.3s ease;
@@ -128,7 +136,7 @@
 
 .nots:hover{
     color: white;
-    background-color: #42a5f5;
+    background-color: lightseagreen;
     text-decoration: none;
 }
 

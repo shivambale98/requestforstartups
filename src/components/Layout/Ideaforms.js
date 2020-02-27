@@ -10,20 +10,18 @@ const Ideaforms = (props) => (
         <div className={classes.righttoolbar}>
             <div className={classes.parent}>
                 <div className={classes.container}>
-        
-                    <p className={classes.head}>{props.email} </p>
+                   <p className={classes.head}>{props.email} </p>
                      <p className={classes.title}>{props.problem}</p>
-
-            </div>
-              
-            <div className={classes.comments}>
+              </div>
+               <div className={classes.comments}>
                      <Link className={classes.comment} onClick={props.onComment} class="fa fa-comment" ><b> Comment</b></Link>
-            </div>
-                    
+            </div> 
+            <aside className={classes.buttn}>    
             <button className={classes.btn} onClick={props.onUpvote}>
                 {props.upvote}   Upvote
-            </button>                
-            </div>
+            </button>
+            </aside>
+             </div>       
         </div>
     </Aux>
 );

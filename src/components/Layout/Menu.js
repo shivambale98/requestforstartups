@@ -70,7 +70,6 @@ class Menu extends Component {
                     <ul className={classes.ul}>
                  <button className={classes.nots}><li className={classes.li}> <Link className={classes.links} to="/"><HomeOutlinedIcon style={{ fontSize: 50 }} />  HOME </Link> </li> </button>              
                  <button className={classes.nots}> <li className={classes.li}> <Link className={classes.links} onClick={this.logout} to={this.state.loglink}><LockOpenIcon  style={{ fontSize: 50 }}/> {this.state.logstatus}</Link> </li> </button>
-                 <button className={classes.nots}> <li className={classes.li}> <Link className={classes.links} to={this.state.signlink}> {this.state.signstatus} </Link> </li> </button>
                 </ul>
                <button className={classes.addidea}> 
                <EmojiObjectsIcon style={{ fontSize: 50 }}/>

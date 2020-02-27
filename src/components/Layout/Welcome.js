@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 import { Col, Row, Container } from 'react-bootstrap';
 import Menu from './Menu';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 
 const jwt = require('jsonwebtoken');
 
@@ -157,14 +157,17 @@ class Welcome extends Component {
       <Aux>
   {this.renderRedirect()}
   <div className={classes.container}>
-   <ul>
-     <li> #NEWEST</li>
-     <li> #TRENDING</li>
-     <li> #TOP</li>
+
+   <ul className={classes.ul}>
+     <li className={classes.li}><Link className={classes.links}>  #NEWEST </Link></li>
+     <li className={classes.li}><Link className={classes.links}>  #TRENDING </Link></li>
+     <li className={classes.li}><Link className={classes.links}> #TOP </Link></li>
    </ul>
   </div>
   {ideas}
-   
+ <aside>
+
+ </aside>  
 
 
 </Aux>

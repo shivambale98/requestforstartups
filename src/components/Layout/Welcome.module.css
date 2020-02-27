@@ -2,7 +2,7 @@
 
 .container{
   display: block;
-  width: 100%;
+  width: 62%;
   height: 10vh;
   box-sizing: border-box;
   border: 0.5px ;
@@ -10,7 +10,7 @@
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-style: inherit;
   color: #1a237e;
-  margin-left: 20%;
+  margin-left: 18%;
   display: flex;
   flex-direction: row;
 }
@@ -25,11 +25,26 @@
   color: #1a237e;
   font-weight: bold;
   font-size: 18px;
+  margin-left: 50px;
+  margin-top: 5px;
 }
 
 .container ul li {
   list-style: none;
   text-transform: uppercase;
   color: #1a237e;
+  margin-left: 60px;
+}
+
+.links{
+  list-style: none;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.7);
   margin-left: 0px;
+}
+
+.links:hover{
+  list-style: none;
+  color: #1a237e;
+  text-decoration: none;
 }

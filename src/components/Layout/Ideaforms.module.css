@@ -5,11 +5,12 @@ body{
 
 
 .righttoolbar{
-    width:100%;
+    width:80%;
     height: auto;
     box-sizing: border-box;
     border-right:  0.5px  solid #e0e0e0;
     margin-bottom: 0px;
+    display: flex; 
 }
 
 .parent{
@@ -19,6 +20,8 @@ body{
     height: auto;
     box-sizing: border-box;
     border:  0.5px  solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
 }
 
 .container{
@@ -27,7 +30,7 @@ body{
     background: white;
     height: auto;
     margin: 10px;
-    margin-left: 45%; 
+    margin-left: 35%; 
     margin-top: 15px;
     display: flex;
     flex-direction: column;
@@ -60,10 +63,11 @@ body{
 
 
 .btn{
-  margin-bottom: 5px;
-  margin-left:80% ;
+  margin-left:35% ;
+  margin-top: 10px;
+  margin-bottom: 10px;
   text-align: center;
-  background: rgba(63, 81, 181, 0.7);
+  background: rgba(3, 169, 244, 0.3);
   border-radius: 3px;
  /* box-shadow: 0 10px 20px -8px rgba(3, 169, 244, 0.7); */
   padding: 10px 17px;
@@ -71,16 +75,20 @@ body{
   cursor: pointer;
   border: none;
   outline: none;
-  color: #ffffff;
+  color:#1a237e ;
   text-decoration: none;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
   height: 40px;
   width: 8%;
-  font-size: 10px;
-  position: relative;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-style: oblique;
+  font-size: 12px;
+  font-weight: bold;
+  position: initial;
   align-items: left;
   justify-content: left;
+  align-self: stretch;
 }
 .btn:hover {
     background-color: rgba(0, 188, 212, 0.7);
@@ -90,25 +98,35 @@ body{
 
 
 .comments{
+    display: flex;
+    flex-direction: column;
     margin-bottom : 0px;
     position: relative;
     color: #1c2a48 ;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    width: 72%;
     justify-content: space-between;
-    margin-left: 45%;
+    margin-left: 35%;
+    margin-top: 0px;
+    align-self: auto;
 }
 
 .comment{
     color: #1c2a48 ;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-style: inherit;
+    font-style: oblique;
     font-weight: bold;
-    margin-top: 20px;
-    margin-left: 0%;
+    margin-top: 10px;
+    margin-left: 30%;
     margin-inline-start: auto;
+}
+
+.buttn{
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    margin-top: 0px;
 }
 @media only screen and (max-width:767px){
     .container{

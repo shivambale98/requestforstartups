@@ -10,6 +10,8 @@ import Menu from './Menu';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
+
+
 const jwt = require('jsonwebtoken');
 
 const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
@@ -142,7 +144,7 @@ class Welcome extends Component {
       />
     );
 
-    //console.log(this.state.records);
+    console.log(this.state.records);
     const ideas = this.state.records.map((record, index) => {
       return <Ideaforms
         email={record.data.userlu || record.data.screen_name}
@@ -155,20 +157,26 @@ class Welcome extends Component {
 
     return (
       <Aux>
+<div className={classes.main}>        
   {this.renderRedirect()}
   <div className={classes.container}>
-
-   <ul className={classes.ul}>
+     <ul className={classes.ul}>
      <li className={classes.li}><Link className={classes.links}>  #NEWEST </Link></li>
      <li className={classes.li}><Link className={classes.links}>  #TRENDING </Link></li>
      <li className={classes.li}><Link className={classes.links}> #TOP </Link></li>
    </ul>
   </div>
-  {ideas}
- <aside>
-
- </aside>  
-
+  {ideas} 
+  <div className={classes.side}>
+    <div className={classes.plane}>
+    <a className={classes.fields} href="#">#Web/mobile Dev</a> <br />
+    <a className={classes.fields} href="#">#blockchain/crypto</a>  <br />
+    <a className={classes.fields} href="#">#Elctronics</a>  <br />
+    <a className={classes.fields} href="#">#Social</a>  
+    <a className={classes.fields} href="#">#Game-Dev</a>  
+    </div>
+  </div>
+</div>
 
 </Aux>
     );

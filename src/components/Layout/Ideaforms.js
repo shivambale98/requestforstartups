@@ -16,11 +16,11 @@ const Ideaforms = (props) => (
                <div className={classes.comments}>
                      <Link className={classes.comment} onClick={props.onComment} class="fa fa-comment" ><b> Comment</b></Link>
             </div> 
-            <aside className={classes.buttn}>    
+            <div className={classes.buttn}>    
             <button className={classes.btn} onClick={props.onUpvote}>
                 {props.upvote}   Upvote
             </button>
-            </aside>
+            </div>
              </div>       
         </div>
     </Aux>

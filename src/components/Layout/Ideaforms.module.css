@@ -5,12 +5,13 @@ body{
 
 
 .righttoolbar{
-    width:80%;
+    width:85%;
     height: auto;
     box-sizing: border-box;
     border-right:  0.5px  solid #e0e0e0;
     margin-bottom: 0px;
-    display: flex; 
+    display: flex;
+    margin-left: 15%; 
 }
 
 .parent{
@@ -30,7 +31,7 @@ body{
     background: white;
     height: auto;
     margin: 10px;
-    margin-left: 35%; 
+    margin-left: 20%; 
     margin-top: 15px;
     display: flex;
     flex-direction: column;
@@ -63,14 +64,14 @@ body{
 
 
 .btn{
-  margin-left:35% ;
+  margin-left:20% ;
   margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;
   background: rgba(3, 169, 244, 0.3);
   border-radius: 3px;
  /* box-shadow: 0 10px 20px -8px rgba(3, 169, 244, 0.7); */
-  padding: 10px 17px;
+  padding: 5px 17px;
   font-size: 16px;
   cursor: pointer;
   border: none;
@@ -105,7 +106,7 @@ body{
     color: #1c2a48 ;
     box-sizing: border-box;
     justify-content: space-between;
-    margin-left: 35%;
+    margin-left: 20%;
     margin-top: 0px;
     align-self: auto;
 }

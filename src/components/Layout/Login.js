@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
 import classes from './Login.module.css';
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import nsVerticalLogo from '../../assets/NS_logo_Vertical.svg';
@@ -13,7 +14,8 @@ class Login extends Component {
   state = {
     isAuthenticated: false,
     user: null,
-    token: ''
+    token: '',
+    redirect: false
   }
 
   componentDidMount() {
@@ -28,18 +30,26 @@ class Login extends Component {
     }
     if (decodedtoken) {
       this.setState({
-        loggedin: true
+        redirect: true
       });
+      Cookies.set('jwttoken', token);
     } else {
       this.setState({
-        loggedin: false
+        redirect: false
       });
+    }
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/' />
     }
   }
 
   render() {
     return (
       <div class={classes.loginstuff}>
+        {this.renderRedirect()}
         <h3>Want to see your startup idea become a reality?</h3>
         <h4>then rub a genie lamp</h4>
         <h5>incase of lack in genie lamps you can

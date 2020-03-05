@@ -18,7 +18,8 @@ class App extends Component {
   }
 
   state = {
-    loggedin: false
+    loggedin: false,
+    user: undefined
   }
 
   componentDidMount() {
@@ -30,26 +31,29 @@ class App extends Component {
       console.log(err);
     }
     if (decodedtoken) {
+      //console.log(decodedtoken);
       this.setState({
-        loggedin: true
+        user: decodedtoken
       });
     } else {
       this.setState({
-        loggedin: false
+        user: undefined
       });
     }
+    this.updatestate(decodedtoken);
   }
 
-  updatestate(loggedin) {
+  updatestate(user) {
+    // console.log(user);
     this.setState({
-      loggedin: loggedin
+      user: user
     });
   }
 
   render() {
-    console.log(this.state);
+
     const menu = () => {
-      return <Menu loggedin={this.state.loggedin} />
+      return <Menu user={this.state.user} />
     }
 
     const login = () => {
@@ -57,24 +61,19 @@ class App extends Component {
     }
 
     const welcome = () => {
-      return <Welcome loggedin={this.state.loggedin} />
-    }
-
-    const signup = () => {
-      return <SignUp updatestate={this.updatestate} />
+      return <Welcome user={this.state.user} />
     }
 
     return (
       <BrowserRouter>
-        
-          <Route component={menu} />
-          <Route path="/" exact component={welcome} />
-          <Route path="/signup" component={signup} />
-          <Route path="/login" component={login} />
-          <Route path="/addidea" component={Addidea} />
-          <Route path='/logout' component={welcome} />
-          <Route path='/myideas' component={my_ideas} />
-          <Route path="/comments/:id" component={Comment} />
+
+        <Route component={menu} />
+        <Route path="/" exact component={welcome} />
+        <Route path="/login" component={login} />
+        <Route path="/addidea" component={Addidea} />
+        <Route path='/logout' component={welcome} />
+        <Route path='/myideas' component={my_ideas} />
+        <Route path="/comments/:id" component={Comment} />
       </BrowserRouter>
     );
   }

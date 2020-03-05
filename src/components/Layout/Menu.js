@@ -14,21 +14,18 @@ class Menu extends Component {
     state = {
         loglink: '/login',
         logstatus: 'Login',
-        signlink: '/signup',
-        signstatus: 'Signup',
-        email: '',
         token: undefined,
         redirect: false
     };
 
     componentDidMount() {
-        if (this.props.loggedin) {
+        console.log(this.props.user);
+
+        if (this.props.user) {
             this.setState({
                 loglink: '/logout',
                 logstatus: 'Logout',
-                signlink: '/myideas',
-                signstatus: 'Myideas',
-                token: this.props.loggedin,
+                token: this.props.user,
                 redirect: true
             });
             //loggedin so re-render
@@ -49,8 +46,6 @@ class Menu extends Component {
                 this.setState({
                     loglink: '/login',
                     logstatus: 'Login',
-                    signlink: '/signup',
-                    signstatus: 'Signup',
                     redirect: true,
                     token: undefined
                 });
@@ -64,16 +59,16 @@ class Menu extends Component {
         //console.log(this.state);
         return (
             <div className={classes.Menustyle}>
-                <Logo className={classes.logs}/>
-                 {this.renderRedirect()}
-                    <ul className={classes.ul}>
-                 <button className={classes.nots}><li className={classes.li}> <Link className={classes.links} to="/"><HomeOutlinedIcon style={{ fontSize: 50 }} />  HOME </Link> </li> </button>              
-                 <button className={classes.nots}> <li className={classes.li}> <Link className={classes.links} onClick={this.logout} to={this.state.loglink}><LockOpenIcon  style={{ fontSize: 50 }}/> {this.state.logstatus}</Link> </li> </button>
+                <Logo className={classes.logs} />
+                {this.renderRedirect()}
+                <ul className={classes.ul}>
+                    <button className={classes.nots}><li className={classes.li}> <Link className={classes.links} to="/"><HomeOutlinedIcon style={{ fontSize: 50 }} />  HOME </Link> </li> </button>
+                    <button className={classes.nots}> <li className={classes.li}> <Link className={classes.links} onClick={this.logout} to={this.state.loglink}><LockOpenIcon style={{ fontSize: 50 }} /> {this.state.logstatus}</Link> </li> </button>
                 </ul>
-               <button className={classes.addidea}> 
-               <EmojiObjectsIcon style={{ fontSize: 50 }}/>
-               <Link className={classes.links} to="/addidea">ADD-IDEA </Link>
-               </button>
+                <button className={classes.addidea}>
+                    <EmojiObjectsIcon style={{ fontSize: 50 }} />
+                    <Link className={classes.links} to="/addidea">ADD-IDEA </Link>
+                </button>
             </div>
         )
     }

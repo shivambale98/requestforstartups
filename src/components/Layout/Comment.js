@@ -162,8 +162,7 @@ postHandler = () => {
                 show={this.state.addcomment} >
                
              </AddComment>  
-
-   <div className={classes.side}>
+             <div className={classes.side}>
     <div className={classes.plane}>
     <a className={classes.fields} href="#">#Web/mobile Dev</a> <br />
     <a className={classes.fields} href="#">#blockchain/crypto</a>  <br />

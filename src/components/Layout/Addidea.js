@@ -3,6 +3,13 @@ import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon } from 'mdbreact';
 //import Cookies from 'universal-cookie';
 import Cookies from 'js-cookie';
 import classes from './Addidea.module.css';
+import Aux from '../../hoc/Auxiliary';
+import { Link } from 'react-router-dom';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { Button } from 'react-bootstrap';
+
+
+
 const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
 //const mainurl = 'http://localhost:5000';//
 
@@ -19,7 +26,15 @@ class Addidea extends Component {
 
   render() {
     return (
-      <div>
+      <Aux>
+     
+<div className={classes.main}>
+<div className={classes.containers}>
+     <ul className={classes.ul}>
+     <li className={classes.li}><Link className={classes.links}><ArrowBackIcon style={{ fontSize:40 } } />  BACK </Link></li>
+   </ul>
+  </div>
+        <div className={classes.form}>
         <MDBContainer>
           <MDBRow>
             <MDBCol md="12">
@@ -46,16 +61,28 @@ class Addidea extends Component {
                 <input type='hidden' value={this.state.token} name='jwttoken' />
 
                 <div className="text-center mt-4">
-                  <MDBBtn color="primary" outline type="submit">
+                  <Button variant="primary" outline type="submit">
                     Submit
-                    <MDBIcon far icon="paper-plane" className="ml-2" />
-                  </MDBBtn>
+                  </Button>
                 </div>
               </form>
             </MDBCol>
           </MDBRow>
         </MDBContainer>
+        </div>
+        <div className={classes.side}>
+         <div className={classes.innerBox}> 
+    <div className={classes.plane}>
+    <a className={classes.fields} href="#">#Web/mobile Dev</a> <br />
+    <a className={classes.fields} href="#">#blockchain/crypto</a>  <br />
+    <a className={classes.fields} href="#">#Elctronics</a>  <br />
+    <a className={classes.fields} href="#">#Social</a>  
+    <a className={classes.fields} href="#">#Game-Dev</a>  
+    </div>
+    </div>
+  </div>   
       </div>
+      </Aux>
     )
   }
 
@@ -63,3 +90,4 @@ class Addidea extends Component {
 
 
 export default Addidea;
+

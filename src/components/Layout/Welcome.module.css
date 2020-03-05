@@ -66,6 +66,7 @@
   justify-items: center;
   display: table-cell;
   position: sticky;
+  background-color:rgba(158, 158, 158, 0.1);
 }
 
 .plane{

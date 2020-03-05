@@ -48,7 +48,7 @@ class Welcome extends Component {
         return res.json();
       })
       .then(resdata => {
-        //console.log(resdata);
+        console.log(resdata);
         this.setState({ records: resdata.recordlist });
       })
       .catch(err => {
@@ -160,28 +160,28 @@ class Welcome extends Component {
 
     return (
       <Aux>
-<div className={classes.main}>        
-  {this.renderRedirect()}
-  <div className={classes.container}>
-     <ul className={classes.ul}>
-     <li className={classes.li}><Link className={classes.links}>  #NEWEST </Link></li>
-     <li className={classes.li}><Link className={classes.links}>  #TRENDING </Link></li>
-     <li className={classes.li}><Link className={classes.links}> #TOP </Link></li>
-   </ul>
-  </div>
-  {ideas} 
-  <div className={classes.side}>
-    <div className={classes.plane}>
-    <a className={classes.fields} href="#">#Web/mobile Dev</a> <br />
-    <a className={classes.fields} href="#">#blockchain/crypto</a>  <br />
-    <a className={classes.fields} href="#">#Elctronics</a>  <br />
-    <a className={classes.fields} href="#">#Social</a>  
-    <a className={classes.fields} href="#">#Game-Dev</a>  
-    </div>
-  </div>
-</div>
+        <div className={classes.main}>
+          {this.renderRedirect()}
+          <div className={classes.container}>
+            <ul className={classes.ul}>
+              <li className={classes.li}><Link className={classes.links}>  #NEWEST </Link></li>
+              <li className={classes.li}><Link className={classes.links}>  #TRENDING </Link></li>
+              <li className={classes.li}><Link className={classes.links}> #TOP </Link></li>
+            </ul>
+          </div>
+          {ideas}
+          <div className={classes.side}>
+            <div className={classes.plane}>
+              <a className={classes.fields} href="#">#Web/mobile Dev</a> <br />
+              <a className={classes.fields} href="#">#blockchain/crypto</a>  <br />
+              <a className={classes.fields} href="#">#Elctronics</a>  <br />
+              <a className={classes.fields} href="#">#Social</a>
+              <a className={classes.fields} href="#">#Game-Dev</a>
+            </div>
+          </div>
+        </div>
 
-</Aux>
+      </Aux>
     );
   }
 }

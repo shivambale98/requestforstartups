@@ -16,49 +16,37 @@ class Login extends Component {
     token: ''
   }
 
-
-  onSuccess = (response) => {
-    const token = response.headers.get('x-auth-token');
-    response.json().then(user => {
-      if (token) {
-        this.setState({ isAuthenticated: true, user: user, token: token });
-      }
-    });
-  };
-
-  onFailed = (error) => {
-    alert(error);
-  };
-
-  logout = () => {
-    this.setState({ isAuthenticated: false, token: '', user: null })
-  };
+  componentDidMount() {
+    console.log(window.location.pathname);
+    var path = window.location.pathname;
+    var token = path.split('/')[2];
+    var decodedtoken;
+    try {
+      decodedtoken = jwt.verify(token, 'heyphil123');
+    } catch (err) {
+      console.log(err);
+    }
+    if (decodedtoken) {
+      this.setState({
+        loggedin: true
+      });
+    } else {
+      this.setState({
+        loggedin: false
+      });
+    }
+  }
 
   render() {
-
-    let content = !!this.state.isAuthenticated ?
-      (
-        <div>
-          <p>Authenticated</p>
-          <div>
-            {this.state.user.email}
-          </div>
-          <div>
-            <button onClick={this.logout} className="button" >
-              Log out
-          </button>
-          </div>
-        </div>
-      ) :
-      (
-        <TwitterLogin loginUrl="http://localhost:5000/auth/twitter"
-          onFailure={this.onFailed} onSuccess={this.onSuccess}
-          requestTokenUrl="http://localhost:4000/twitter/reverse" />
-      );
-
     return (
-      <div className="App">
-        {content}
+      <div class={classes.loginstuff}>
+        <h3>Want to see your startup idea become a reality?</h3>
+        <h4>then rub a genie lamp</h4>
+        <h5>incase of lack in genie lamps you can
+        <a href={mainurl + '/auth/twitter/reverse'} >
+            <button>Login</button>
+          </a>
+        </h5>
       </div>
     )
   };

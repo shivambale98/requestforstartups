@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import classes from './Comment.module.css'
 import Aux from '../../hoc/Auxiliary';
-import Comments from './Comments'
-import { MDBInput } from 'mdbreact';
 import Cookies from 'js-cookie';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import { Link } from 'react-router-dom';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import AddCommentIcon from '@material-ui/icons/AddComment';
+import AddComment from './Addcomment';
 const jwt = require('jsonwebtoken');
-
-
 const mainurl = require('../../links');
 
 class Comment extends Component {
@@ -20,10 +20,13 @@ class Comment extends Component {
     commentbox: '',
     email: '',
     Problem: undefined,
-    userlu: undefined
+    userlu: undefined,
+    addcomment: false
   };
 
-
+  postHandler = () => {
+    this.setState({ addcomment: true });
+  }
 
   componentDidMount() {
     var id = this.props.location.pathname.toString();
@@ -107,53 +110,68 @@ class Comment extends Component {
 
   render() {
     console.log(this.state.userlu);
-
-    const comments = this.state.comments.map((comment, index) => {
-      return <Comments
-        name={this.state.users[index]}
-        comment={comment}
-      />
-    });
-
     return (
       <Aux>
-        <h2 className={classes.lab}>Comments</h2>
-        <div className={classes.container}>
-          <MDBCol md="12">
-            <MDBRow>
-              <MDBContainer>
-                <p className={classes.head}>{this.state.userlu}</p>
-                <div>
-                  <p className={classes.title}><u>{this.state.Problem}</u></p>
-                </div>
-              </MDBContainer>
-            </MDBRow>
-          </MDBCol>
-        </div>
-        <MDBContainer>
-          <MDBRow>
-            <MDBCol md="6">
-              <div class="form-group">
-                <MDBInput
-                  type="textarea"
-                  rows="5"
-                  id="exampleFormControlTextarea1"
-                  name="comment"
-                  onChange={this.handelchange}
-                  value={this.state.commentbox}
-                  background="primary"
-                  placeholder="write your comment"
+        <div className={classes.main}>
+          <div className={classes.containers}>
+            <ul className={classes.ul}>
+              <li className={classes.li}><Link className={classes.links}><ArrowBackIcon style={{ fontSize: 40 }} />  BACK </Link></li>
+            </ul>
+          </div>
+          <div className={classes.righttoolbar}>
+            <div className={classes.parent}>
+              <div >
+                <img className={classes.img}
+                  src="https://pbs.twimg.com/profile_images/1228890736206188545/3s2Ayy7x_normal.jpg"
+                  alt="image"
+                  width={70}
+                  height={70}
                 />
-                <button className={classes.btn} onClick={this.postComment}><b>post</b></button>
               </div>
-            </MDBCol>
-          </MDBRow>
-        </MDBContainer>
-        <br />
-        <br />
-        <br />
-        <br />
-        {comments}
+              <div className={classes.container}>
+                <p className={classes.head}>User NAME</p>
+                <p className={classes.title}>PROBLEM.............................................</p>
+
+              </div>
+              <div className={classes.ThumbsUp}>
+                <p className={classes.votes}> 31 <ThumbUpIcon style={{ fontSize: 23 }} />  </p>
+                <Link
+                  onClick={classes.posted}
+                  className={classes.titles}>
+                  <AddCommentIcon style={{ fontSize: 30 }} />
+                </Link>
+              </div>
+            </div>
+            <div className={classes.parentc}>
+              <img className={classes.imgc}
+                src="https://pbs.twimg.com/profile_images/1228890736206188545/3s2Ayy7x_normal.jpg"
+                alt="image"
+                width={50}
+                height={50}
+
+              />
+              <div className={classes.containerc}>
+                <p className={classes.head}>User NAME</p>
+                this was awesome
+                </div>
+            </div>
+
+            <AddComment
+              show={this.state.addcomment} >
+
+            </AddComment>
+
+            <div className={classes.side}>
+              <div className={classes.plane}>
+                <a className={classes.fields} href="#">#Web/mobile Dev</a> <br />
+                <a className={classes.fields} href="#">#blockchain/crypto</a>  <br />
+                <a className={classes.fields} href="#">#Elctronics</a>  <br />
+                <a className={classes.fields} href="#">#Social</a>
+                <a className={classes.fields} href="#">#Game-Dev</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </Aux>
     )
   }

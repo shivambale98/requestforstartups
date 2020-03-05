@@ -271,9 +271,19 @@
   padding-left: 15px;
   padding-right: 10px;
   padding-top: 20px;
+  color: #e0e0e0;
 }
 
 .fields:hover{
   color: #1a237e;
   text-decoration: none;
+}
+
+.innerBox{
+  box-sizing: border-box;
+  border-radius: 10px;
+  background-color:#757575;
+  margin: 15px;
+  height: 80vh;
+  padding: 15px;
 }

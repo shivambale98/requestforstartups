@@ -164,11 +164,13 @@ postHandler = () => {
              </AddComment>  
              <div className={classes.side}>
     <div className={classes.plane}>
+      <div className={classes.innerBox}>
     <a className={classes.fields} href="#">#Web/mobile Dev</a> <br />
     <a className={classes.fields} href="#">#blockchain/crypto</a>  <br />
     <a className={classes.fields} href="#">#Elctronics</a>  <br />
     <a className={classes.fields} href="#">#Social</a>  
     <a className={classes.fields} href="#">#Game-Dev</a>  
+    </div>
     </div>
   </div>   
         </div>

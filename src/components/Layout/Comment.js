@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import AddCommentIcon from '@material-ui/icons/AddComment';
 import AddComment from './Addcomment';
+import Commentbox from './commentbox';
 const jwt = require('jsonwebtoken');
 const mainurl = require('../../links');
 
@@ -43,12 +44,16 @@ class Comment extends Component {
         var { Problem } = resdata.fields;
         var { userlu } = resdata.fields;
         var { screen_name } = resdata.fields;
+        var { Piclu } = resdata.fields;
         this.setState({
           comments: resdata.comments || [],
           users: resdata.users || [],
           Problem: Problem,
-          userlu: userlu || screen_name
+          userlu: userlu || screen_name,
+          userpic: Piclu || [],
+          userspic: resdata.userspic || []
         });
+        console.log(resdata);
       })
       .catch(err => {
         console.log(err);
@@ -109,7 +114,15 @@ class Comment extends Component {
 
 
   render() {
-    console.log(this.state.userlu);
+    console.log(this.state.users);
+
+    const comments = this.state.comments.map((comment, index) => {
+      return <Commentbox
+        userimage={this.state.userspic[index]}
+        username={this.state.users[index]}
+        usercomment={comment}
+      />
+    });
 
     return (
       <Aux>
@@ -123,15 +136,15 @@ class Comment extends Component {
             <div className={classes.parent}>
               <div >
                 <img className={classes.img}
-                  src="https://pbs.twimg.com/profile_images/1228890736206188545/3s2Ayy7x_normal.jpg"
+                  src={this.state.userpic}
                   alt="image"
                   width={70}
                   height={70}
                 />
               </div>
               <div className={classes.container}>
-                <p className={classes.head}>User NAME</p>
-                <p className={classes.title}>PROBLEM.............................................</p>
+                <p className={classes.head}>{this.state.userlu}</p>
+                <p className={classes.title}>{this.state.Problem}</p>
 
               </div>
               <div className={classes.ThumbsUp}>
@@ -143,32 +156,21 @@ class Comment extends Component {
                 </Link>
               </div>
             </div>
-            <div className={classes.parentc}>
-              <img className={classes.imgc}
-                src="https://pbs.twimg.com/profile_images/1228890736206188545/3s2Ayy7x_normal.jpg"
-                alt="image"
-                width={50}
-                height={50}
-
-              />
-              <div className={classes.containerc}>
-                <p className={classes.head}>User NAME</p>
-                this was awesome
-                </div>
-            </div>
 
             <AddComment
               show={this.state.addcomment} >
 
             </AddComment>
-
+            {comments}
             <div className={classes.side}>
               <div className={classes.plane}>
-                <a className={classes.fields} href="#">#Web/mobile Dev</a> <br />
-                <a className={classes.fields} href="#">#blockchain/crypto</a>  <br />
-                <a className={classes.fields} href="#">#Elctronics</a>  <br />
-                <a className={classes.fields} href="#">#Social</a>
-                <a className={classes.fields} href="#">#Game-Dev</a>
+                <div className={classes.innerBox}>
+                  <a className={classes.fields} href="#">#Web/mobile Dev</a> <br />
+                  <a className={classes.fields} href="#">#blockchain/crypto</a>  <br />
+                  <a className={classes.fields} href="#">#Elctronics</a>  <br />
+                  <a className={classes.fields} href="#">#Social</a>
+                  <a className={classes.fields} href="#">#Game-Dev</a>
+                </div>
               </div>
             </div>
           </div>

@@ -4,7 +4,6 @@ import Aux from '../../hoc/Auxiliary';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
-
 const Ideaforms = (props) => (
     <Aux>
 
@@ -28,9 +27,9 @@ const Ideaforms = (props) => (
                     <Link className={classes.comment} onClick={props.onComment} class="fa fa-comment" ><b> Comment</b></Link>
                 </div>
                 <div className={classes.buttn}>
-                    <button className={classes.btn} onClick={props.onUpvote}>
+                    <button className={classes.btn} onClick={props.onUpvote} style={{ background: props.upvotecolor }}>
                         {props.upvote}   Upvote
-            </button>
+                    </button>
                 </div>
             </div>
         </div>

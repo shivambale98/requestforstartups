@@ -8,6 +8,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import my_ideas from './components/Layout/my_ideas';
 import Cookies from 'js-cookie';
 import Comment from './components/Layout/Comment';
+import DrawerToggleButton from './components/Layout/DrawerToggleButton'
+import { Fragment } from 'react';
 const jwt = require('jsonwebtoken');
 
 class App extends Component {
@@ -19,9 +21,15 @@ class App extends Component {
 
   state = {
     loggedin: false,
-    user: undefined
+    user: undefined,
+    menuOpen: false
   }
 
+  drawerToggleClickHandler = () => {
+    this.setState((prevState) => {
+      return { menuOpen: !prevState.menuOpen };
+    });
+  };
   componentDidMount() {
     const token = Cookies.get('jwttoken');
     var decodedtoken;
@@ -54,6 +62,12 @@ class App extends Component {
 
     const menu = () => {
       return <Menu user={this.state.user} />
+
+      if (this.state.menuOpen) {
+        menu = <Menu />;
+      }
+
+      return <Menu loggedin={this.state.loggedin} />
     }
 
     const login = () => {
@@ -65,16 +79,21 @@ class App extends Component {
     }
 
     return (
-      <BrowserRouter>
-
-        <Route component={menu} />
-        <Route path="/" exact component={welcome} />
-        <Route path="/login" component={login} />
-        <Route path="/addidea" component={Addidea} />
-        <Route path='/logout' component={welcome} />
-        <Route path='/myideas' component={my_ideas} />
-        <Route path="/comments/:id" component={Comment} />
-      </BrowserRouter>
+      <Fragment>
+        <div>
+          <DrawerToggleButton click={this.props.drawerClickedHandler} />
+        </div>
+        <BrowserRouter>
+          <Route component={menu}
+            drawerClickedHandler={this.drawerToggleClickHandler} />
+          <Route path="/" exact component={welcome} />
+          <Route path="/login" component={login} />
+          <Route path="/addidea" component={Addidea} />
+          <Route path='/logout' component={welcome} />
+          <Route path='/myideas' component={my_ideas} />
+          <Route path="/comments/:id" component={Comment} />
+        </BrowserRouter>
+      </Fragment>
     );
   }
 

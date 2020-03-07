@@ -9,11 +9,11 @@ import { Col, Row, Container } from 'react-bootstrap';
 import Menu from './Menu';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
+import MenuIcon from '@material-ui/icons/Menu';
 
 
 const jwt = require('jsonwebtoken');
-
+var decodedtoken, upvotecolor = 'rgba(3, 3, 3, 0.3)';
 const mainurl = require('../../links');
 
 var recordlist = [];
@@ -24,7 +24,8 @@ class Welcome extends Component {
     records: [],
     link: '',
     redirect: false,
-    id: ''
+    id: '',
+    loggedin: false
   };
   //pagination
   //const [currentPage, setCurrentPage] = useState(1);
@@ -54,6 +55,18 @@ class Welcome extends Component {
       .catch(err => {
         console.log(err);
       });
+
+    const token = Cookies.get('jwttoken');
+    try {
+      decodedtoken = jwt.verify(token, 'heyphil123');
+    } catch (err) {
+      this.setState({ loggedin: false });
+    }
+    if (!decodedtoken) {
+      this.setState({ loggedin: false });
+    } else {
+      this.setState({ loggedin: true });
+    }
 
   }
 
@@ -199,14 +212,29 @@ class Welcome extends Component {
 
     console.log(this.state.records);
     const ideas = this.state.records.map((record, index) => {
-      return <Ideaforms
-        name={record.data.userlu || record.data.screen_name}
-        problem={record.data.Problem}
-        upvote={record.data.upvote}
-        onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
-        onComment={this.onComment.bind(this, record.id)}
-        pic={record.data.Piclu}
-      />
+      if (!this.state.loggedin) {
+        return <Ideaforms
+          name={record.data.userlu || record.data.screen_name}
+          problem={record.data.Problem}
+          upvote={record.data.upvote}
+          onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
+          onComment={this.onComment.bind(this, record.id)}
+          pic={record.data.Piclu}
+        />
+      } else {
+        if (record.data.whoupvotelu && record.data.whoupvotelu.includes(decodedtoken.user.user_id)) {
+          var upvotecolor = 'rgba(244, 3, 3, 0.3)';
+        }
+        return <Ideaforms
+          name={record.data.userlu || record.data.screen_name}
+          problem={record.data.Problem}
+          upvote={record.data.upvote}
+          onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
+          onComment={this.onComment.bind(this, record.id)}
+          pic={record.data.Piclu}
+          upvotecolor={upvotecolor}
+        />
+      }
     });
 
     return (
@@ -236,6 +264,7 @@ class Welcome extends Component {
         </div>
 
       </Aux>
+
     );
   }
 }

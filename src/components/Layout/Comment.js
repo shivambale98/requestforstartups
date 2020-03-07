@@ -132,7 +132,7 @@ postHandler = () => {
             </div>
                 <div className={classes.container}>
                    <p className={classes.head}>User NAME</p>
-                     <p className={classes.title}>PROBLEM.............................................</p>
+                     <p className={classes.title}>PROBLEM... . ........ ... ......... ................ .....</p>
                 
               </div>
               <div className={classes.ThumbsUp}>
@@ -141,7 +141,7 @@ postHandler = () => {
                     onClick={classes.posted} 
                     className={classes.titles}>
                     <AddCommentIcon style={{ fontSize:30 }} />
-                </Link>
+               </Link>
               </div>
              </div>  
             <div className={classes.parentc}>
@@ -154,15 +154,15 @@ postHandler = () => {
              />
             <div className={classes.containerc}>
             <p className={classes.head}>User NAME</p>
-                this was awesome
-                </div>
+            <p className={classes.title}>  this was awesome</p>
+             </div>
             </div>
             
              <AddComment 
                 show={this.state.addcomment} >
                
              </AddComment>  
-             <div className={classes.side}>
+   <div className={classes.side}>
     <div className={classes.plane}>
       <div className={classes.innerBox}>
     <a className={classes.fields} href="#">#Web/mobile Dev</a> <br />

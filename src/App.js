@@ -8,6 +8,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import my_ideas from './components/Layout/my_ideas';
 import Cookies from 'js-cookie';
 import Comment from './components/Layout/Comment';
+import DrawerToggleButton from './components/Layout/DrawerToggleButton'
+import { Fragment } from 'react';
 const jwt = require('jsonwebtoken');
 
 class App extends Component {
@@ -18,9 +20,15 @@ class App extends Component {
   }
 
   state = {
-    loggedin: false
+    loggedin: false,
+    menuOpen: false
   }
 
+  drawerToggleClickHandler = () => {
+    this.setState((prevState)=> {
+       return {menuOpen: !prevState.menuOpen};
+    });
+  };
   componentDidMount() {
     const token = Cookies.get('jwttoken');
     var decodedtoken;
@@ -49,6 +57,11 @@ class App extends Component {
   render() {
     console.log(this.state);
     const menu = () => {
+
+      if (this.state.menuOpen) {
+        menu = <Menu /> ;
+    }
+  
       return <Menu loggedin={this.state.loggedin} />
     }
 
@@ -65,9 +78,13 @@ class App extends Component {
     }
 
     return (
+      <Fragment>
+      <div>
+    <DrawerToggleButton click={this.props.drawerClickedHandler}/>
+      </div>
       <BrowserRouter>
-        
-          <Route component={menu} />
+          <Route component={menu}
+           drawerClickedHandler={this.drawerToggleClickHandler}/>
           <Route path="/" exact component={welcome} />
           <Route path="/signup" component={signup} />
           <Route path="/login" component={login} />
@@ -76,6 +93,7 @@ class App extends Component {
           <Route path='/myideas' component={my_ideas} />
           <Route path="/comments/:id" component={Comment} />
       </BrowserRouter>
+      </Fragment>
     );
   }
 

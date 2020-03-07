@@ -60,7 +60,8 @@ class Addidea extends Component {
 
                 <input type='hidden' value={this.state.token} name='jwttoken' />
 
-                <div className="text-center mt-4">
+                <div  
+                   className="text-center mt-4">
                   <Button variant="primary" outline type="submit">
                     Submit
                   </Button>
@@ -70,8 +71,8 @@ class Addidea extends Component {
           </MDBRow>
         </MDBContainer>
         </div>
-        <div className={classes.side}>
-         <div className={classes.innerBox}> 
+    <div className={classes.side}>
+    <div className={classes.innerBox}> 
     <div className={classes.plane}>
     <a className={classes.fields} href="#">#Web/mobile Dev</a> <br />
     <a className={classes.fields} href="#">#blockchain/crypto</a>  <br />

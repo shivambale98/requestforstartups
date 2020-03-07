@@ -9,7 +9,7 @@ import { Col, Row, Container } from 'react-bootstrap';
 import Menu from './Menu';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
+import MenuIcon from '@material-ui/icons/Menu';
 
 
 const jwt = require('jsonwebtoken');
@@ -159,7 +159,9 @@ class Welcome extends Component {
       <Aux>
 <div className={classes.main}>        
   {this.renderRedirect()}
+
   <div className={classes.container}>
+  
      <ul className={classes.ul}>
      <li className={classes.li}><Link className={classes.links}>  #NEWEST </Link></li>
      <li className={classes.li}><Link className={classes.links}>  #TRENDING </Link></li>

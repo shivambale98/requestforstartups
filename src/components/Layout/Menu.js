@@ -1,12 +1,14 @@
 import classes from './Menu.module.css';
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
+
 import { Redirect } from 'react-router-dom'
 import Logo from './vertLogo';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import Cookies from 'js-cookie';
+import MenuIcon from '@material-ui/icons/Menu';
 const jwt = require('jsonwebtoken');
 const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
 //const mainurl = 'http://localhost:5000';//
@@ -76,6 +78,7 @@ class Menu extends Component {
                <Link className={classes.links} to="/addidea">ADD-IDEA </Link>
                </button>
             </div>
+            
         )
     }
 

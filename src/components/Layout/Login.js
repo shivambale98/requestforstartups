@@ -19,7 +19,7 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    console.log(window.location.pathname);
+    //console.log(window.location.pathname);
     var path = window.location.pathname;
     var token = path.split('/')[2];
     var decodedtoken;

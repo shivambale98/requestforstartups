@@ -57,6 +57,56 @@ class Welcome extends Component {
 
   }
 
+
+  getfilteredideas(domain) {
+    console.log(domain);
+    if (domain === "ALL") {
+      const ideasurl = mainurl + '/';
+      console.log(domain);
+      fetch(ideasurl)
+        .then(res => {
+          return res.json();
+        })
+        .then(resdata => {
+          console.log(resdata);
+          this.setState({ records: resdata.recordlist });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+    } else {
+      fetch(mainurl + '/idea/filterideas/' + domain)
+        .then(res => {
+          return res.json();
+        })
+        .then(resdata => {
+          this.setState({ records: resdata.recordlist });
+          //console.log(resjson);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+    }
+
+  }
+
+  orderideas(type) {
+    fetch(mainurl + '/idea/orderideas/' + type)
+      .then(res => {
+        return res.json();
+      })
+      .then(resdata => {
+        this.setState({ records: resdata.recordlist });
+        console.log(resdata);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+  }
+
   renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect to={'/comments/' + this.state.id} />
@@ -86,7 +136,7 @@ class Welcome extends Component {
 
     if (loggedin) {
       var formdate = new FormData();
-      formdate.append('userid', decodedtoken.userid);
+      formdate.append('userid', decodedtoken.record_id);
       if (loggedin) {
         const url = mainurl + "/idea/upvote/" + recordid;
         fetch(url, {
@@ -150,11 +200,12 @@ class Welcome extends Component {
     console.log(this.state.records);
     const ideas = this.state.records.map((record, index) => {
       return <Ideaforms
-        email={record.data.userlu || record.data.screen_name}
+        name={record.data.userlu || record.data.screen_name}
         problem={record.data.Problem}
         upvote={record.data.upvote}
         onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
         onComment={this.onComment.bind(this, record.id)}
+        pic={record.data.Piclu}
       />
     });
 
@@ -164,19 +215,22 @@ class Welcome extends Component {
           {this.renderRedirect()}
           <div className={classes.container}>
             <ul className={classes.ul}>
-              <li className={classes.li}><Link className={classes.links}>  #NEWEST </Link></li>
-              <li className={classes.li}><Link className={classes.links}>  #TRENDING </Link></li>
-              <li className={classes.li}><Link className={classes.links}> #TOP </Link></li>
+              <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'NEWEST')}> #NEWEST </a></li>
+              <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'TRENDING')}> #TRENDING </a></li>
+              <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'TOP')}> #TOP </a></li>
             </ul>
           </div>
           {ideas}
           <div className={classes.side}>
             <div className={classes.plane}>
-              <a className={classes.fields} href="#">#Web/mobile Dev</a> <br />
-              <a className={classes.fields} href="#">#blockchain/crypto</a>  <br />
-              <a className={classes.fields} href="#">#Elctronics</a>  <br />
-              <a className={classes.fields} href="#">#Social</a>
-              <a className={classes.fields} href="#">#Game-Dev</a>
+              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "ALL")} >#ALL</a> <br />
+              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Web-Mobile Development")} >#Web/mobile Dev</a> <br />
+              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Blockchain-Crypto")} >#blockchain/crypto</a>  <br />
+              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Hardware-Elctronics")} >#Elctronics</a>  <br />
+              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Social")} >#Social</a>
+              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Gaame Development")} >#Game-Dev</a>
+              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "AI-ML")} >#AI/ML</a>
+              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "IOT")} >#IOT</a>
             </div>
           </div>
         </div>

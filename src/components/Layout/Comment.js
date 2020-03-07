@@ -110,6 +110,7 @@ class Comment extends Component {
 
   render() {
     console.log(this.state.userlu);
+
     return (
       <Aux>
         <div className={classes.main}>

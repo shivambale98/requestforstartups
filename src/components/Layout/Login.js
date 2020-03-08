@@ -7,6 +7,7 @@ import LoginFormError from '../Layout/LoginFormError';
 import TwitterLogin from 'react-twitter-auth';
 import Cookies from 'js-cookie';
 import jwt from 'jsonwebtoken';
+import { Button } from 'react-bootstrap';
 
 const mainurl = require('../../links');
 
@@ -48,15 +49,17 @@ class Login extends Component {
 
   render() {
     return (
-      <div class={classes.loginstuff}>
+      <div className={classes.loginstuff}>
         {this.renderRedirect()}
-        <h3>Want to see your startup idea become a reality?</h3>
-        <h4>then rub a genie lamp</h4>
-        <h5>incase of lack in genie lamps you can
+        <h3 className={classes.head}>Want to see your startup idea become a reality?</h3>
+        <h4 className={classes.head2}>then rub a genie lamp</h4>
+        <h5 className={classes.head3}>incase of lack in genie lamps you can </h5>
+        <h5 className={classes.head4} >Click the button below and login using Twitter!</h5>
+        <div className={classes.button}>
         <a href={mainurl + '/auth/twitter/reverse'} >
-            <button>Login</button>
+            <Button variant="outline-dark" className={classes.buts}>Login</Button>
           </a>
-        </h5>
+       </div>
       </div>
     )
   };

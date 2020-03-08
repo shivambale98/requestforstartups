@@ -123,7 +123,7 @@
 
 
 .ThumbsUp{
-  margin-left: 26%;
+  margin-left: 24%;
   display: flex;
   flex-direction: row;
 }
@@ -193,6 +193,7 @@
   text-align: left;
   font-size: 25px;
   margin-left: 10px;
+  margin-top: 10px;
 }
 
 .titles:hover{
@@ -290,6 +291,50 @@
 
 
 
+.buttn{
+  height: auto;
+  width: auto;
+  display: table-cell;
+  align-items: right;
+  margin-top: 0px;
+  position: relative;
+  margin-left: 0px;
+  margin-right: 5%;
+}
+
+
+.btn{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  background: #424242;
+  border-radius: 3px;
+ /* box-shadow: 0 10px 20px -8px rgba(3, 169, 244, 0.7); */
+  padding: 5px 17px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color:#e0e0e0 ;
+  text-decoration: none;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+  height: 40px;
+  width: 80px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-style: oblique;
+  font-size: 12px;
+  font-weight: bold;
+  position: initial;
+  align-items: left;
+  justify-content: left;
+  align-self: stretch;
+}
+.btn:hover {
+    background-color: rgba(62, 69, 81, 0.7);
+    color: wheat;
+    
+}
 
 @media (max-width: 768px){
   .side{
@@ -394,7 +439,7 @@
 
 
 .ThumbsUp{
-  margin-left: 24%;
+  margin-left: 20%;
   display: flex;
   flex-direction: row;
 }

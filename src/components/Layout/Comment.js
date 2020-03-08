@@ -148,11 +148,15 @@ class Comment extends Component {
 
               </div>
               <div className={classes.ThumbsUp}>
-                <p className={classes.votes}> 31 <ThumbUpIcon style={{ fontSize: 23 }} />  </p>
+              <div className={classes.buttn}>
+                    <button className={classes.btn} >
+                        31   Upvote
+                    </button>
+                </div>
                 <Link
                   onClick={classes.posted}
                   className={classes.titles}>
-                  <AddCommentIcon style={{ fontSize: 30 }} />
+                  <AddCommentIcon style={{ fontSize: 40 }} />
                 </Link>
               </div>
             </div>

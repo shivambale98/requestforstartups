@@ -1,79 +1,97 @@
-.Loginstyle {
-    display: flex;
-    background-color:#1a237e ;
-    height: 60vh;
-    color: #e8eaf6;
-    justify-content: center;
-    align-items: center;
-    margin-left: 8%;
-    margin-top: 10%;
-    width: 40%;
-    border: 3px solid #3949ab;
-    padding: 10px;
-    border-radius: 20px;
+.loginstuff {
+height: 60vh;
+width: 60vw;
+margin-left: 30%;
+margin-top: 5%;
+box-sizing: border-box;
+border:  0.5px  solid #e0e0e0;
+position: absolute;
+background-color: #757575;
+border-radius: 10px;
 }
 
-.back {
-    background: -webkit-linear-gradient(to left, #8f94fb, #c5cae9);   
-    height: 80vh;
-    display: flex;
+.head{
+    margin-top:20px;
+    margin-left: 15%;
+    color: #e0e0e0;
 }
 
-
-.header {
-    font-weight: bold;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-style: inherit;
-    color: #1a237e;
-    text-align: center;
-    margin-bottom:20px;
-    padding-top: 5px;
-    margin-top: 2px;
+.head2{
+    margin-top:5px;
     margin-left: 35%;
-    position: fixed;
+    color: #e0e0e0;
 }
-
-.images{
-    height: 50%;
-    width: 20%;
-    margin-left: 2%;
-    margin-top: 10%;
+.head3{
+    margin-top:5px;
+    margin-left: 30%;
+    color: #e0e0e0;
 }
+.head4{
+    margin-top:5px;
+    margin-left: 23%;
+    color: #e0e0e0;
+}
+.button{
+    display: block;
+    margin-top: 20%;
+    margin-left: 45%;
+    width: auto;
 
+}
+.buts{
+    height: 100%;
+    background-color: black;
+    color: #e0e0e0;
+}
 @media only screen and (max-width:767px) {
-    .Loginstyle {
-        margin-left: 8%;
-        margin-top: 35%;
-        height: 40vh;
-        width: 60%;
-        border: 3px solid #3949ab;
-        padding: 10px;
-        border-radius: 20px;
-    }
-   
-.header {
-    margin-bottom:10px;
-    padding-top: 5px;
-    margin-top: 5px;
-    margin-left: 25%;
-    position: fixed;
-    font-size: 30px;
-}
-.images{
-    height: 50%;
-    width: 25%;
-    margin-left: 2%;
-    margin-top: 30%;
-}
-
-.loginstuff{
-    text-align: center;
-    margin-left: 100px;
-}
-
-.h4 .h5 .h3 {
-    text-align: center;
-    margin-left: 100px;
-}
+    .loginstuff {
+        height: 75vh;
+        width: 70vw;
+        margin-left: 15%;
+        margin-top: 5%;
+        box-sizing: border-box;
+        border:  0.5px  solid #e0e0e0;
+        position: absolute;
+        background-color: #757575;
+        border-radius: 10px;
+        }
     
+.head{
+    margin-top:20px;
+    margin-left: 10%;
+    color: #e0e0e0;
+    font-size: 20px;
+}
+
+.head2{
+    margin-top:10px;
+    margin-left: 10%;
+    font-size: 20px;
+    color: #e0e0e0;
+}
+.head3{
+    margin-top:5px;
+    margin-left: 10%;
+    font-size: 20px;
+    color: #e0e0e0;
+}
+.head4{
+    margin-top:75px;
+    margin-left: 20%;
+    color: black;
+    font-size: 24px;
+}
+
+.button{
+    display: block;
+    margin-top: 35%;
+    margin-left: 35%;
+    width: auto;
+
+}
+.buts{
+    height: 100%;
+    background-color: black;
+    color: #e0e0e0;
+}
 }

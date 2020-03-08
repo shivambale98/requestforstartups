@@ -82,6 +82,18 @@ class Addidea extends Component {
                 <a className={classes.fields} ><Link to='/ideas/IOT'>#IOT</Link></a>
               </div>
             </div>
+            <div className={classes.innerBox2}>
+              <h5 className={classes.heading}>Profile</h5>
+              <div >
+                <img className={classes.img23}
+                  src={this.state.userpic}
+                  alt="image"
+                  width={30}
+                  height={30}
+                />
+              </div>
+              <p className={classes.heading1}> User Name: Shivam Bale </p>
+            </div>
           </div>
         </div>
       </Aux>

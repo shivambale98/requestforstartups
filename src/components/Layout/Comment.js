@@ -240,13 +240,16 @@ class Comment extends Component {
 
               </div>
               <div className={classes.ThumbsUp}>
-                <button onClick={this.upvotebuttonHandler.bind(this)} style={{ background: upvotecolor }}>
-                  <p className={classes.votes}> {this.state.upvote} <ThumbUpIcon style={{ fontSize: 23 }} />  </p>
-                </button>
+
+                <div className={classes.buttn}>
+                  <button className={classes.btn} onClick={this.upvotebuttonHandler.bind(this)} style={{ background: upvotecolor }}>
+                    {this.state.upvote}   Upvote
+                    </button>
+                </div>
                 <Link
                   onClick={this.clickmodel}
                   className={classes.titles}>
-                  <AddCommentIcon style={{ fontSize: 30 }} />
+                  <AddCommentIcon style={{ fontSize: 40 }} />
                 </Link>
               </div>
               <div>
@@ -287,6 +290,18 @@ class Comment extends Component {
                   <a className={classes.fields} ><Link to='/ideas/Gaame Development'>#Game-Dev</Link></a><br />
                   <a className={classes.fields} ><Link to='/ideas/AI-ML'>#AI-ML</Link></a>
                   <a className={classes.fields} ><Link to='/ideas/IOT'>#IOT</Link></a>
+                </div>
+                <div className={classes.innerBox2}>
+                  <h5 className={classes.heading}>Profile</h5>
+                  <div >
+                    <img className={classes.img23}
+                      src={this.state.userpic}
+                      alt="image"
+                      width={30}
+                      height={30}
+                    />
+                  </div>
+                  <p className={classes.heading1}> User Name : Shivam Bale </p>
                 </div>
               </div>
             </div>

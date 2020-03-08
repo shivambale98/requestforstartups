@@ -10,6 +10,7 @@ import Menu from './Menu';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
+import { Modal, ModalBody, ModalHeader } from "shards-react";
 
 
 const jwt = require('jsonwebtoken');
@@ -25,7 +26,8 @@ class Welcome extends Component {
     link: '',
     redirect: false,
     id: '',
-    loggedin: false
+    loggedin: false,
+    showupvotemodel: false
   };
   //pagination
   //const [currentPage, setCurrentPage] = useState(1);
@@ -56,13 +58,7 @@ class Welcome extends Component {
         console.log(err);
       });
 
-    const token = Cookies.get('jwttoken');
-    try {
-      decodedtoken = jwt.verify(token, 'heyphil123');
-    } catch (err) {
-      this.setState({ loggedin: false });
-    }
-    if (!decodedtoken) {
+    if (!this.props.user) {
       this.setState({ loggedin: false });
     } else {
       this.setState({ loggedin: true });
@@ -185,7 +181,10 @@ class Welcome extends Component {
           });
 
       }
+    } else {
+      this.setState({ showupvotemodel: !this.state.showupvotemodel });
     }
+
   }
 
   onComment = (id) => {
@@ -195,6 +194,7 @@ class Welcome extends Component {
     });
     //this.props.history.push();
   }
+
 
   toggleCollapse = collapseID => () =>
     this.setState(prevState => ({
@@ -210,7 +210,10 @@ class Welcome extends Component {
       />
     );
 
-    console.log(this.state.records);
+    const model = () => {
+    };
+
+    //console.log(this.state.records);
     const ideas = this.state.records.map((record, index) => {
       if (!this.state.loggedin) {
         return <Ideaforms
@@ -222,7 +225,7 @@ class Welcome extends Component {
           pic={record.data.Piclu}
         />
       } else {
-        if (record.data.whoupvotelu && record.data.whoupvotelu.includes(decodedtoken.user.user_id)) {
+        if (record.data.whoupvotelu && record.data.whoupvotelu.includes(this.props.user.user.user_id)) {
           var upvotecolor = 'rgba(244, 3, 3, 0.3)';
         }
         return <Ideaforms
@@ -241,6 +244,11 @@ class Welcome extends Component {
       <Aux>
         <div className={classes.main}>
           {this.renderRedirect()}
+          <Modal open={this.state.showupvotemodel} toggle={this.upvotebuttonHandler.bind(this)}>
+            <ModalHeader>Login Error</ModalHeader>
+            <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
+            <ModalBody><Link to='/login'>login</Link> to upvote</ModalBody>
+          </Modal>
           <div className={classes.container}>
             <ul className={classes.ul}>
               <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'NEWEST')}> #NEWEST </a></li>

@@ -29,7 +29,7 @@ class Addidea extends Component {
         <div className={classes.main}>
           <div className={classes.containers}>
             <ul className={classes.ul}>
-              <li className={classes.li}><Link className={classes.links}><ArrowBackIcon style={{ fontSize: 40 }} />  BACK </Link></li>
+              <li className={classes.li}><Link to='/' className={classes.links}><ArrowBackIcon style={{ fontSize: 40 }} />  BACK </Link></li>
             </ul>
           </div>
           <div className={classes.form}>
@@ -42,11 +42,11 @@ class Addidea extends Component {
                     <label className={classes.lab}>Select the domain of your startup</label>
                     <select class="browser-default custom-select mb-4" name='domain' required>
                       <option value="" disabled selected hidden>Select domain</option>
-                      <option value="AI/ML" >AI/ML</option>
+                      <option value="AI-ML" >AI/ML</option>
                       <option value="IOT">IOT</option>
-                      <option value="Web/Mobile Development">Web/Mobile Development</option>
-                      <option value="Blockchain/Crypto">Blockchain/Crypto</option>
-                      <option value="Hardware/Electronics">Hardware/Electronics</option>
+                      <option value="Web-Mobile Development">Web/Mobile Development</option>
+                      <option value="Blockchain-Crypto">Blockchain/Crypto</option>
+                      <option value="Hardware-Electronics">Hardware/Electronics</option>
                       <option value="Social">Social</option>
                       <option value="Game Development">Game Development</option>
                     </select>

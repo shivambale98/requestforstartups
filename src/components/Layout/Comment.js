@@ -4,6 +4,7 @@ import Aux from '../../hoc/Auxiliary';
 import Cookies from 'js-cookie';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import { Link } from 'react-router-dom';
+import { Button, Modal, ModalBody, ModalHeader, ModalFooter, FormTextarea } from "shards-react";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import AddCommentIcon from '@material-ui/icons/AddComment';
 import AddComment from './Addcomment';
@@ -22,7 +23,9 @@ class Comment extends Component {
     email: '',
     Problem: undefined,
     userlu: undefined,
-    addcomment: false
+    addcomment: false,
+    open: false,
+    commmentmodel: false
   };
 
   postHandler = () => {
@@ -30,6 +33,10 @@ class Comment extends Component {
   }
 
   componentDidMount() {
+    this.getcomments();
+  }
+
+  getcomments = () => {
     var id = this.props.location.pathname.toString();
     id = id.split('/')[2];
     this.setState({
@@ -67,7 +74,7 @@ class Comment extends Component {
     });
   }
 
-  postComment = () => {
+  clickmodel = () => {
     const token = Cookies.get('jwttoken');
     var decodedtoken;
     try {
@@ -76,11 +83,32 @@ class Comment extends Component {
       console.log(err);
     }
     if (decodedtoken) {
-      this.state.email = decodedtoken.email;
+      this.setState({ open: !this.state.open });
+    } else {
+      this.togcommentmodel();
+    }
+  }
+
+  togcommentmodel = () => {
+    this.setState({ commmentmodel: !this.state.commmentmodel });
+  }
+
+  postComment = () => {
+    //console.log(this.state.commentbox);
+    this.clickmodel();
+    const token = Cookies.get('jwttoken');
+    var decodedtoken;
+    try {
+      decodedtoken = jwt.verify(token, 'heyphil123');
+    } catch (err) {
+      console.log(err);
+    }
+    if (decodedtoken) {
+      this.state.name = decodedtoken.user.screen_name;
       const ideaid = this.state.ideaid;
       var formdata = new FormData();
       formdata.append('comment', this.state.commentbox);
-      formdata.append('email', this.state.email);
+      formdata.append('name', this.state.name);
 
       fetch(mainurl + '/comments/' + ideaid, {
         method: 'POST',
@@ -95,11 +123,7 @@ class Comment extends Component {
               return res.json();
             })
             .then(resdata => {
-              this.setState({
-                comments: resdata.comments || [],
-                users: resdata.users || [],
-                commentbox: ''
-              });
+              this.getcomments();
             })
             .catch(err => {
               console.log(err);
@@ -110,6 +134,7 @@ class Comment extends Component {
           console.log(err);
         });
     }
+
   }
 
 
@@ -129,7 +154,7 @@ class Comment extends Component {
         <div className={classes.main}>
           <div className={classes.containers}>
             <ul className={classes.ul}>
-              <li className={classes.li}><Link className={classes.links}><ArrowBackIcon style={{ fontSize: 40 }} />  BACK </Link></li>
+              <li className={classes.li}><Link to='/' className={classes.links}><ArrowBackIcon style={{ fontSize: 40 }} />  BACK </Link></li>
             </ul>
           </div>
           <div className={classes.righttoolbar}>
@@ -150,17 +175,31 @@ class Comment extends Component {
               <div className={classes.ThumbsUp}>
                 <p className={classes.votes}> 31 <ThumbUpIcon style={{ fontSize: 23 }} />  </p>
                 <Link
-                  onClick={classes.posted}
+                  onClick={this.clickmodel}
                   className={classes.titles}>
                   <AddCommentIcon style={{ fontSize: 30 }} />
                 </Link>
               </div>
+              <div>
+                <Modal open={this.state.open} toggle={this.clickmodel}>
+                  <ModalHeader>Post your comment</ModalHeader>
+                  <ModalBody>
+                    <FormTextarea size="lg" onChange={this.handelchange.bind(this)} />
+                    <Button onClick={this.postComment}>Post</Button>
+                  </ModalBody>
+                </Modal>
+              </div>
+
+              <div>
+                <Modal open={this.state.commmentmodel} toggle={this.togcommentmodel}>
+                  <ModalHeader>Login Error</ModalHeader>
+                  <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
+                  <ModalBody><Link to='/login'>login</Link> to upvote</ModalBody>
+                </Modal>
+              </div>
+
             </div>
 
-            <AddComment
-              show={this.state.addcomment} >
-
-            </AddComment>
             {comments}
             <div className={classes.side}>
               <div className={classes.plane}>

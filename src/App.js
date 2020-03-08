@@ -61,7 +61,9 @@ class App extends Component {
   render() {
 
     const menu = () => {
-      return <Menu user={this.state.user} />
+      return <Menu user={this.state.user}
+        updatestate={this.updatestate}
+      />
 
       if (this.state.menuOpen) {
         menu = <Menu />;

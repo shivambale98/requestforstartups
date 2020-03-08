@@ -17,7 +17,9 @@ class Menu extends Component {
         loglink: '/login',
         logstatus: 'Login',
         token: undefined,
-        redirect: false
+        homeredirect: false,
+        addidearedirect: false,
+        logredirect: false
     };
 
     componentDidMount() {
@@ -25,54 +27,64 @@ class Menu extends Component {
 
         if (this.props.user) {
             this.setState({
-                loglink: '/logout',
+                loglink: '/',
                 logstatus: 'Logout',
                 token: this.props.user,
-                redirect: true
+                logredirect: false
             });
             //loggedin so re-render
         }
     }
 
     renderRedirect = () => {
-        if (this.state.redirect) {
+        if (this.state.logredirect) {
             return <Redirect to='/' />
         }
     }
 
     logout = () => {
-        if (this.state.loglink === '/logout') {
+        if (this.state.logstatus === 'Logout') {
             if (this.state.token) {
                 //console.log('hey');
                 Cookies.remove('jwttoken');
                 this.setState({
                     loglink: '/login',
                     logstatus: 'Login',
-                    redirect: true,
+                    logredirect: true,
                     token: undefined
                 });
+                this.props.updatestate(undefined);
                 //this.props.history.push('/');
                 //rerender
             }
         }
     }
 
+    addideabut = () => {
+        console.log(this.props.user);
+        if (this.props.user) {
+
+            return <Link to='/addidea' className={classes.links} >
+                <button className={classes.addidea}>
+                    <EmojiObjectsIcon style={{ fontSize: 50 }} />
+                    ADD-IDEA
+                </button>
+            </Link >
+        }
+    };
+
     render() {
-        //console.log(this.state);
         return (
             <div className={classes.Menustyle}>
                 <Logo className={classes.logs} />
                 {this.renderRedirect()}
                 <ul className={classes.ul}>
-                    <button className={classes.nots}><li className={classes.li}> <Link className={classes.links} to="/"><HomeOutlinedIcon style={{ fontSize: 50 }} />  HOME </Link> </li> </button>
-                    <button className={classes.nots}> <li className={classes.li}> <Link className={classes.links} onClick={this.logout} to={this.state.loglink}><LockOpenIcon style={{ fontSize: 50 }} /> {this.state.logstatus}</Link> </li> </button>
+                    <Link className={classes.links} to='/' ><button className={classes.nots}><li className={classes.li}> <HomeOutlinedIcon style={{ fontSize: 50 }} />  HOME  </li> </button></Link>
+                    <Link className={classes.links} to={this.state.loglink}> <button onClick={this.logout} className={classes.nots}> <li className={classes.li}> <LockOpenIcon style={{ fontSize: 50 }} /> {this.state.logstatus} </li> </button></Link>
                 </ul>
-                <button className={classes.addidea}>
-                    <EmojiObjectsIcon style={{ fontSize: 50 }} />
-                    <Link className={classes.links} to="/addidea">ADD-IDEA </Link>
-                </button>
+                {this.addideabut()}
             </div>
-            
+
         )
     }
 

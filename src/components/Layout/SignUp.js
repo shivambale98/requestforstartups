@@ -5,10 +5,7 @@ import nsVerticalLogo from '../../assets/NS_logo_Vertical.svg';
 import LoginFormError from '../Layout/LoginFormError';
 import Cookies from 'js-cookie';
 
-const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-//const mainurl = 'http://localhost:5000';//
-
-
+const mainurl = require('../../links');
 
 class SignUp extends Component {
   state = {

@@ -204,6 +204,33 @@ class Comment extends Component {
   };
 
 
+  userprofile = () => {
+    const token = Cookies.get('jwttoken');
+    var decodedtoken;
+    try {
+      decodedtoken = jwt.verify(token, 'heyphil123');
+    } catch (err) {
+      console.log(err);
+    }
+    if (decodedtoken) {
+      return <div className={classes.innerBox2}>
+        <h5 className={classes.heading}>Profile</h5>
+        <div >
+          <img className={classes.img}
+            src={decodedtoken.user.profile_image_url}
+            alt="image"
+            width={30}
+            height={30}
+          />
+        </div>
+        <p className={classes.heading1}>{decodedtoken.user.screen_name}: loggedin</p>
+      </div>
+
+    }
+  };
+
+
+
   render() {
     console.log(this.state.users);
     this.checkifupvote();
@@ -291,18 +318,7 @@ class Comment extends Component {
                   <a className={classes.fields} ><Link to='/ideas/AI-ML'>#AI-ML</Link></a>
                   <a className={classes.fields} ><Link to='/ideas/IOT'>#IOT</Link></a>
                 </div>
-                <div className={classes.innerBox2}>
-                  <h5 className={classes.heading}>Profile</h5>
-                  <div >
-                    <img className={classes.img23}
-                      src={this.state.userpic}
-                      alt="image"
-                      width={30}
-                      height={30}
-                    />
-                  </div>
-                  <p className={classes.heading1}> User Name : Shivam Bale </p>
-                </div>
+                {this.userprofile()}
               </div>
             </div>
           </div>

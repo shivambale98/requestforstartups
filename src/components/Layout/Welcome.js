@@ -52,6 +52,7 @@ class Welcome extends Component {
     } else {
       this.getallideas();
     }
+
   }
 
   getallideas = () => {
@@ -193,6 +194,32 @@ class Welcome extends Component {
   }
 
 
+  userprofile = () => {
+    const token = Cookies.get('jwttoken');
+    var decodedtoken;
+    try {
+      decodedtoken = jwt.verify(token, 'heyphil123');
+    } catch (err) {
+      console.log(err);
+    }
+    if (decodedtoken) {
+      return <div className={classes.innerBox2}>
+        <h5 className={classes.heading}>Profile</h5>
+        <div >
+          <img className={classes.img}
+            src={decodedtoken.user.profile_image_url}
+            alt="image"
+            width={30}
+            height={30}
+          />
+        </div>
+        <p className={classes.heading1}>{decodedtoken.user.screen_name}: loggedin</p>
+      </div>
+
+    }
+  };
+
+
   toggleCollapse = collapseID => () =>
     this.setState(prevState => ({
       collapseID: prevState.collapseID !== collapseID ? collapseID : ""
@@ -207,8 +234,6 @@ class Welcome extends Component {
       />
     );
 
-    const model = () => {
-    };
 
     //console.log(this.state.records);
     const ideas = this.state.records.map((record, index) => {
@@ -266,17 +291,8 @@ class Welcome extends Component {
                 <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "AI-ML")} >#AI/ML</a>
                 <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "IOT")} >#IOT</a>
               </div>
-              <div className={classes.innerBox2}>
-                <h5 className={classes.heading}>Profile</h5>
-                <div >
-                  <img className={classes.img}
-                    src={this.state.userpic}
-                    alt="image"
-                    width={30}
-                    height={30}
-                  />
-                </div>
-                <p className={classes.heading1}> User Name : Shivam Bale </p>
+              <div>
+                {this.userprofile()}
               </div>
             </div>
           </div>

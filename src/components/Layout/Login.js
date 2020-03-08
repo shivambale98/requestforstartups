@@ -52,14 +52,14 @@ class Login extends Component {
       <div className={classes.loginstuff}>
         {this.renderRedirect()}
         <h3 className={classes.head}>Want to see your startup idea become a reality?</h3>
-        <h4 className={classes.head2}>then rub a genie lamp</h4>
-        <h5 className={classes.head3}>incase of lack in genie lamps you can </h5>
-        <h5 className={classes.head4} >Click the button below and login using Twitter!</h5>
+        <h4 className={classes.head2}>then rub a genie lamp.</h4>
+        <h5 className={classes.head3}>Incase of lack in genie lamps you can </h5>
         <div className={classes.button}>
-        <a href={mainurl + '/auth/twitter/reverse'} >
-            <Button variant="outline-dark" className={classes.buts}>Login</Button>
+          <a href={mainurl + '/auth/twitter/reverse'} >
+            <Button variant="outline-dark" className={classes.buts}>Login with twitter</Button>
           </a>
-       </div>
+
+        </div>
       </div>
     )
   };

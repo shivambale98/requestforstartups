@@ -75,10 +75,24 @@ class Addidea extends Component {
                 <a className={classes.fields} href="#">#Web/mobile Dev</a> <br />
                 <a className={classes.fields} href="#">#blockchain/crypto</a>  <br />
                 <a className={classes.fields} href="#">#Elctronics</a>  <br />
-                <a className={classes.fields} href="#">#Social</a>
-                <a className={classes.fields} href="#">#Game-Dev</a>
+                <a className={classes.fields} href="#">#Social</a>   <br />
+                <a className={classes.fields} href="#">#Game-Dev</a>  <br />
+                <a className={classes.fields} href="#">#AI/ML</a>
+                <a className={classes.fields} href="#">#IOT</a>
               </div>
             </div>
+            <div className={classes.innerBox2}>
+                <h5 className={classes.heading}>Profile</h5>
+              <div >
+                <img className={classes.img23}
+                  src={this.state.userpic}
+                  alt="image"
+                  width={30}
+                  height={30}
+                />
+              </div>
+             <p className={classes.heading1}> User Name: Shivam Bale </p>
+              </div>
           </div>
         </div>
       </Aux>

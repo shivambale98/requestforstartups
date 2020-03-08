@@ -80,9 +80,7 @@ class App extends Component {
 
     return (
       <Fragment>
-        <div>
-          <DrawerToggleButton click={this.props.drawerClickedHandler} />
-        </div>
+       
         <BrowserRouter>
           <Route component={menu}
             drawerClickedHandler={this.drawerToggleClickHandler} />

@@ -19,12 +19,12 @@ const Ideaforms = (props) => (
                     />
                 </div>
                 <div className={classes.container}>
-                    <p className={classes.head}>{props.name} </p>
+                    <p className={classes.head}>@{props.name} </p>
                     <p className={classes.title}>{props.problem}</p>
 
                 </div>
                 <div className={classes.comments}>
-                    <Link className={classes.comment} onClick={props.onComment} class="fa fa-comment" ><b> Comment</b></Link>
+                    <a className={classes.comment} onClick={props.onComment} class="fa fa-comment" ><b> Comment</b></a>
                 </div>
                 <div className={classes.buttn}>
                     <button className={classes.btn} onClick={props.onUpvote} style={{ background: props.upvotecolor }}>

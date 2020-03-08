@@ -11,6 +11,8 @@ import AddComment from './Addcomment';
 import Commentbox from './commentbox';
 const jwt = require('jsonwebtoken');
 const mainurl = require('../../links');
+var upvotecolor = 'rgba(3, 3, 3, 0.3)';
+
 
 class Comment extends Component {
   state = {
@@ -25,7 +27,8 @@ class Comment extends Component {
     userlu: undefined,
     addcomment: false,
     open: false,
-    commmentmodel: false
+    commmentmodel: false,
+    showupvotemodel: false
   };
 
   postHandler = () => {
@@ -52,13 +55,17 @@ class Comment extends Component {
         var { userlu } = resdata.fields;
         var { screen_name } = resdata.fields;
         var { Piclu } = resdata.fields;
+        var { upvote } = resdata.fields;
+        var { whoupvotelu } = resdata.fields;
         this.setState({
           comments: resdata.comments || [],
           users: resdata.users || [],
           Problem: Problem,
           userlu: userlu || screen_name,
           userpic: Piclu || [],
-          userspic: resdata.userspic || []
+          userspic: resdata.userspic || [],
+          upvote: upvote,
+          whoupvotelu: whoupvotelu || []
         });
         console.log(resdata);
       })
@@ -138,8 +145,68 @@ class Comment extends Component {
   }
 
 
+  upvotebuttonHandler = () => {
+    const token = Cookies.get('jwttoken');
+    var decodedtoken;
+    var loggedin;
+    try {
+      decodedtoken = jwt.verify(token, 'heyphil123');
+    } catch (err) {
+      console.log(err);
+    }
+    if (decodedtoken) {
+      this.setState({ loggedin: true });
+      this.setState({ decodedtoken: decodedtoken });
+      loggedin = true;
+    } else {
+      this.setState({ loggedin: false });
+      loggedin = false;
+    }
+
+    if (loggedin) {
+      var formdate = new FormData();
+      formdate.append('userid', decodedtoken.record_id);
+      if (loggedin) {
+        const url = mainurl + "/idea/upvote/" + this.state.ideaid;
+        fetch(url, {
+          method: 'POST',
+          body: formdate
+        })
+          .then(res => {
+            return res.json();
+          })
+          .then(resdata => {
+            var { record } = resdata;
+            var { id } = record;
+            var { link } = resdata;
+            console.log(resdata);
+            this.setState({ upvote: record.data.upvote });
+            this.setState({ whoupvotelu: record.data.whoupvotelu });
+            //this.setState({ link: link });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+
+      }
+    } else {
+      this.setState({ showupvotemodel: !this.state.showupvotemodel });
+    }
+
+  }
+
+  checkifupvote = () => {
+    if (this.state.loggedin) {
+      if (this.state.whoupvotelu.includes(this.state.decodedtoken.user_id)) {
+        upvotecolor = 'rgba(244, 3, 3, 0.3)';
+      }
+    }
+  };
+
+
   render() {
     console.log(this.state.users);
+    this.checkifupvote();
 
     const comments = this.state.comments.map((comment, index) => {
       return <Commentbox
@@ -168,12 +235,14 @@ class Comment extends Component {
                 />
               </div>
               <div className={classes.container}>
-                <p className={classes.head}>{this.state.userlu}</p>
+                <p className={classes.head}>@{this.state.userlu}</p>
                 <p className={classes.title}>{this.state.Problem}</p>
 
               </div>
               <div className={classes.ThumbsUp}>
-                <p className={classes.votes}> 31 <ThumbUpIcon style={{ fontSize: 23 }} />  </p>
+                <button onClick={this.upvotebuttonHandler.bind(this)} style={{ background: upvotecolor }}>
+                  <p className={classes.votes}> {this.state.upvote} <ThumbUpIcon style={{ fontSize: 23 }} />  </p>
+                </button>
                 <Link
                   onClick={this.clickmodel}
                   className={classes.titles}>
@@ -194,9 +263,15 @@ class Comment extends Component {
                 <Modal open={this.state.commmentmodel} toggle={this.togcommentmodel}>
                   <ModalHeader>Login Error</ModalHeader>
                   <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
-                  <ModalBody><Link to='/login'>login</Link> to upvote</ModalBody>
+                  <ModalBody><Link to='/login'>login</Link> to comment</ModalBody>
                 </Modal>
               </div>
+
+              <Modal open={this.state.showupvotemodel} toggle={this.upvotebuttonHandler.bind(this)}>
+                <ModalHeader>Login Error</ModalHeader>
+                <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
+                <ModalBody><Link to='/login'>login</Link> to upvote</ModalBody>
+              </Modal>
 
             </div>
 
@@ -204,11 +279,14 @@ class Comment extends Component {
             <div className={classes.side}>
               <div className={classes.plane}>
                 <div className={classes.innerBox}>
-                  <a className={classes.fields} href="#">#Web/mobile Dev</a> <br />
-                  <a className={classes.fields} href="#">#blockchain/crypto</a>  <br />
-                  <a className={classes.fields} href="#">#Elctronics</a>  <br />
-                  <a className={classes.fields} href="#">#Social</a>
-                  <a className={classes.fields} href="#">#Game-Dev</a>
+                  <a className={classes.fields} ><Link to='/ideas/ALL'>#ALL</Link></a> <br />
+                  <a className={classes.fields} ><Link to='/ideas/Web-Mobile Development'>#Web/mobile Dev</Link></a> <br />
+                  <a className={classes.fields} ><Link to='/ideas/Blockchain-Crypto'>#Blockchain/crypto</Link></a>  <br />
+                  <a className={classes.fields} ><Link to='/ideas/Hardware-Elctronics'>#Hardware/Elctronics</Link></a>  <br />
+                  <a className={classes.fields} ><Link to='/ideas/Social'>#Social</Link></a><br />
+                  <a className={classes.fields} ><Link to='/ideas/Gaame Development'>#Game-Dev</Link></a><br />
+                  <a className={classes.fields} ><Link to='/ideas/AI-ML'>#AI-ML</Link></a>
+                  <a className={classes.fields} ><Link to='/ideas/IOT'>#IOT</Link></a>
                 </div>
               </div>
             </div>

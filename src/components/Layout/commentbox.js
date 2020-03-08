@@ -16,7 +16,7 @@ const commentbox = (props) => (
 
             />
             <div className={classes.containerc}>
-                <p className={classes.head}>{props.username}</p>
+                <p className={classes.head}>@{props.username}</p>
                 <p className={classes.title}>{props.usercomment}</p>
             </div>
         </div>

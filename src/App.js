@@ -82,13 +82,12 @@ class App extends Component {
 
     return (
       <Fragment>
-        <div>
-          <DrawerToggleButton click={this.props.drawerClickedHandler} />
-        </div>
+
         <BrowserRouter>
           <Route component={menu}
             drawerClickedHandler={this.drawerToggleClickHandler} />
           <Route path="/" exact component={welcome} />
+          <Route path="/ideas" component={welcome} />
           <Route path="/login" component={login} />
           <Route path="/addidea" component={Addidea} />
           <Route path='/logout' component={welcome} />

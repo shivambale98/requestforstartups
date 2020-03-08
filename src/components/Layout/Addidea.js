@@ -25,13 +25,13 @@ class Addidea extends Component {
   render() {
     return (
       <Aux>
-
+        <div className={classes.containers}>
+          <ul className={classes.ul}>
+            <li className={classes.li}><Link to='/' className={classes.links}><ArrowBackIcon style={{ fontSize: 40 }} />  BACK </Link></li>
+          </ul>
+        </div>
         <div className={classes.main}>
-          <div className={classes.containers}>
-            <ul className={classes.ul}>
-              <li className={classes.li}><Link to='/' className={classes.links}><ArrowBackIcon style={{ fontSize: 40 }} />  BACK </Link></li>
-            </ul>
-          </div>
+
           <div className={classes.form}>
             <MDBContainer>
               <MDBRow>
@@ -72,11 +72,14 @@ class Addidea extends Component {
           <div className={classes.side}>
             <div className={classes.innerBox}>
               <div className={classes.plane}>
-                <a className={classes.fields} href="#">#Web/mobile Dev</a> <br />
-                <a className={classes.fields} href="#">#blockchain/crypto</a>  <br />
-                <a className={classes.fields} href="#">#Elctronics</a>  <br />
-                <a className={classes.fields} href="#">#Social</a>
-                <a className={classes.fields} href="#">#Game-Dev</a>
+                <a className={classes.fields} ><Link to='/ideas/ALL'>#ALL</Link></a> <br />
+                <a className={classes.fields} ><Link to='/ideas/Web-Mobile Development'>#Web/mobile Dev</Link></a> <br />
+                <a className={classes.fields} ><Link to='/ideas/Blockchain-Crypto'>#Blockchain/crypto</Link></a>  <br />
+                <a className={classes.fields} ><Link to='/ideas/Hardware-Elctronics'>#Hardware/Elctronics</Link></a>  <br />
+                <a className={classes.fields} ><Link to='/ideas/Social'>#Social</Link></a><br />
+                <a className={classes.fields} ><Link to='/ideas/Gaame Development'>#Game-Dev</Link></a><br />
+                <a className={classes.fields} ><Link to='/ideas/AI-ML'>#AI-ML</Link></a>
+                <a className={classes.fields} ><Link to='/ideas/IOT'>#IOT</Link></a>
               </div>
             </div>
           </div>

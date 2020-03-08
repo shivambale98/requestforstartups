@@ -45,6 +45,16 @@ class Welcome extends Component {
   //pagination
 
   componentDidMount() {
+    var path = window.location.href;
+    var dom = path.split('ideas/')[1];
+    if (dom) {
+      this.getfilteredideas(dom);
+    } else {
+      this.getallideas();
+    }
+  }
+
+  getallideas = () => {
     const ideasurl = mainurl + '/';
     fetch(ideasurl)
       .then(res => {
@@ -70,20 +80,7 @@ class Welcome extends Component {
   getfilteredideas(domain) {
     console.log(domain);
     if (domain === "ALL") {
-      const ideasurl = mainurl + '/';
-      console.log(domain);
-      fetch(ideasurl)
-        .then(res => {
-          return res.json();
-        })
-        .then(resdata => {
-          console.log(resdata);
-          this.setState({ records: resdata.recordlist });
-        })
-        .catch(err => {
-          console.log(err);
-        });
-
+      this.getallideas();
     } else {
       fetch(mainurl + '/idea/filterideas/' + domain)
         .then(res => {
@@ -259,14 +256,19 @@ class Welcome extends Component {
           {ideas}
           <div className={classes.side}>
             <div className={classes.plane}>
-              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "ALL")} >#ALL</a> <br />
-              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Web-Mobile Development")} >#Web/mobile Dev</a> <br />
-              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Blockchain-Crypto")} >#blockchain/crypto</a>  <br />
-              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Hardware-Elctronics")} >#Elctronics</a>  <br />
-              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Social")} >#Social</a>
-              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Gaame Development")} >#Game-Dev</a>
-              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "AI-ML")} >#AI/ML</a>
-              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "IOT")} >#IOT</a>
+              <div className={classes.innerBox}>
+                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "ALL")} >#ALL</a> <br />
+                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Web-Mobile Development")} >#Web/mobile Dev</a> <br />
+                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Blockchain-Crypto")} >#blockchain/crypto</a>  <br />
+                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Hardware-Elctronics")} >#Elctronics</a>  <br />
+                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Social")} >#Social</a><br />
+                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Gaame Development")} >#Game-Dev</a> <br />
+                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "AI-ML")} >#AI/ML</a>
+                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "IOT")} >#IOT</a>
+              </div>
+              <div className={classes.innerBox2}>
+
+              </div>
             </div>
           </div>
         </div>

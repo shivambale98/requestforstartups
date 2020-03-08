@@ -1,13 +1,14 @@
 import classes from './Menu.module.css';
 import { Link } from 'react-router-dom';
-import React, { Component } from 'react';
-
+import React, { Component, Fragment } from 'react';
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom'
 import Logo from './vertLogo';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import Cookies from 'js-cookie';
+import Mobilelogo from './mobilelogo';
 import MenuIcon from '@material-ui/icons/Menu';
 const jwt = require('jsonwebtoken');
 const mainurl = require('../../links');
@@ -59,6 +60,7 @@ class Menu extends Component {
             }
         }
     }
+    //------------------------------mobile menu----------------------------------------------------------//
 
     addideabut = () => {
         console.log(this.props.user);
@@ -73,18 +75,47 @@ class Menu extends Component {
         }
     };
 
+    addideabutmobile = () => {
+        console.log(this.props.user);
+        if (this.props.user) {
+            return <Nav.Link href="/addidea">ADD-IDEA</Nav.Link>
+        }
+    };
+
+    //------------------------------mobile menu---------------------------------------------------------//   
     render() {
         return (
-            <div className={classes.Menustyle}>
-                <Logo className={classes.logs} />
-                {this.renderRedirect()}
-                <ul className={classes.ul}>
-                    <Link className={classes.links} to='/' ><button className={classes.nots}><li className={classes.li}> <HomeOutlinedIcon style={{ fontSize: 50 }} />  HOME  </li> </button></Link>
-                    <Link className={classes.links} to={this.state.loglink}> <button onClick={this.logout} className={classes.nots}> <li className={classes.li}> <LockOpenIcon style={{ fontSize: 50 }} /> {this.state.logstatus} </li> </button></Link>
-                </ul>
-                {this.addideabut()}
-            </div>
+            <Fragment>
+                {/* mobile navbar */}
+                <div className={classes.mobile}>
+                    {this.renderRedirect()}
+                    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                        <Navbar.Brand href="#home">
+                            <Mobilelogo />
+                        </Navbar.Brand>
+                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                        <Navbar.Collapse id="responsive-navbar-nav">
+                            <Nav className="mr-auto">
+                                <Nav.Link href="/">HOME</Nav.Link>
+                                <Nav.Link href={this.state.loglink} onClick={this.logout}>{this.state.logstatus}</Nav.Link>
+                                {this.addideabutmobile()}
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Navbar>
 
+                </div>
+
+                {/* mobile navbar */}
+                <div className={classes.Menustyle}>
+                    <Logo className={classes.logs} />
+                    {this.renderRedirect()}
+                    <ul className={classes.ul}>
+                        <Link className={classes.links} to='/' ><button className={classes.nots}><li className={classes.li}> <HomeOutlinedIcon style={{ fontSize: 50 }} />  HOME  </li> </button></Link>
+                        <Link className={classes.links} to={this.state.loglink}> <button onClick={this.logout} className={classes.nots}> <li className={classes.li}> <LockOpenIcon style={{ fontSize: 50 }} /> {this.state.logstatus} </li> </button></Link>
+                    </ul>
+                    {this.addideabut()}
+                </div>
+            </Fragment>
         )
     }
 

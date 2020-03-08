@@ -11,7 +11,7 @@
 .container{
   display: block;
   width: 84%;
-  height: 17vh;
+  height: 15vh;
   box-sizing: border-box;
   border: 0.5px ;
   border:  0.5px  solid #e0e0e0;
@@ -22,6 +22,7 @@
   display: flex;
   flex-direction: row;
   margin-top: 0px;
+  position: static;
 }
 
 
@@ -41,9 +42,9 @@
 .container ul li {
   list-style: none;
   text-transform: uppercase;
-  color: #1a237e;
+  color: rgba(0, 0, 0, 0.7);
   margin-left: 60px;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .links{
@@ -51,7 +52,7 @@
   text-transform: uppercase;
   color: rgba(0, 0, 0, 0.7);
   margin-left: 0px;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .links:hover{
@@ -70,15 +71,16 @@
   display: table-cell;
   position: sticky;
   background-color:rgba(158, 158, 158, 0.1);
+  overflow-x: scroll;
 }
 
 .plane{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-style: oblique;
-  color: #1a237e;
+  color: #424242;
   font-size: 18px;
   font-weight: bold;
-  padding-top: 10px ;
+ /* padding-top: 10px ; */
   margin-top: 0px;
   justify-items: center;
   justify-content: center;
@@ -86,26 +88,32 @@
 }
 
 .fields{
-  color: #eeeeee;
+  color: #424242;
   padding-left: 15px;
   padding-right: 10px;
-  padding-top: 30px;
+  padding-top: 3px;
 }
 
 .fields:hover{
-  color: #1a237e;
   text-decoration: none;
 }
 
 .innerBox{
   box-sizing: border-box;
   border-radius: 10px;
-  background-color:#757575;
+  background-color:#bdbdbd;
   margin: 15px;
-  height: 80vh;
+  height: 50vh;
   padding: 15px;
 }
-
+.innerBox2{
+  box-sizing: border-box;
+  border-radius: 10px;
+  background-color:#bdbdbd;
+  margin: 15px;
+  height: 20vh;
+  padding: 15px;
+}
 
 /*----------------------------mobile version-----------------------------------------*/
 

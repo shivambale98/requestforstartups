@@ -13,9 +13,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 
 const jwt = require('jsonwebtoken');
-
-const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-//const mainurl = 'http://localhost:5000';//
+var decodedtoken, upvotecolor = 'rgba(3, 3, 3, 0.3)';
+const mainurl = require('../../links');
 
 var recordlist = [];
 
@@ -25,7 +24,8 @@ class Welcome extends Component {
     records: [],
     link: '',
     redirect: false,
-    id: ''
+    id: '',
+    loggedin: false
   };
   //pagination
   //const [currentPage, setCurrentPage] = useState(1);
@@ -56,6 +56,68 @@ class Welcome extends Component {
         console.log(err);
       });
 
+    const token = Cookies.get('jwttoken');
+    try {
+      decodedtoken = jwt.verify(token, 'heyphil123');
+    } catch (err) {
+      this.setState({ loggedin: false });
+    }
+    if (!decodedtoken) {
+      this.setState({ loggedin: false });
+    } else {
+      this.setState({ loggedin: true });
+    }
+
+  }
+
+
+  getfilteredideas(domain) {
+    console.log(domain);
+    if (domain === "ALL") {
+      const ideasurl = mainurl + '/';
+      console.log(domain);
+      fetch(ideasurl)
+        .then(res => {
+          return res.json();
+        })
+        .then(resdata => {
+          console.log(resdata);
+          this.setState({ records: resdata.recordlist });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+    } else {
+      fetch(mainurl + '/idea/filterideas/' + domain)
+        .then(res => {
+          return res.json();
+        })
+        .then(resdata => {
+          this.setState({ records: resdata.recordlist });
+          //console.log(resjson);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+    }
+
+  }
+
+  orderideas(type) {
+    fetch(mainurl + '/idea/orderideas/' + type)
+      .then(res => {
+        return res.json();
+      })
+      .then(resdata => {
+        this.setState({ records: resdata.recordlist });
+        console.log(resdata);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
   }
 
   renderRedirect = () => {
@@ -67,6 +129,7 @@ class Welcome extends Component {
   upvotebuttonHandler = recordid => {
     const token = Cookies.get('jwttoken');
     var decodedtoken;
+    var loggedin;
     try {
       decodedtoken = jwt.verify(token, 'heyphil123');
     } catch (err) {
@@ -76,15 +139,18 @@ class Welcome extends Component {
       this.setState({
         loggedin: true
       });
+      loggedin = true;
     } else {
       this.setState({
         loggedin: false
       });
+      loggedin = false;
     }
-    if (this.state.loggedin) {
+
+    if (loggedin) {
       var formdate = new FormData();
-      formdate.append('userid', decodedtoken.userid);
-      if (this.state.loggedin) {
+      formdate.append('userid', decodedtoken.record_id);
+      if (loggedin) {
         const url = mainurl + "/idea/upvote/" + recordid;
         fetch(url, {
           method: 'POST',
@@ -97,7 +163,7 @@ class Welcome extends Component {
             var { record } = resdata;
             var { id } = record;
             var { link } = resdata;
-            console.log(resdata);
+            //console.log(resdata);
             var temp = [];
             this.state.records.map(recordt => {
               if (recordt.id === id) {
@@ -109,7 +175,7 @@ class Welcome extends Component {
                 temp.push(recordt);
               }
             });
-            console.log(temp);
+            //console.log(temp);
 
             this.setState({ records: temp });
             this.setState({ link: link });
@@ -146,43 +212,64 @@ class Welcome extends Component {
 
     console.log(this.state.records);
     const ideas = this.state.records.map((record, index) => {
-      return <Ideaforms
-        email={record.data.userlu || record.data.screen_name}
-        problem={record.data.Problem}
-        upvote={record.data.upvote}
-        onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
-        onComment={this.onComment.bind(this, record.id)}
-      />
+      if (!this.state.loggedin) {
+        return <Ideaforms
+          name={record.data.userlu || record.data.screen_name}
+          problem={record.data.Problem}
+          upvote={record.data.upvote}
+          onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
+          onComment={this.onComment.bind(this, record.id)}
+          pic={record.data.Piclu}
+        />
+      } else {
+        if (record.data.whoupvotelu && record.data.whoupvotelu.includes(decodedtoken.user.user_id)) {
+          var upvotecolor = 'rgba(244, 3, 3, 0.3)';
+        }
+        return <Ideaforms
+          name={record.data.userlu || record.data.screen_name}
+          problem={record.data.Problem}
+          upvote={record.data.upvote}
+          onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
+          onComment={this.onComment.bind(this, record.id)}
+          pic={record.data.Piclu}
+          upvotecolor={upvotecolor}
+        />
+      }
     });
 
     return (
       <Aux>
-<div className={classes.main}>        
-  {this.renderRedirect()}
+        <div className={classes.main}>
+          {this.renderRedirect()}
+          <div className={classes.container}>
+            <ul className={classes.ul}>
+              <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'NEWEST')}> #NEWEST </a></li>
+              <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'TRENDING')}> #TRENDING </a></li>
+              <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'TOP')}> #TOP </a></li>
+            </ul>
+          </div>
+          {ideas}
+          <div className={classes.side}>
+            <div className={classes.plane}>
+            <div className={classes.innerBox}>
+              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "ALL")} >#ALL</a> <br />
+              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Web-Mobile Development")} >#Web/mobile Dev</a> <br />
+              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Blockchain-Crypto")} >#blockchain/crypto</a>  <br />
+              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Hardware-Elctronics")} >#Elctronics</a>  <br />
+              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Social")} >#Social</a><br />
+              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Gaame Development")} >#Game-Dev</a> <br />
+              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "AI-ML")} >#AI/ML</a>
+              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "IOT")} >#IOT</a>
+              </div>
+              <div className={classes.innerBox2}>
+              
+              </div>
+            </div>
+            </div>
+        </div>
 
-  <div className={classes.container}>
-  
-     <ul className={classes.ul}>
-     <li className={classes.li}><Link className={classes.links}>  #NEWEST </Link></li>
-     <li className={classes.li}><Link className={classes.links}>  #TRENDING </Link></li>
-     <li className={classes.li}><Link className={classes.links}> #TOP </Link></li>
-   </ul>
-  </div>
-  {ideas} 
-  <div className={classes.side}>
-    <div className={classes.plane}>
-      <div className={classes.innerBox}>
-    <a className={classes.fields} href="#">#Web/mobile Dev</a> <br />
-    <a className={classes.fields} href="#">#blockchain/crypto</a>  <br />
-    <a className={classes.fields} href="#">#Elctronics</a>  <br />
-    <a className={classes.fields} href="#">#Social</a>  
-    <a className={classes.fields} href="#">#Game-Dev</a>
-    </div>  
-    </div>
-  </div>
-</div>
+      </Aux>
 
-</Aux>
     );
   }
 }

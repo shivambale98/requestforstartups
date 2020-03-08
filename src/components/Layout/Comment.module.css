@@ -102,7 +102,7 @@
   font-weight: lighter;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-style: inherit;
-  color: #1a237e;
+  color: rgba(0, 0, 0, 0.7);
   text-align: left;
   font-size: 16px;
   margin-left: 0px;
@@ -271,7 +271,7 @@
   padding-left: 15px;
   padding-right: 10px;
   padding-top: 20px;
-  color: #e0e0e0;
+  color: #424242;
 }
 
 .fields:hover{
@@ -282,7 +282,7 @@
 .innerBox{
   box-sizing: border-box;
   border-radius: 10px;
-  background-color:#757575;
+  background-color:#bdbdbd;
   margin: 15px;
   height: 80vh;
   padding: 15px;

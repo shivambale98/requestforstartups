@@ -5,10 +5,9 @@ import Aux from '../../hoc/Auxiliary';
 import { Link } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Button } from 'react-bootstrap';
-
 import Cookies from 'js-cookie';
 import classes from './Addidea.module.css';
-
+const jwt = require('jsonwebtoken');
 const mainurl = require('../../links');
 
 class Addidea extends Component {
@@ -22,16 +21,42 @@ class Addidea extends Component {
     this.setState({ token: token });
   }
 
+  userprofile = () => {
+    const token = Cookies.get('jwttoken');
+    var decodedtoken;
+    try {
+      decodedtoken = jwt.verify(token, 'heyphil123');
+    } catch (err) {
+      console.log(err);
+    }
+    if (decodedtoken) {
+      return <div className={classes.innerBox2}>
+        <h5 className={classes.heading}>Profile</h5>
+        <div >
+          <img className={classes.img}
+            src={decodedtoken.user.profile_image_url}
+            alt="image"
+            width={30}
+            height={30}
+          />
+        </div>
+        <p className={classes.heading1}>{decodedtoken.user.screen_name}: loggedin</p>
+      </div>
+
+    }
+  };
+
+
   render() {
     return (
       <Aux>
-             <div className={classes.containers}>
-            <ul className={classes.ul}>
-              <li className={classes.li}><Link className={classes.links}><ArrowBackIcon style={{ fontSize: 40 }} />  BACK </Link></li>
-            </ul>
-          </div>
+        <div className={classes.containers}>
+          <ul className={classes.ul}>
+            <li className={classes.li}><Link to='/' className={classes.links}><ArrowBackIcon style={{ fontSize: 40 }} />  BACK </Link></li>
+          </ul>
+        </div>
         <div className={classes.main}>
-        
+
           <div className={classes.form}>
             <MDBContainer>
               <MDBRow>
@@ -42,11 +67,11 @@ class Addidea extends Component {
                     <label className={classes.lab}>Select the domain of your startup</label>
                     <select class="browser-default custom-select mb-4" name='domain' required>
                       <option value="" disabled selected hidden>Select domain</option>
-                      <option value="AI/ML" >AI/ML</option>
+                      <option value="AI-ML" >AI/ML</option>
                       <option value="IOT">IOT</option>
-                      <option value="Web/Mobile Development">Web/Mobile Development</option>
-                      <option value="Blockchain/Crypto">Blockchain/Crypto</option>
-                      <option value="Hardware/Electronics">Hardware/Electronics</option>
+                      <option value="Web-Mobile Development">Web/Mobile Development</option>
+                      <option value="Blockchain-Crypto">Blockchain/Crypto</option>
+                      <option value="Hardware-Electronics">Hardware/Electronics</option>
                       <option value="Social">Social</option>
                       <option value="Game Development">Game Development</option>
                     </select>
@@ -72,27 +97,19 @@ class Addidea extends Component {
           <div className={classes.side}>
             <div className={classes.innerBox}>
               <div className={classes.plane}>
-                <a className={classes.fields} href="#">#Web/mobile Dev</a> <br />
-                <a className={classes.fields} href="#">#blockchain/crypto</a>  <br />
-                <a className={classes.fields} href="#">#Elctronics</a>  <br />
-                <a className={classes.fields} href="#">#Social</a>   <br />
-                <a className={classes.fields} href="#">#Game-Dev</a>  <br />
-                <a className={classes.fields} href="#">#AI/ML</a>
-                <a className={classes.fields} href="#">#IOT</a>
+                <a className={classes.fields} ><Link to='/ideas/ALL'>#ALL</Link></a> <br />
+                <a className={classes.fields} ><Link to='/ideas/Web-Mobile Development'>#Web/mobile Dev</Link></a> <br />
+                <a className={classes.fields} ><Link to='/ideas/Blockchain-Crypto'>#Blockchain/crypto</Link></a>  <br />
+                <a className={classes.fields} ><Link to='/ideas/Hardware-Elctronics'>#Hardware/Elctronics</Link></a>  <br />
+                <a className={classes.fields} ><Link to='/ideas/Social'>#Social</Link></a><br />
+                <a className={classes.fields} ><Link to='/ideas/Gaame Development'>#Game-Dev</Link></a><br />
+                <a className={classes.fields} ><Link to='/ideas/AI-ML'>#AI-ML</Link></a>
+                <a className={classes.fields} ><Link to='/ideas/IOT'>#IOT</Link></a>
               </div>
             </div>
-            <div className={classes.innerBox2}>
-                <h5 className={classes.heading}>Profile</h5>
-              <div >
-                <img className={classes.img23}
-                  src={this.state.userpic}
-                  alt="image"
-                  width={30}
-                  height={30}
-                />
-              </div>
-             <p className={classes.heading1}> User Name: Shivam Bale </p>
-              </div>
+            <div >
+              {this.userprofile()}
+            </div>
           </div>
         </div>
       </Aux>

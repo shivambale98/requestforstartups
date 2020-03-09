@@ -4,8 +4,27 @@
     display: table;
     width: 84%;
 }
+a:link {
+  color: rgb(73, 73, 73);
+}
+a:hover {
+   color: rgb(73, 73, 73);
+}
+a:visited {
+  color: rgb(73, 73, 73);
+}
 
-
+.img{
+  position: absolute;
+    height: 70px;
+    width: 70px;
+    margin-left: 75px;
+    margin-top: 50px;
+    margin-bottom: 0px;
+    position: absolute;
+     border: 3px solid rgba(62, 69, 81, 0.3);
+     border-radius: 50px;
+  }
 
 .idea{
     background:#c5cae9 ;  

@@ -61,7 +61,9 @@ class App extends Component {
   render() {
 
     const menu = () => {
-      return <Menu user={this.state.user} />
+      return <Menu user={this.state.user}
+        updatestate={this.updatestate}
+      />
 
       if (this.state.menuOpen) {
         menu = <Menu />;
@@ -80,11 +82,12 @@ class App extends Component {
 
     return (
       <Fragment>
-       
+
         <BrowserRouter>
           <Route component={menu}
             drawerClickedHandler={this.drawerToggleClickHandler} />
           <Route path="/" exact component={welcome} />
+          <Route path="/ideas" component={welcome} />
           <Route path="/login" component={login} />
           <Route path="/addidea" component={Addidea} />
           <Route path='/logout' component={welcome} />

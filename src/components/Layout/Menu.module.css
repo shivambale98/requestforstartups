@@ -53,6 +53,7 @@
     margin-left: 0px;
     font-size: 20px;
     padding-top: 5%;
+    width: 100%;
 }
 .links:hover{
     color: #e0e0e0;
@@ -113,8 +114,8 @@
     border: white;
     background-color: white;
     border-radius: 15px;
-   height: 65px;
-   width: 78%;
+   height: 75px;
+   width: 80%;
    align-items: center;
    margin-left: 22px;
     margin-top: 0px;

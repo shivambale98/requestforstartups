@@ -1,7 +1,7 @@
 import classes from './Menu.module.css';
 import { Link } from 'react-router-dom';
 import React, { Component, Fragment } from 'react';
-import { Nav, Navbar,  NavDropdown } from 'react-bootstrap';
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom'
 import Logo from './vertLogo';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
@@ -18,7 +18,9 @@ class Menu extends Component {
         loglink: '/login',
         logstatus: 'Login',
         token: undefined,
-        redirect: false
+        homeredirect: false,
+        addidearedirect: false,
+        logredirect: false
     };
 
     componentDidMount() {
@@ -26,76 +28,94 @@ class Menu extends Component {
 
         if (this.props.user) {
             this.setState({
-                loglink: '/logout',
+                loglink: '/',
                 logstatus: 'Logout',
                 token: this.props.user,
-                redirect: true
+                logredirect: false
             });
             //loggedin so re-render
         }
     }
 
     renderRedirect = () => {
-        if (this.state.redirect) {
+        if (this.state.logredirect) {
             return <Redirect to='/' />
         }
     }
 
     logout = () => {
-        if (this.state.loglink === '/logout') {
+        if (this.state.logstatus === 'Logout') {
             if (this.state.token) {
                 //console.log('hey');
                 Cookies.remove('jwttoken');
                 this.setState({
                     loglink: '/login',
                     logstatus: 'Login',
-                    redirect: true,
+                    logredirect: true,
                     token: undefined
                 });
+                this.props.updatestate(undefined);
                 //this.props.history.push('/');
                 //rerender
             }
         }
     }
-//------------------------------mobile menu----------------------------------------------------------//
+    //------------------------------mobile menu----------------------------------------------------------//
 
-//------------------------------mobile menu---------------------------------------------------------//   
-    render() {
-        //console.log(this.state);
-        return (
-        <Fragment>
- {/* mobile navbar */}
- <div className={classes.mobile}>
- <Navbar  collapseOnSelect expand="lg" bg="dark" variant="dark">
-  <Navbar.Brand href="#home">
-      <Mobilelogo />
-      </Navbar.Brand>
-  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-  <Navbar.Collapse id="responsive-navbar-nav">
-    <Nav className="mr-auto">
-      <Nav.Link href="#features">HOME</Nav.Link>
-      <Nav.Link href="#pricing">lOGIN</Nav.Link>
-      <Nav.Link href="#pricing">ADD-IDEA</Nav.Link>
-    </Nav>
-  </Navbar.Collapse>
-</Navbar>
+    addideabut = () => {
+        console.log(this.props.user);
+        if (this.props.user) {
 
-</div>
-
-{/* mobile navbar */}
-            <div className={classes.Menustyle}>
-               <Logo className={classes.logs} />
-                {this.renderRedirect()}
-                <ul className={classes.ul}>
-                    <button className={classes.nots}><li className={classes.li}> <Link className={classes.links} to="/"><HomeOutlinedIcon style={{ fontSize: 50 }} />  HOME </Link> </li> </button>
-                    <button className={classes.nots}> <li className={classes.li}> <Link className={classes.links} onClick={this.logout} to={this.state.loglink}><LockOpenIcon style={{ fontSize: 50 }} /> {this.state.logstatus}</Link> </li> </button>
-                </ul>
+            return <Link to='/addidea' className={classes.links} >
                 <button className={classes.addidea}>
                     <EmojiObjectsIcon style={{ fontSize: 50 }} />
-                    <Link className={classes.links} to="/addidea">ADD-IDEA </Link>
+                    ADD-IDEA
                 </button>
-            </div>
-        </Fragment>
+            </Link >
+        }
+    };
+
+    addideabutmobile = () => {
+        console.log(this.props.user);
+        if (this.props.user) {
+            return <Nav.Link href="/addidea">ADD-IDEA</Nav.Link>
+        }
+    };
+
+    //------------------------------mobile menu---------------------------------------------------------//   
+    render() {
+        return (
+            <Fragment>
+                {/* mobile navbar */}
+                <div className={classes.mobile}>
+                    {this.renderRedirect()}
+                    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                        <Navbar.Brand href="#home">
+                            <Mobilelogo />
+                        </Navbar.Brand>
+                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                        <Navbar.Collapse id="responsive-navbar-nav">
+                            <Nav className="mr-auto">
+                                <Nav.Link href="/">HOME</Nav.Link>
+                                <Nav.Link href={this.state.loglink} onClick={this.logout}>{this.state.logstatus}</Nav.Link>
+                                {this.addideabutmobile()}
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Navbar>
+
+                </div>
+
+                {/* mobile navbar */}
+                <div className={classes.Menustyle}>
+                    <Logo className={classes.logs} />
+                    {this.renderRedirect()}
+                    <ul className={classes.ul}>
+                        <Link className={classes.links} to='/' ><button className={classes.nots}><li className={classes.li}> <HomeOutlinedIcon style={{ fontSize: 50 }} />  HOME  </li> </button></Link>
+                        <Link className={classes.links} to={this.state.loglink}> <button onClick={this.logout} className={classes.nots}> <li className={classes.li}> <LockOpenIcon style={{ fontSize: 50 }} /> {this.state.logstatus} </li> </button></Link>
+                    </ul>
+                    {this.addideabut()}
+                </div>
+            </Fragment>
         )
     }
 

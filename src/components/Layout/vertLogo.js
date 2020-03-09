@@ -4,8 +4,8 @@ import classes from './vertLogo.module.css';
 
 
 const logo = (props) => (
-    <div>
-        <img  className={classes.Logo} src={nsLogo} alt="NS_Logo" />
+    <div className={classes.Logo}>
+        <img src={nsLogo} alt="NS_Logo" />
     </div>
 );
 

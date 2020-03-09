@@ -10,6 +10,7 @@ import Menu from './Menu';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
+import { Modal, ModalBody, ModalHeader } from "shards-react";
 
 
 const jwt = require('jsonwebtoken');
@@ -25,7 +26,8 @@ class Welcome extends Component {
     link: '',
     redirect: false,
     id: '',
-    loggedin: false
+    loggedin: false,
+    showupvotemodel: false
   };
   //pagination
   //const [currentPage, setCurrentPage] = useState(1);
@@ -43,6 +45,17 @@ class Welcome extends Component {
   //pagination
 
   componentDidMount() {
+    var path = window.location.href;
+    var dom = path.split('ideas/')[1];
+    if (dom) {
+      this.getfilteredideas(dom);
+    } else {
+      this.getallideas();
+    }
+
+  }
+
+  getallideas = () => {
     const ideasurl = mainurl + '/';
     fetch(ideasurl)
       .then(res => {
@@ -56,13 +69,7 @@ class Welcome extends Component {
         console.log(err);
       });
 
-    const token = Cookies.get('jwttoken');
-    try {
-      decodedtoken = jwt.verify(token, 'heyphil123');
-    } catch (err) {
-      this.setState({ loggedin: false });
-    }
-    if (!decodedtoken) {
+    if (!this.props.user) {
       this.setState({ loggedin: false });
     } else {
       this.setState({ loggedin: true });
@@ -74,20 +81,7 @@ class Welcome extends Component {
   getfilteredideas(domain) {
     console.log(domain);
     if (domain === "ALL") {
-      const ideasurl = mainurl + '/';
-      console.log(domain);
-      fetch(ideasurl)
-        .then(res => {
-          return res.json();
-        })
-        .then(resdata => {
-          console.log(resdata);
-          this.setState({ records: resdata.recordlist });
-        })
-        .catch(err => {
-          console.log(err);
-        });
-
+      this.getallideas();
     } else {
       fetch(mainurl + '/idea/filterideas/' + domain)
         .then(res => {
@@ -185,7 +179,10 @@ class Welcome extends Component {
           });
 
       }
+    } else {
+      this.setState({ showupvotemodel: !this.state.showupvotemodel });
     }
+
   }
 
   onComment = (id) => {
@@ -195,6 +192,33 @@ class Welcome extends Component {
     });
     //this.props.history.push();
   }
+
+
+  userprofile = () => {
+    const token = Cookies.get('jwttoken');
+    var decodedtoken;
+    try {
+      decodedtoken = jwt.verify(token, 'heyphil123');
+    } catch (err) {
+      console.log(err);
+    }
+    if (decodedtoken) {
+      return <div className={classes.innerBox2}>
+        <h5 className={classes.heading}>Profile</h5>
+        <div >
+          <img className={classes.img}
+            src={decodedtoken.user.profile_image_url}
+            alt="image"
+            width={30}
+            height={30}
+          />
+        </div>
+        <p className={classes.heading1}>{decodedtoken.user.screen_name}: loggedin</p>
+      </div>
+
+    }
+  };
+
 
   toggleCollapse = collapseID => () =>
     this.setState(prevState => ({
@@ -210,7 +234,8 @@ class Welcome extends Component {
       />
     );
 
-    console.log(this.state.records);
+
+    //console.log(this.state.records);
     const ideas = this.state.records.map((record, index) => {
       if (!this.state.loggedin) {
         return <Ideaforms
@@ -222,7 +247,7 @@ class Welcome extends Component {
           pic={record.data.Piclu}
         />
       } else {
-        if (record.data.whoupvotelu && record.data.whoupvotelu.includes(decodedtoken.user.user_id)) {
+        if (record.data.whoupvotelu && record.data.whoupvotelu.includes(this.props.user.user.user_id)) {
           var upvotecolor = 'rgba(244, 3, 3, 0.3)';
         }
         return <Ideaforms
@@ -241,6 +266,11 @@ class Welcome extends Component {
       <Aux>
         <div className={classes.main}>
           {this.renderRedirect()}
+          <Modal open={this.state.showupvotemodel} toggle={this.upvotebuttonHandler.bind(this)}>
+            <ModalHeader>Login Error</ModalHeader>
+            <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
+            <ModalBody><Link to='/login'>login</Link> to upvote</ModalBody>
+          </Modal>
           <div className={classes.container}>
             <ul className={classes.ul}>
               <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'NEWEST')}> #NEWEST </a></li>
@@ -251,30 +281,21 @@ class Welcome extends Component {
           {ideas}
           <div className={classes.side}>
             <div className={classes.plane}>
-            <div className={classes.innerBox}>
-              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "ALL")} >#ALL</a> <br />
-              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Web-Mobile Development")} >#Web/mobile Dev</a> <br />
-              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Blockchain-Crypto")} >#blockchain/crypto</a>  <br />
-              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Hardware-Elctronics")} >#Elctronics</a>  <br />
-              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Social")} >#Social</a><br />
-              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Gaame Development")} >#Game-Dev</a> <br />
-              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "AI-ML")} >#AI/ML</a>
-              <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "IOT")} >#IOT</a>
+              <div className={classes.innerBox}>
+                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "ALL")} >#ALL</a> <br />
+                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Web-Mobile Development")} >#Web/mobile Dev</a> <br />
+                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Blockchain-Crypto")} >#blockchain/crypto</a>  <br />
+                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Hardware-Elctronics")} >#Elctronics</a>  <br />
+                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Social")} >#Social</a><br />
+                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Gaame Development")} >#Game-Dev</a> <br />
+                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "AI-ML")} >#AI/ML</a>
+                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "IOT")} >#IOT</a>
               </div>
-              <div className={classes.innerBox2}>
-                <h5 className={classes.heading}>Profile</h5>
-              <div >
-                <img className={classes.img}
-                  src={this.state.userpic}
-                  alt="image"
-                  width={30}
-                  height={30}
-                />
-              </div>
-             <p className={classes.heading1}> User Name : Shivam Bale </p>
+              <div>
+                {this.userprofile()}
               </div>
             </div>
-            </div>
+          </div>
         </div>
 
       </Aux>

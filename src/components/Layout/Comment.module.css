@@ -537,6 +537,17 @@ position: absolute;
    border-radius: 50px;
 }
 
+.img23{
+  height: 70px;
+  width: 70px;
+  margin-left: 6px;
+  margin-top: 15px;
+  margin-bottom: 0px;
+  position: absolute;
+   border: 3px solid rgba(62, 69, 81, 0.3);
+   border-radius: 50px;
+}
+
 
 .ThumbsUp{
   margin-left: 20%;

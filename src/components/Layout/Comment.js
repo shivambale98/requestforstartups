@@ -254,7 +254,7 @@ class Comment extends Component {
           <div className={classes.righttoolbar}>
             <div className={classes.parent}>
               <div >
-                <img className={classes.img}
+                <img className={classes.img23}
                   src={this.state.userpic}
                   alt="image"
                   width={70}

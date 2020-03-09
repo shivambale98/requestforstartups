@@ -7,11 +7,12 @@ a:hover {
 a:visited {
   color: rgb(73, 73, 73);
 }
+
 .img{
   position: absolute;
     height: 70px;
     width: 70px;
-    margin-left: 75px;
+    margin-left: 105px;
     margin-top: 50px;
     margin-bottom: 0px;
     position: absolute;
@@ -50,7 +51,6 @@ a:visited {
   border:  0.5px  solid #e0e0e0;
   background: white;
   height: auto;
-  margin: 10px;
   margin-left: 25%; 
   margin-top: 15px;
   display: flex;
@@ -97,17 +97,6 @@ a:visited {
     
 }
 
-
-.img{
-  height: 70px;
-  width: 70px;
-  margin-left: 6%;
-  margin-top: 15px;
-  margin-bottom: 0px;
-  position: absolute;
-   border: 3px solid rgba(62, 69, 81, 0.3);
-   border-radius: 50px;
-}
 /* */
 .lab{
     font-weight: lighter;
@@ -353,7 +342,7 @@ a:visited {
   border-radius: 10px;
   background-color:#bdbdbd;
   margin-top: 15px;
-  margin-left: 18px;
+  margin-left: 25px;
   height: 40vh;
   width: 88%;
   display: flex;
@@ -422,7 +411,7 @@ position: absolute;
   height: 70px;
   width: 70px;
   margin-left: 120px;
-  margin-top: 50px;
+  margin-top: 25px;
   margin-bottom: 0px;
   position: absolute;
    border: 3px solid rgba(62, 69, 81, 0.3);
@@ -435,7 +424,7 @@ position: absolute;
   font-weight: bold;
   position: absolute;
   margin-top: 15px;
- margin-left: 85px;
+  margin-left: 105px;
 }
 
 .heading1{

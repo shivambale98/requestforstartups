@@ -45,10 +45,10 @@ border-radius: 10px;
 }
 @media only screen and (max-width:767px) {
     .loginstuff {
-        height: 75vh;
+        height: 60vh;
         width: 70vw;
         margin-left: 15%;
-        margin-top: 5%;
+        margin-top: 15%;
         box-sizing: border-box;
         border:  0.5px  solid #e0e0e0;
         position: absolute;
@@ -84,8 +84,8 @@ border-radius: 10px;
 
 .button{
     display: block;
-    margin-top: 35%;
-    margin-left: 35%;
+    margin-top: 50%;
+    margin-left: 17%;
     width: auto;
 
 }

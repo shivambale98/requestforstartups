@@ -266,9 +266,10 @@
 
   .form{
     width: 95%;
-    height: 68vh;
+    height: 75vh;
     background-color: #757575;
-    margin: 10px;
+    margin-top: 10px;
+    margin-left: 40px;
     box-sizing: border-box;
     border-radius: 10px;
 }

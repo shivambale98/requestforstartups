@@ -11,7 +11,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Modal, ModalBody, ModalHeader } from "shards-react";
-
+import FloatButton from './Floatbutton';
 
 const jwt = require('jsonwebtoken');
 var decodedtoken, upvotecolor = 'rgba(3, 3, 3, 0.3)';
@@ -269,15 +269,18 @@ class Welcome extends Component {
           <Modal open={this.state.showupvotemodel} toggle={this.upvotebuttonHandler.bind(this)}>
             <ModalHeader>Login Error</ModalHeader>
             <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
-            <ModalBody><Link to='/login'>login</Link> to upvote</ModalBody>
+            <ModalBody><Link className={classes.liks} to='/login'><b>login</b></Link> to upvote</ModalBody>
           </Modal>
           <div className={classes.container}>
             <ul className={classes.ul}>
               <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'NEWEST')}> #NEWEST </a></li>
               <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'TRENDING')}> #TRENDING </a></li>
               <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'TOP')}> #TOP </a></li>
+              <div className={classes.fabu}> 
+          </div>
             </ul>
           </div>
+          <FloatButton />
           {ideas}
           <div className={classes.side}>
             <div className={classes.plane}>
@@ -309,4 +312,3 @@ export default Welcome;
 
 
 
-//postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} //

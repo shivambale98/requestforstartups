@@ -140,6 +140,7 @@
     .mobile{
         display: block;
         margin: 0px;
+        width: 100%;
     }
       .Menustyle{
         display: none;
@@ -147,5 +148,13 @@
     .moblogo{
         width: auto;
         height: auto;
+    }
+    .mrauto{
+        margin-top: 5px;
+        margin-right: 2px;
+    }
+    .innerbox{
+        display: flex;
+        flex-direction: row;
     }
 }

@@ -1,0 +1,89 @@
+
+.buts{
+    display: none;
+}
+
+
+
+@media (max-width:786px) {
+    .buts{
+        display: block;
+        position: fixed; 
+        margin-left: 65%;
+        margin-top: 400px;
+        object-position: bottom;
+        opacity: 100%;
+    }
+    
+    .buts:active{
+        text-decoration: none;
+        list-style: none;
+    }
+}
+@media (height:731px) and (max-width:786px){
+.buts{
+    display: block;
+    position: fixed; 
+    margin-left: 65%;
+    margin-top: 500px;
+    object-position: bottom;
+    opacity: 100%;
+}
+
+.buts:active{
+    text-decoration: none;
+    list-style: none;
+}
+}
+
+@media (height:812px) and (max-width:786px){
+    .buts{
+        display: block;
+        position: fixed; 
+        margin-left: 65%;
+        margin-top: 540px;
+        object-position: bottom;
+        opacity: 100%;
+    }
+    
+    .buts:active{
+        text-decoration: none;
+        list-style: none;
+    }
+    }
+
+    @media (height:568px) and (max-width:786px) {
+        .buts{
+            display: block;
+            position: fixed; 
+            margin-left: 60%;
+            margin-top: 350px;
+            object-position: bottom;
+            opacity: 100%;
+        }
+        
+        .buts:active{
+            text-decoration: none;
+            list-style: none;
+        }
+        }
+
+
+        @media (height:783px) and (max-width:470px) {
+            .buts{
+                display: block;
+                position: fixed; 
+                margin-left: 65%;
+                margin-top: 550px;
+                object-position: bottom;
+                opacity: 100%;
+            }
+            
+            .buts:active{
+                text-decoration: none;
+                list-style: none;
+            }
+            }
+
+
+        

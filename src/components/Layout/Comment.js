@@ -8,7 +8,12 @@ import { Button, Modal, ModalBody, ModalHeader, ModalFooter, FormTextarea } from
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import AddCommentIcon from '@material-ui/icons/AddComment';
 import AddComment from './Addcomment';
+import Paper from '@material-ui/core/Paper';
 import Commentbox from './commentbox';
+import Container from '@material-ui/core/Container';
+
+
+
 const jwt = require('jsonwebtoken');
 const mainurl = require('../../links');
 var upvotecolor = 'rgba(3, 3, 3, 0.3)';
@@ -245,6 +250,7 @@ class Comment extends Component {
 
     return (
       <Aux>
+       
         <div className={classes.main}>
           <div className={classes.containers}>
             <ul className={classes.ul}>
@@ -262,9 +268,10 @@ class Comment extends Component {
                 />
               </div>
               <div className={classes.container}>
+                <Paper elevation={1}>
                 <p className={classes.head}>@{this.state.userlu}</p>
                 <p className={classes.title}>{this.state.Problem}</p>
-
+                </Paper>
               </div>
               <div className={classes.ThumbsUp}>
 
@@ -321,8 +328,10 @@ class Comment extends Component {
                 {this.userprofile()}
               </div>
             </div>
+           
           </div>
         </div>
+        
       </Aux>
     )
   }

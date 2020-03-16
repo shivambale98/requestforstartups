@@ -92,6 +92,7 @@ class Menu extends Component {
                     <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
                     <Navbar.Brand href="#home">
                             <Mobilelogo className={classes.moblogo} />
+                            
                      </Navbar.Brand>
                      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">

@@ -60,7 +60,7 @@ class Menu extends Component {
             }
         }
     }
-    //------------------------------mobile menu----------------------------------------------------------//
+    //------------------------------mobile menu start----------------------------------------------------------//
 
     addideabut = () => {
         console.log(this.props.user);
@@ -82,18 +82,19 @@ class Menu extends Component {
         }
     };
 
-    //------------------------------mobile menu---------------------------------------------------------//   
+    //------------------------------mobile menu over---------------------------------------------------------//   
     render() {
         return (
             <Fragment>
                 {/* mobile navbar */}
                 <div className={classes.mobile}>
                     {this.renderRedirect()}
-                    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                        <Navbar.Brand href="#home">
+                    <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
+                    <Navbar.Brand href="#home">
                             <Mobilelogo className={classes.moblogo} />
-                        </Navbar.Brand>
-                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                            
+                     </Navbar.Brand>
+                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="mr-auto">
                                 <Nav.Link href="/">HOME</Nav.Link>
@@ -102,9 +103,7 @@ class Menu extends Component {
                             </Nav>
                         </Navbar.Collapse>
                     </Navbar>
-
                 </div>
-
                 {/* mobile navbar */}
                 <div className={classes.Menustyle}>
                     <Logo className={classes.logs} />

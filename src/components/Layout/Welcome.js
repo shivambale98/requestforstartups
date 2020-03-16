@@ -265,7 +265,6 @@ class Welcome extends Component {
     return (
       <Aux>
         <div className={classes.main}>
-          {this.renderRedirect()}
           <Modal open={this.state.showupvotemodel} toggle={this.upvotebuttonHandler.bind(this)}>
             <ModalHeader>Login Error</ModalHeader>
             <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
@@ -278,7 +277,6 @@ class Welcome extends Component {
               <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'TOP')}> #TOP </a></li>
             </ul>
           </div>
-          {ideas}
           <div className={classes.side}>
             <div className={classes.plane}>
               <div className={classes.innerBox}>
@@ -292,7 +290,6 @@ class Welcome extends Component {
                 <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "IOT")} >#IOT</a>
               </div>
               <div>
-                {this.userprofile()}
               </div>
             </div>
           </div>

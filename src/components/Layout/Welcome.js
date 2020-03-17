@@ -63,7 +63,7 @@ class Welcome extends Component {
       })
       .then(resdata => {
         console.log(resdata);
-        this.setState({ records: resdata.recordlist });
+        this.setState({ records: resdata.ideas });
       })
       .catch(err => {
         console.log(err);
@@ -88,7 +88,7 @@ class Welcome extends Component {
           return res.json();
         })
         .then(resdata => {
-          this.setState({ records: resdata.recordlist });
+          this.setState({ records: resdata.ideas });
           //console.log(resjson);
         })
         .catch(err => {
@@ -105,7 +105,7 @@ class Welcome extends Component {
         return res.json();
       })
       .then(resdata => {
-        this.setState({ records: resdata.recordlist });
+        this.setState({ records: resdata.ideas });
         console.log(resdata);
       })
       .catch(err => {
@@ -121,64 +121,28 @@ class Welcome extends Component {
   }
 
   upvotebuttonHandler = recordid => {
-    const token = Cookies.get('jwttoken');
-    var decodedtoken;
-    var loggedin;
-    try {
-      decodedtoken = jwt.verify(token, 'heyphil123');
-    } catch (err) {
-      console.log(err);
+    var user;
+    if (this.props.user) {
+      var user = this.props.user.user;
     }
-    if (decodedtoken) {
-      this.setState({
-        loggedin: true
-      });
-      loggedin = true;
-    } else {
-      this.setState({
-        loggedin: false
-      });
-      loggedin = false;
-    }
-
-    if (loggedin) {
+    if (this.props.user) {
       var formdate = new FormData();
-      formdate.append('userid', decodedtoken.record_id);
-      if (loggedin) {
-        const url = mainurl + "/idea/upvote/" + recordid;
-        fetch(url, {
-          method: 'POST',
-          body: formdate
+      formdate.append('userid', this.props.user.record_id);
+      const url = mainurl + "/idea/upvote/" + recordid;
+      fetch(url, {
+        method: 'POST',
+        body: formdate
+      })
+        .then(res => {
+          return res.json();
         })
-          .then(res => {
-            return res.json();
-          })
-          .then(resdata => {
-            var { record } = resdata;
-            var { id } = record;
-            var { link } = resdata;
-            //console.log(resdata);
-            var temp = [];
-            this.state.records.map(recordt => {
-              if (recordt.id === id) {
-                var temprecord = recordt;
-                recordt = record;
-                recordt.email = temprecord.email;
-                temp.push(recordt);
-              } else {
-                temp.push(recordt);
-              }
-            });
-            //console.log(temp);
+        .then(resdata => {
+          this.setState({ records: resdata.ideas });
+        })
+        .catch(err => {
+          console.log(err);
+        });
 
-            this.setState({ records: temp });
-            this.setState({ link: link });
-          })
-          .catch(err => {
-            console.log(err);
-          });
-
-      }
     } else {
       this.setState({ showupvotemodel: !this.state.showupvotemodel });
     }
@@ -195,25 +159,18 @@ class Welcome extends Component {
 
 
   userprofile = () => {
-    const token = Cookies.get('jwttoken');
-    var decodedtoken;
-    try {
-      decodedtoken = jwt.verify(token, 'heyphil123');
-    } catch (err) {
-      console.log(err);
-    }
-    if (decodedtoken) {
+    if (this.props.user) {
       return <div className={classes.innerBox2}>
         <h5 className={classes.heading}>Profile</h5>
         <div >
           <img className={classes.img}
-            src={decodedtoken.user.profile_image_url}
+            src={this.props.user.user.profile_image_url}
             alt="image"
             width={30}
             height={30}
           />
         </div>
-        <p className={classes.heading1}>{decodedtoken.user.screen_name}: loggedin</p>
+        <p className={classes.heading1}>{this.props.user.user.screen_name}: loggedin</p>
       </div>
 
     }
@@ -237,34 +194,35 @@ class Welcome extends Component {
 
     //console.log(this.state.records);
     const ideas = this.state.records.map((record, index) => {
-      if (!this.state.loggedin) {
-        return <Ideaforms
-          name={record.data.userlu || record.data.screen_name}
-          problem={record.data.Problem}
-          upvote={record.data.upvote}
-          onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
-          onComment={this.onComment.bind(this, record.id)}
-          pic={record.data.Piclu}
-        />
-      } else {
-        if (record.data.whoupvotelu && record.data.whoupvotelu.includes(this.props.user.user.user_id)) {
-          var upvotecolor = 'rgba(244, 3, 3, 0.3)';
-        }
-        return <Ideaforms
-          name={record.data.userlu || record.data.screen_name}
-          problem={record.data.Problem}
-          upvote={record.data.upvote}
-          onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
-          onComment={this.onComment.bind(this, record.id)}
-          pic={record.data.Piclu}
-          upvotecolor={upvotecolor}
-        />
+      //if (!this.state.loggedin) {
+      return <Ideaforms
+        name={record.user.name}
+        problem={record.problem}
+        upvote={record.upvote}
+        onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
+        onComment={this.onComment.bind(this, record.id)}
+        pic={record.user.profilePicture}
+      />
+      //} else {
+      if (record.data.whoupvotelu && record.data.whoupvotelu.includes(this.props.user.user.user_id)) {
+        var upvotecolor = 'rgba(244, 3, 3, 0.3)';
       }
+      return <Ideaforms
+        name={record.user.name}
+        problem={record.problem}
+        upvote={record.upvote}
+        onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
+        onComment={this.onComment.bind(this, record.id)}
+        pic={record.user.profilePicture}
+        upvotecolor={upvotecolor}
+      />
+      //}
     });
 
     return (
       <Aux>
         <div className={classes.main}>
+          {this.renderRedirect()}
           <Modal open={this.state.showupvotemodel} toggle={this.upvotebuttonHandler.bind(this)}>
             <ModalHeader>Login Error</ModalHeader>
             <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
@@ -295,10 +253,10 @@ class Welcome extends Component {
               </div>
               <div>
               </div>
+              {this.userprofile()}
             </div>
           </div>
         </div>
-
       </Aux>
 
     );

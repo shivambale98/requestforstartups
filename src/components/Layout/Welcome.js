@@ -27,7 +27,9 @@ class Welcome extends Component {
     redirect: false,
     id: '',
     loggedin: false,
-    showupvotemodel: false
+    showupvotemodel: false,
+    addideamodel: false,
+    addidearedirect: false
   };
   //pagination
   //const [currentPage, setCurrentPage] = useState(1);
@@ -149,6 +151,21 @@ class Welcome extends Component {
 
   }
 
+  addideahandler() {
+    if (this.props.user) {
+      this.setState({ addidearedirect: true });
+    } else {
+      this.setState({ addideamodel: !this.state.addideamodel });
+    }
+
+  }
+
+  addidearedirecthandler = () => {
+    if (this.state.addidearedirect) {
+      return <Redirect to={'/addidea'} />
+    }
+  }
+
   onComment = (id) => {
     this.setState({
       id: id,
@@ -228,6 +245,13 @@ class Welcome extends Component {
             <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
             <ModalBody><Link className={classes.liks} to='/login'><b>login</b></Link> to upvote</ModalBody>
           </Modal>
+
+          <Modal open={this.state.addideamodel} toggle={this.addideahandler.bind(this)}>
+            <ModalHeader>Login Error</ModalHeader>
+            <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
+            <ModalBody><Link className={classes.liks} to='/login'><b>login</b></Link> to addIdea</ModalBody>
+          </Modal>
+
           <div className={classes.container}>
             <ul className={classes.ul}>
               <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'NEWEST')}> #NEWEST </a></li>
@@ -237,7 +261,8 @@ class Welcome extends Component {
               </div>
             </ul>
           </div>
-          <FloatButton />
+          <button onClick={this.addideahandler.bind(this)} >addidea</button>
+          {this.addidearedirecthandler()}
           {ideas}
           <div className={classes.side}>
             <div className={classes.plane}>

@@ -122,7 +122,7 @@ class Welcome extends Component {
     }
   }
 
-  upvotebuttonHandler = recordid => {
+  upvotebuttonHandler = (recordid, index) => {
     var user;
     if (this.props.user) {
       var user = this.props.user.user;
@@ -139,7 +139,16 @@ class Welcome extends Component {
           return res.json();
         })
         .then(resdata => {
-          this.setState({ records: resdata.ideas });
+          if (resdata.idea.upvote > this.state.records[index].upvote) {
+            var psudoupvoters = [{ id: this.props.user.record_id }];
+          } else {
+            var psudoupvoters = [{ id: 0 }];
+          }
+          var psudouser = this.state.records[index].user;
+          resdata.idea.user = psudouser;
+          resdata.idea.Upvoters = psudoupvoters;
+          this.state.records[index] = resdata.idea;
+          this.setState({ records: this.state.records });
         })
         .catch(err => {
           console.log(err);
@@ -193,16 +202,6 @@ class Welcome extends Component {
     }
   };
 
-  checkifincludes(upvoters) {
-    upvoters.forEach(voter => {
-      if (voter.id === this.props.user.record_id) {
-        var upvotecolor = 'rgba(244, 3, 3, 0.3)'
-        return upvotecolor;
-      }
-    });
-    return undefined;
-  };
-
   toggleCollapse = collapseID => () =>
     this.setState(prevState => ({
       collapseID: prevState.collapseID !== collapseID ? collapseID : ""
@@ -226,7 +225,7 @@ class Welcome extends Component {
           name={record.user.name}
           problem={record.problem}
           upvote={record.upvote}
-          onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
+          onUpvote={this.upvotebuttonHandler.bind(this, record.id, index)}
           onComment={this.onComment.bind(this, record.id)}
           pic={record.user.profilePicture}
         />
@@ -243,7 +242,7 @@ class Welcome extends Component {
           name={record.user.name}
           problem={record.problem}
           upvote={record.upvote}
-          onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
+          onUpvote={this.upvotebuttonHandler.bind(this, record.id, index)}
           onComment={this.onComment.bind(this, record.id)}
           pic={record.user.profilePicture}
           upvotecolor={upvotecolor}

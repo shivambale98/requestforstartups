@@ -13,9 +13,10 @@
 .img{
     height: 60px;
     width: 60px;
-    margin-left: 8px;
+    margin-left: 60%;
     margin-bottom: 0px;
-    position: relative;
+    margin-top: 0%;
+    position: absolute;
      border: 3px solid rgba(62, 69, 81, 0.3);
      border-radius: 50px;
 }

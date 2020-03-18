@@ -12,6 +12,11 @@ import { Link } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Modal, ModalBody, ModalHeader } from "shards-react";
 import FloatButton from './Floatbutton';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+
+
+
 
 const jwt = require('jsonwebtoken');
 var decodedtoken, upvotecolor = 'rgba(3, 3, 3, 0.3)';
@@ -261,8 +266,16 @@ class Welcome extends Component {
               </div>
             </ul>
           </div>
-          <button onClick={this.addideahandler.bind(this)} >addidea</button>
-          {this.addidearedirecthandler()}
+          <div className={classes.buts}>
+           <Fab 
+              color="primary" 
+              aria-label="add"
+              onClick={this.addideahandler.bind(this)}>
+             <AddIcon />
+           </Fab>
+           {this.addidearedirecthandler()}
+           </div>
+   
           {ideas}
           <div className={classes.side}>
             <div className={classes.plane}>
@@ -290,6 +303,10 @@ class Welcome extends Component {
 
 
 export default Welcome;
+
+
+
+
 
 
 

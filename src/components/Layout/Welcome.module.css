@@ -144,6 +144,12 @@ position: absolute;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-weight: bold;
 }
+
+.buts{
+  display: none;
+}
+
+
 /*----------------------------mobile version-----------------------------------------*/
 
 
@@ -200,5 +206,86 @@ width: 100%;
   margin-left: 0px;
   margin-top: 10px;
 }
+/*floating button css */
+.buts{
+  display: block;
+  position: fixed; 
+  margin-left: 65%;
+  margin-top: 90%;
+  object-position: bottom;
+  opacity: 100%;
 }
+
+.buts:active{
+  text-decoration: none;
+  list-style: none;
+} 
+}
+
+@media (height:731px) and (max-width:786px){
+  .buts{
+      display: block;
+      position: fixed; 
+      margin-left: 65%;
+      margin-top: 500px;
+      object-position: bottom;
+      opacity: 100%;
+  }
+  
+  .buts:active{
+      text-decoration: none;
+      list-style: none;
+  }
+  }
+  
+  @media (height:812px) and (max-width:786px){
+      .buts{
+          display: block;
+          position: fixed; 
+          margin-left: 65%;
+          margin-top: 500px;
+          object-position: bottom;
+          opacity: 100%;
+      }
+      
+      .buts:active{
+          text-decoration: none;
+          list-style: none;
+      }
+      }
+  
+      @media (height:568px) and (max-width:786px) {
+          .buts{
+              display: block;
+              position: fixed; 
+              margin-left: 60%;
+              margin-top: 350px;
+              object-position: bottom;
+              opacity: 100%;
+          }
+          
+          .buts:active{
+              text-decoration: none;
+              list-style: none;
+          }
+          }
+  
+  
+          @media (height:783px) and (max-width:470px) {
+              .buts{
+                  display: block;
+                  position: fixed; 
+                  margin-left: 65%;
+                  margin-top: 550px;
+                  object-position: bottom;
+                  opacity: 100%;
+              }
+              
+              .buts:active{
+                  text-decoration: none;
+                  list-style: none;
+              }
+              }
+  
+  
 

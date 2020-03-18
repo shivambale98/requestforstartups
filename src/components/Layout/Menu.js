@@ -103,10 +103,9 @@ class Menu extends Component {
                     {this.renderRedirect()}
                     <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
                         <Navbar.Brand href="/">
+                        {this.menulogo()}
                             <Mobilelogo className={classes.moblogo} />
-                            {this.menulogo()}
-
-
+                           
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">

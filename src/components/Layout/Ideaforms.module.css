@@ -5,13 +5,13 @@ body{
 
 
 .righttoolbar{
-    width:85%;
+    width:901px;
     height: auto;
     box-sizing: border-box;
     border-right:  0.5px  solid #e0e0e0;
     margin-bottom: 0px;
     display: flex;
-    margin-left: 15%; 
+    margin-left: 179px; 
 }
 
 .parent{
@@ -26,41 +26,43 @@ body{
 }
 
 .container{
-    box-sizing: border-box;
-    border:  0.5px  solid #e0e0e0;
-    background: white;
-    height: auto;
-    margin: 10px;
-    margin-left: 20%; 
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    justify-content: center;
-    box-sizing: border-box;
-    width:60%;
-    padding: 5px;
-    border-radius: 10px ;
+   box-sizing: border-box;
+   border:  0.5px  solid #e0e0e0;
+   background: white;
+   height: auto;
+   margin: 10px;
+   margin-left: 20%; 
+   margin-top: 15px;
+   display: flex;
+   flex-direction: column; 
+   align-items: left;
+   justify-content: center;
+   box-sizing: border-box;
+   width:60%;
+   padding: 5px;
+   border-radius: 10px ;
    background-color:  rgba(158, 158, 158, 0.1);
 }
 
 
 .title{
     font-weight: lighter;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
     font-style: inherit;
-    color: rgba(0, 0, 0, 0.7);
+    color:black;
     text-align: left;
-    font-size: 16px;
+    font-size: 18px;
+    margin-left: 5px;
 }
 .head {
     font-weight: bold;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Times New Roman', Times, serif;
     font-style: inherit;
     color: #1a237e;
     text-align: left;
-    font-size: 18px;
+    font-size: 20px;
     margin-top: 2px;
+    margin-left: 5px;
 }
 
 
@@ -170,11 +172,12 @@ body{
         border-right:  0.5px  solid #e0e0e0;
         margin-bottom: 0px;
         display: flex;
-        margin-left: 1px; 
+        margin-left: 0%; 
     }
     
     .parent{
         margin-top: 0px;
+        margin-left: 0%;
         box-sizing: content-box;
         width: 100%;
         height: auto;
@@ -204,22 +207,24 @@ body{
     
     
     .title{
-        font-weight: lighter;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-weight: normal;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
         font-style: inherit;
         color: black;
         text-align: left;
         font-size: 16px;
         margin-top: 0px;
+        padding: 5px;
     }
     .head {
         font-weight: bold;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-family: 'Times New Roman', Times, serif;
         font-style: inherit;
         color: #1a237e;
         text-align: left;
         font-size: 18px;
         margin-top: 2px;
+        padding: 5px;
     }
     
     

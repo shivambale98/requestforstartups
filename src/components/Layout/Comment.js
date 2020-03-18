@@ -8,7 +8,12 @@ import { Button, Modal, ModalBody, ModalHeader, ModalFooter, FormTextarea } from
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import AddCommentIcon from '@material-ui/icons/AddComment';
 import AddComment from './Addcomment';
+import Paper from '@material-ui/core/Paper';
 import Commentbox from './commentbox';
+import Container from '@material-ui/core/Container';
+
+
+
 const jwt = require('jsonwebtoken');
 const mainurl = require('../../links');
 var upvotecolor = 'rgba(3, 3, 3, 0.3)';
@@ -40,8 +45,8 @@ class Comment extends Component {
   }
 
   getcomments = () => {
-    var id = this.props.location.pathname.toString();
-    id = id.split('/')[2];
+    var id = window.location.href;
+    id = id.split('/comments/')[1];
     this.setState({
       ideaid: id
     });
@@ -51,21 +56,12 @@ class Comment extends Component {
         return res.json();
       })
       .then(resdata => {
-        var { Problem } = resdata.fields;
-        var { userlu } = resdata.fields;
-        var { screen_name } = resdata.fields;
-        var { Piclu } = resdata.fields;
-        var { upvote } = resdata.fields;
-        var { whoupvotelu } = resdata.fields;
         this.setState({
           comments: resdata.comments || [],
-          users: resdata.users || [],
-          Problem: Problem,
-          userlu: userlu || screen_name,
-          userpic: Piclu || [],
-          userspic: resdata.userspic || [],
-          upvote: upvote,
-          whoupvotelu: whoupvotelu || []
+          problem: resdata.idea.problem,
+          username: resdata.user.name,
+          upvote: resdata.idea.upvote,
+          profilePicture: resdata.user.profilePicture
         });
         console.log(resdata);
       })
@@ -103,19 +99,13 @@ class Comment extends Component {
   postComment = () => {
     //console.log(this.state.commentbox);
     this.clickmodel();
-    const token = Cookies.get('jwttoken');
-    var decodedtoken;
-    try {
-      decodedtoken = jwt.verify(token, 'heyphil123');
-    } catch (err) {
-      console.log(err);
-    }
-    if (decodedtoken) {
-      this.state.name = decodedtoken.user.screen_name;
+    if (this.props.user) {
+      var user = this.props.user.user;
+      this.state.name = user.screen_name;
       const ideaid = this.state.ideaid;
       var formdata = new FormData();
       formdata.append('comment', this.state.commentbox);
-      formdata.append('name', this.state.name);
+      formdata.append('userid', this.props.user.record_id);
 
       fetch(mainurl + '/comments/' + ideaid, {
         method: 'POST',
@@ -130,7 +120,7 @@ class Comment extends Component {
               return res.json();
             })
             .then(resdata => {
-              this.getcomments();
+              this.setState({ comments: resdata.comments });
             })
             .catch(err => {
               console.log(err);
@@ -146,53 +136,30 @@ class Comment extends Component {
 
 
   upvotebuttonHandler = () => {
-    const token = Cookies.get('jwttoken');
-    var decodedtoken;
-    var loggedin;
-    try {
-      decodedtoken = jwt.verify(token, 'heyphil123');
-    } catch (err) {
-      console.log(err);
-    }
-    if (decodedtoken) {
-      this.setState({ loggedin: true });
-      this.setState({ decodedtoken: decodedtoken });
-      loggedin = true;
-    } else {
-      this.setState({ loggedin: false });
-      loggedin = false;
-    }
+    var user;
+    if (this.props.user) {
+      var user = this.props.user.user;
 
-    if (loggedin) {
       var formdate = new FormData();
-      formdate.append('userid', decodedtoken.record_id);
-      if (loggedin) {
-        const url = mainurl + "/idea/upvote/" + this.state.ideaid;
-        fetch(url, {
-          method: 'POST',
-          body: formdate
+      formdate.append('userid', this.props.user.record_id);
+      const url = mainurl + "/comments/upvote/" + this.state.ideaid;
+      fetch(url, {
+        method: 'POST',
+        body: formdate
+      })
+        .then(res => {
+          return res.json();
         })
-          .then(res => {
-            return res.json();
-          })
-          .then(resdata => {
-            var { record } = resdata;
-            var { id } = record;
-            var { link } = resdata;
-            console.log(resdata);
-            this.setState({ upvote: record.data.upvote });
-            this.setState({ whoupvotelu: record.data.whoupvotelu });
-            //this.setState({ link: link });
-          })
-          .catch(err => {
-            console.log(err);
-          });
+        .then(resdata => {
+          this.setState({ upvote: resdata.idea.upvote });
+        })
+        .catch(err => {
+          console.log(err);
+        });
 
-      }
     } else {
       this.setState({ showupvotemodel: !this.state.showupvotemodel });
     }
-
   }
 
   checkifupvote = () => {
@@ -205,25 +172,18 @@ class Comment extends Component {
 
 
   userprofile = () => {
-    const token = Cookies.get('jwttoken');
-    var decodedtoken;
-    try {
-      decodedtoken = jwt.verify(token, 'heyphil123');
-    } catch (err) {
-      console.log(err);
-    }
-    if (decodedtoken) {
+    if (this.props.user) {
       return <div className={classes.innerBox2}>
         <h5 className={classes.heading}>Profile</h5>
         <div >
-          <img className={classes.img}
-            src={decodedtoken.user.profile_image_url}
+          <img className={classes.img23}
+            src={this.props.user.user.profile_image_url}
             alt="image"
             width={30}
             height={30}
           />
         </div>
-        <p className={classes.heading1}>{decodedtoken.user.screen_name}: loggedin</p>
+        <p className={classes.heading1}>{this.props.user.user.screen_name}: loggedin</p>
       </div>
 
     }
@@ -232,19 +192,20 @@ class Comment extends Component {
 
 
   render() {
-    console.log(this.state.users);
+    //console.log(this.state.users);
     this.checkifupvote();
 
     const comments = this.state.comments.map((comment, index) => {
       return <Commentbox
-        userimage={this.state.userspic[index]}
-        username={this.state.users[index]}
-        usercomment={comment}
+        userimage={comment.Commenters.profilePicture}
+        username={comment.Commenters.name}
+        usercomment={comment.commentText}
       />
     });
 
     return (
       <Aux>
+
         <div className={classes.main}>
           <div className={classes.containers}>
             <ul className={classes.ul}>
@@ -254,20 +215,22 @@ class Comment extends Component {
           <div className={classes.righttoolbar}>
             <div className={classes.parent}>
               <div >
-                <img className={classes.img23}
-                  src={this.state.userpic}
+                <img className={classes.img}
+                  src={this.state.profilePicture}
                   alt="image"
                   width={70}
                   height={70}
                 />
               </div>
-              <div className={classes.container}>
-                <p className={classes.head}>@{this.state.userlu}</p>
-                <p className={classes.title}>{this.state.Problem}</p>
-
-              </div>
+              <Container maxWidth="lg">
+                <div className={classes.container}>
+                  <Paper elevation={0.5}>
+                    <p className={classes.head}>@{this.state.username}</p>
+                    <p className={classes.title}>{this.state.problem}</p>
+                  </Paper>
+                </div>
+              </ Container>
               <div className={classes.ThumbsUp}>
-
                 <div className={classes.buttn}>
                   <button className={classes.btn} onClick={this.upvotebuttonHandler.bind(this)} style={{ background: upvotecolor }}>
                     {this.state.upvote}   Upvote
@@ -309,20 +272,22 @@ class Comment extends Component {
             <div className={classes.side}>
               <div className={classes.plane}>
                 <div className={classes.innerBox}>
-                  <a className={classes.fields} ><Link to='/ideas/ALL'>#ALL</Link></a> <br />
-                  <a className={classes.fields} ><Link to='/ideas/Web-Mobile Development'>#Web/mobile Dev</Link></a> <br />
-                  <a className={classes.fields} ><Link to='/ideas/Blockchain-Crypto'>#Blockchain/crypto</Link></a>  <br />
-                  <a className={classes.fields} ><Link to='/ideas/Hardware-Elctronics'>#Hardware/Elctronics</Link></a>  <br />
-                  <a className={classes.fields} ><Link to='/ideas/Social'>#Social</Link></a><br />
-                  <a className={classes.fields} ><Link to='/ideas/Gaame Development'>#Game-Dev</Link></a><br />
-                  <a className={classes.fields} ><Link to='/ideas/AI-ML'>#AI-ML</Link></a>
-                  <a className={classes.fields} ><Link to='/ideas/IOT'>#IOT</Link></a>
+                  <a className={classes.fields} ><Link className={classes.fields} to='/ideas/ALL'>#ALL</Link></a> <br />
+                  <a className={classes.fields} ><Link className={classes.fields} to='/ideas/Web-Mobile Development'>#Web/mobile Dev</Link></a> <br />
+                  <a className={classes.fields} ><Link className={classes.fields} to='/ideas/Blockchain-Crypto'>#Blockchain/crypto</Link></a>  <br />
+                  <a className={classes.fields} ><Link className={classes.fields} to='/ideas/Hardware-Elctronics'>#Hardware/Elctronics</Link></a>  <br />
+                  <a className={classes.fields} ><Link className={classes.fields} to='/ideas/Social'>#Social</Link></a><br />
+                  <a className={classes.fields} ><Link className={classes.fields} to='/ideas/Gaame Development'>#Game-Dev</Link></a><br />
+                  <a className={classes.fields} ><Link className={classes.fields} to='/ideas/AI-ML'>#AI-ML</Link></a>
+                  <a className={classes.fields} ><Link className={classes.fields} to='/ideas/IOT'>#IOT</Link></a>
                 </div>
                 {this.userprofile()}
               </div>
             </div>
+
           </div>
         </div>
+
       </Aux>
     )
   }

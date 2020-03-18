@@ -4,8 +4,8 @@ import classes from './mobilelogo.module.css';
 
 
 const Mobilelogo = (props) => (
-    <div>
-        <img  className={classes.Logo} src={MLogo} alt="NS_Logo" />
+    <div className={classes.logs}>
+        <img className={classes.Logo} src={MLogo} alt="NS_Logo" />
     </div>
 );
 

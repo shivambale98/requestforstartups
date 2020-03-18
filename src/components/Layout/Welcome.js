@@ -11,10 +11,15 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Modal, ModalBody, ModalHeader } from "shards-react";
+import FloatButton from './Floatbutton';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+
+
 
 
 const jwt = require('jsonwebtoken');
-var decodedtoken, upvotecolor = 'rgba(3, 3, 3, 0.3)';
+var decodedtoken, upvotecolor;
 const mainurl = require('../../links');
 
 var recordlist = [];
@@ -27,7 +32,9 @@ class Welcome extends Component {
     redirect: false,
     id: '',
     loggedin: false,
-    showupvotemodel: false
+    showupvotemodel: false,
+    addideamodel: false,
+    addidearedirect: false
   };
   //pagination
   //const [currentPage, setCurrentPage] = useState(1);
@@ -63,7 +70,7 @@ class Welcome extends Component {
       })
       .then(resdata => {
         console.log(resdata);
-        this.setState({ records: resdata.recordlist });
+        this.setState({ records: resdata.ideas });
       })
       .catch(err => {
         console.log(err);
@@ -88,7 +95,7 @@ class Welcome extends Component {
           return res.json();
         })
         .then(resdata => {
-          this.setState({ records: resdata.recordlist });
+          this.setState({ records: resdata.ideas });
           //console.log(resjson);
         })
         .catch(err => {
@@ -105,7 +112,7 @@ class Welcome extends Component {
         return res.json();
       })
       .then(resdata => {
-        this.setState({ records: resdata.recordlist });
+        this.setState({ records: resdata.ideas });
         console.log(resdata);
       })
       .catch(err => {
@@ -120,69 +127,57 @@ class Welcome extends Component {
     }
   }
 
-  upvotebuttonHandler = recordid => {
-    const token = Cookies.get('jwttoken');
-    var decodedtoken;
-    var loggedin;
-    try {
-      decodedtoken = jwt.verify(token, 'heyphil123');
-    } catch (err) {
-      console.log(err);
+  upvotebuttonHandler = (recordid, index) => {
+    var user;
+    if (this.props.user) {
+      var user = this.props.user.user;
     }
-    if (decodedtoken) {
-      this.setState({
-        loggedin: true
-      });
-      loggedin = true;
-    } else {
-      this.setState({
-        loggedin: false
-      });
-      loggedin = false;
-    }
-
-    if (loggedin) {
+    if (this.props.user) {
       var formdate = new FormData();
-      formdate.append('userid', decodedtoken.record_id);
-      if (loggedin) {
-        const url = mainurl + "/idea/upvote/" + recordid;
-        fetch(url, {
-          method: 'POST',
-          body: formdate
+      formdate.append('userid', this.props.user.record_id);
+      const url = mainurl + "/idea/upvote/" + recordid;
+      fetch(url, {
+        method: 'POST',
+        body: formdate
+      })
+        .then(res => {
+          return res.json();
         })
-          .then(res => {
-            return res.json();
-          })
-          .then(resdata => {
-            var { record } = resdata;
-            var { id } = record;
-            var { link } = resdata;
-            //console.log(resdata);
-            var temp = [];
-            this.state.records.map(recordt => {
-              if (recordt.id === id) {
-                var temprecord = recordt;
-                recordt = record;
-                recordt.email = temprecord.email;
-                temp.push(recordt);
-              } else {
-                temp.push(recordt);
-              }
-            });
-            //console.log(temp);
+        .then(resdata => {
+          if (resdata.idea.upvote > this.state.records[index].upvote) {
+            var psudoupvoters = [{ id: this.props.user.record_id }];
+          } else {
+            var psudoupvoters = [{ id: 0 }];
+          }
+          var psudouser = this.state.records[index].user;
+          resdata.idea.user = psudouser;
+          resdata.idea.Upvoters = psudoupvoters;
+          this.state.records[index] = resdata.idea;
+          this.setState({ records: this.state.records });
+        })
+        .catch(err => {
+          console.log(err);
+        });
 
-            this.setState({ records: temp });
-            this.setState({ link: link });
-          })
-          .catch(err => {
-            console.log(err);
-          });
-
-      }
     } else {
       this.setState({ showupvotemodel: !this.state.showupvotemodel });
     }
 
+  }
+
+  addideahandler() {
+    if (this.props.user) {
+      this.setState({ addidearedirect: true });
+    } else {
+      this.setState({ addideamodel: !this.state.addideamodel });
+    }
+
+  }
+
+  addidearedirecthandler = () => {
+    if (this.state.addidearedirect) {
+      return <Redirect to={'/addidea'} />
+    }
   }
 
   onComment = (id) => {
@@ -195,30 +190,22 @@ class Welcome extends Component {
 
 
   userprofile = () => {
-    const token = Cookies.get('jwttoken');
-    var decodedtoken;
-    try {
-      decodedtoken = jwt.verify(token, 'heyphil123');
-    } catch (err) {
-      console.log(err);
-    }
-    if (decodedtoken) {
+    if (this.props.user) {
       return <div className={classes.innerBox2}>
         <h5 className={classes.heading}>Profile</h5>
         <div >
           <img className={classes.img}
-            src={decodedtoken.user.profile_image_url}
+            src={this.props.user.user.profile_image_url}
             alt="image"
             width={30}
             height={30}
           />
         </div>
-        <p className={classes.heading1}>{decodedtoken.user.screen_name}: loggedin</p>
+        <p className={classes.heading1}>{this.props.user.user.screen_name}: loggedin</p>
       </div>
 
     }
   };
-
 
   toggleCollapse = collapseID => () =>
     this.setState(prevState => ({
@@ -237,26 +224,32 @@ class Welcome extends Component {
 
     //console.log(this.state.records);
     const ideas = this.state.records.map((record, index) => {
+      upvotecolor = undefined;
       if (!this.state.loggedin) {
         return <Ideaforms
-          name={record.data.userlu || record.data.screen_name}
-          problem={record.data.Problem}
-          upvote={record.data.upvote}
-          onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
+          name={record.user.name}
+          problem={record.problem}
+          upvote={record.upvote}
+          onUpvote={this.upvotebuttonHandler.bind(this, record.id, index)}
           onComment={this.onComment.bind(this, record.id)}
-          pic={record.data.Piclu}
+          pic={record.user.profilePicture}
         />
       } else {
-        if (record.data.whoupvotelu && record.data.whoupvotelu.includes(this.props.user.user.user_id)) {
-          var upvotecolor = 'rgba(244, 3, 3, 0.3)';
+        if (record.Upvoters) {
+          record.Upvoters.forEach(voter => {
+            if (voter.id === this.props.user.record_id) {
+              upvotecolor = 'rgba(244, 3, 3, 0.3)';
+            }
+          });
+          //console.log(upvotecolor);
         }
         return <Ideaforms
-          name={record.data.userlu || record.data.screen_name}
-          problem={record.data.Problem}
-          upvote={record.data.upvote}
-          onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
+          name={record.user.name}
+          problem={record.problem}
+          upvote={record.upvote}
+          onUpvote={this.upvotebuttonHandler.bind(this, record.id, index)}
           onComment={this.onComment.bind(this, record.id)}
-          pic={record.data.Piclu}
+          pic={record.user.profilePicture}
           upvotecolor={upvotecolor}
         />
       }
@@ -269,15 +262,34 @@ class Welcome extends Component {
           <Modal open={this.state.showupvotemodel} toggle={this.upvotebuttonHandler.bind(this)}>
             <ModalHeader>Login Error</ModalHeader>
             <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
-            <ModalBody><Link to='/login'>login</Link> to upvote</ModalBody>
+            <ModalBody><Link className={classes.liks} to='/login'><b>login</b></Link> to upvote</ModalBody>
           </Modal>
+
+          <Modal open={this.state.addideamodel} toggle={this.addideahandler.bind(this)}>
+            <ModalHeader>Login Error</ModalHeader>
+            <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
+            <ModalBody><Link className={classes.liks} to='/login'><b>login</b></Link> to addIdea</ModalBody>
+          </Modal>
+
           <div className={classes.container}>
             <ul className={classes.ul}>
               <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'NEWEST')}> #NEWEST </a></li>
               <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'TRENDING')}> #TRENDING </a></li>
               <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'TOP')}> #TOP </a></li>
+              <div className={classes.fabu}>
+              </div>
             </ul>
           </div>
+          <div className={classes.buts}>
+           <Fab 
+              color="primary" 
+              aria-label="add"
+              onClick={this.addideahandler.bind(this)}>
+             <AddIcon />
+           </Fab>
+           {this.addidearedirecthandler()}
+           </div>
+   
           {ideas}
           <div className={classes.side}>
             <div className={classes.plane}>
@@ -292,16 +304,16 @@ class Welcome extends Component {
                 <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "IOT")} >#IOT</a>
               </div>
               <div>
-                {this.userprofile()}
               </div>
+              {this.userprofile()}
             </div>
           </div>
         </div>
-
       </Aux>
 
     );
   }
+
 }
 
 
@@ -309,4 +321,7 @@ export default Welcome;
 
 
 
-//postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} //
+
+
+
+

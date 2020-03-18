@@ -1,4 +1,5 @@
 import classes from './Menu.module.css';
+import mobclasses from './mobilelogo.module.css';
 import { Link } from 'react-router-dom';
 import React, { Component, Fragment } from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
@@ -37,6 +38,17 @@ class Menu extends Component {
         }
     }
 
+    menulogo = () => {
+        if (this.props.user) {
+            return <img className={mobclasses.img}
+                src={this.props.user.user.profile_image_url}
+                alt="image"
+                width={50}
+                height={60}
+            />
+        }
+    }
+
     renderRedirect = () => {
         if (this.state.logredirect) {
             return <Redirect to='/' />
@@ -60,7 +72,7 @@ class Menu extends Component {
             }
         }
     }
-    //------------------------------mobile menu----------------------------------------------------------//
+    //------------------------------mobile menu start----------------------------------------------------------//
 
     addideabut = () => {
         console.log(this.props.user);
@@ -82,16 +94,18 @@ class Menu extends Component {
         }
     };
 
-    //------------------------------mobile menu---------------------------------------------------------//   
+    //------------------------------mobile menu over---------------------------------------------------------//   
     render() {
         return (
             <Fragment>
                 {/* mobile navbar */}
                 <div className={classes.mobile}>
                     {this.renderRedirect()}
-                    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                        <Navbar.Brand href="#home">
+                    <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
+                        <Navbar.Brand href="/">
+                        {this.menulogo()}
                             <Mobilelogo className={classes.moblogo} />
+                           
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
@@ -102,9 +116,7 @@ class Menu extends Component {
                             </Nav>
                         </Navbar.Collapse>
                     </Navbar>
-
                 </div>
-
                 {/* mobile navbar */}
                 <div className={classes.Menustyle}>
                     <Logo className={classes.logs} />

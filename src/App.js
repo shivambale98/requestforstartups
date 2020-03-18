@@ -33,6 +33,7 @@ class App extends Component {
       return { menuOpen: !prevState.menuOpen };
     });
   };
+
   componentDidMount() {
     const token = Cookies.get('jwttoken');
     var decodedtoken;
@@ -83,6 +84,10 @@ class App extends Component {
       return <Welcome user={this.state.user} />
     }
 
+    const comment = () => {
+      return <Comment user={this.state.user} />
+    }
+
     return (
       <Fragment>
 
@@ -95,7 +100,7 @@ class App extends Component {
           <Route path="/addidea" component={Addidea} />
           <Route path='/logout' component={welcome} />
           <Route path='/myideas' component={my_ideas} />
-          <Route path="/comments/:id" component={Comment} />
+          <Route path="/comments/:id" component={comment} />
         </BrowserRouter>
       </Fragment>
     );

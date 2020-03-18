@@ -1,4 +1,5 @@
 import classes from './Menu.module.css';
+import mobclasses from './mobilelogo.module.css';
 import { Link } from 'react-router-dom';
 import React, { Component, Fragment } from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
@@ -34,6 +35,17 @@ class Menu extends Component {
                 logredirect: false
             });
             //loggedin so re-render
+        }
+    }
+
+    menulogo = () => {
+        if (this.props.user) {
+            return <img className={mobclasses.img}
+                src={this.props.user.user.profile_image_url}
+                alt="image"
+                width={50}
+                height={60}
+            />
         }
     }
 
@@ -90,11 +102,13 @@ class Menu extends Component {
                 <div className={classes.mobile}>
                     {this.renderRedirect()}
                     <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
-                    <Navbar.Brand href="#home">
+                        <Navbar.Brand href="/">
                             <Mobilelogo className={classes.moblogo} />
-                            
-                     </Navbar.Brand>
-                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                            {this.menulogo()}
+
+
+                        </Navbar.Brand>
+                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="mr-auto">
                                 <Nav.Link href="/">HOME</Nav.Link>

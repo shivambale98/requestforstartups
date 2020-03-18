@@ -14,7 +14,7 @@ import { Modal, ModalBody, ModalHeader } from "shards-react";
 import FloatButton from './Floatbutton';
 
 const jwt = require('jsonwebtoken');
-var decodedtoken, upvotecolor = 'rgba(3, 3, 3, 0.3)';
+var decodedtoken, upvotecolor;
 const mainurl = require('../../links');
 
 var recordlist = [];
@@ -193,6 +193,15 @@ class Welcome extends Component {
     }
   };
 
+  checkifincludes(upvoters) {
+    upvoters.forEach(voter => {
+      if (voter.id === this.props.user.record_id) {
+        var upvotecolor = 'rgba(244, 3, 3, 0.3)'
+        return upvotecolor;
+      }
+    });
+    return undefined;
+  };
 
   toggleCollapse = collapseID => () =>
     this.setState(prevState => ({
@@ -211,29 +220,35 @@ class Welcome extends Component {
 
     //console.log(this.state.records);
     const ideas = this.state.records.map((record, index) => {
-      //if (!this.state.loggedin) {
-      return <Ideaforms
-        name={record.user.name}
-        problem={record.problem}
-        upvote={record.upvote}
-        onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
-        onComment={this.onComment.bind(this, record.id)}
-        pic={record.user.profilePicture}
-      />
-      //} else {
-      if (record.data.whoupvotelu && record.data.whoupvotelu.includes(this.props.user.user.user_id)) {
-        var upvotecolor = 'rgba(244, 3, 3, 0.3)';
+      upvotecolor = undefined;
+      if (!this.state.loggedin) {
+        return <Ideaforms
+          name={record.user.name}
+          problem={record.problem}
+          upvote={record.upvote}
+          onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
+          onComment={this.onComment.bind(this, record.id)}
+          pic={record.user.profilePicture}
+        />
+      } else {
+        if (record.Upvoters) {
+          record.Upvoters.forEach(voter => {
+            if (voter.id === this.props.user.record_id) {
+              upvotecolor = 'rgba(244, 3, 3, 0.3)';
+            }
+          });
+          //console.log(upvotecolor);
+        }
+        return <Ideaforms
+          name={record.user.name}
+          problem={record.problem}
+          upvote={record.upvote}
+          onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
+          onComment={this.onComment.bind(this, record.id)}
+          pic={record.user.profilePicture}
+          upvotecolor={upvotecolor}
+        />
       }
-      return <Ideaforms
-        name={record.user.name}
-        problem={record.problem}
-        upvote={record.upvote}
-        onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
-        onComment={this.onComment.bind(this, record.id)}
-        pic={record.user.profilePicture}
-        upvotecolor={upvotecolor}
-      />
-      //}
     });
 
     return (
@@ -286,6 +301,7 @@ class Welcome extends Component {
 
     );
   }
+
 }
 
 

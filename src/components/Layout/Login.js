@@ -22,7 +22,7 @@ class Login extends Component {
   componentDidMount() {
     //console.log(window.location.pathname);
     var path = window.location.pathname;
-    var token = path.split('/')[2];
+    var token = path.split('/login/')[1];
     var decodedtoken;
     try {
       decodedtoken = jwt.verify(token, 'heyphil123');
@@ -56,7 +56,7 @@ class Login extends Component {
         <h4 className={classes.head3}>Incase of lack in genie lamps you can Login and add your idea here</h4>
         <div className={classes.button}>
           <a href={mainurl + '/auth/twitter/reverse'} >
-          <Button variant="danger" className={classes.buts}>LOGIN WITH TWITTER</Button>
+            <Button variant="danger" className={classes.buts}>LOGIN WITH TWITTER</Button>
           </a>
 
         </div>

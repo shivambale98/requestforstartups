@@ -120,7 +120,7 @@ class Comment extends Component {
               return res.json();
             })
             .then(resdata => {
-              this.getcomments();
+              this.setState({ comments: resdata.comments });
             })
             .catch(err => {
               console.log(err);
@@ -223,12 +223,12 @@ class Comment extends Component {
                 />
               </div>
               <Container maxWidth="lg">
-              <div className={classes.container}>
-                <Paper elevation={0.5}>
-                  <p className={classes.head}>@{this.state.username}</p>
-                  <p className={classes.title}>{this.state.problem}</p>
-                </Paper>
-              </div>
+                <div className={classes.container}>
+                  <Paper elevation={0.5}>
+                    <p className={classes.head}>@{this.state.username}</p>
+                    <p className={classes.title}>{this.state.problem}</p>
+                  </Paper>
+                </div>
               </ Container>
               <div className={classes.ThumbsUp}>
                 <div className={classes.buttn}>

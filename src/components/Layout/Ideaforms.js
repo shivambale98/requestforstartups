@@ -11,10 +11,10 @@ import Typography from '@material-ui/core/Typography';
 
 const Ideaforms = (props) => (
     <Aux>
-      
+
         <div className={classes.righttoolbar}>
             <div className={classes.parent}>
-           
+
                 <div >
                     <img className={classes.img}
                         src={props.pic}
@@ -25,12 +25,12 @@ const Ideaforms = (props) => (
                     />
                 </div>
                 <Container maxWidth="lg">
-                <div className={classes.container}>
-                    <Paper elevation={0}>
-                    <p className={classes.head}>@{props.name} </p>
-                    <p className={classes.title}>{props.problem}</p>
-                    </Paper>
-                </div>
+                    <div className={classes.container}>
+                        <Paper elevation={0}>
+                            <p className={classes.head}>@{props.name} </p>
+                            <p className={classes.title}>{props.problem}</p>
+                        </Paper>
+                    </div>
                 </ Container>
                 <div className={classes.comments}>
                     <a className={classes.comment} onClick={props.onComment} class="fa fa-comment" ><b> Comment</b></a>
@@ -41,9 +41,9 @@ const Ideaforms = (props) => (
                     </button>
                 </div>
             </div>
-           
+
         </div>
-      
+
     </Aux>
 );
 

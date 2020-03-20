@@ -42,14 +42,12 @@ background-color: #e0e0e0;
 .buts{
     background-color: rgba(244, 67, 54, 0.7);
     color: #e0e0e0;
-    width: 140px;
-    height: 60px;
     text-decoration: none;
     text-transform: capitalize;
     padding: 5px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 16px;
 }
 @media only screen and (max-width:767px) {
     .loginstuff {

@@ -17,11 +17,10 @@ const Ideaforms = (props) => (
 
                 <div >
                     <img className={classes.img}
-                        src={props.pic}
-                        alt="image"
-                        width={70}
-                        height={70}
-
+                          src={props.pic}
+                          alt="image"
+                          width={70}
+                          height={70}
                     />
                 </div>
                 <Container maxWidth="lg">

@@ -69,7 +69,6 @@ class Login extends Component {
           <a href={mainurl + '/auth/twitter/reverse'} >
             <Button variant="danger" className={classes.buts}>LOGIN WITH TWITTER</Button>
           </a>
-
         </div>
       </div>
     )

@@ -14,6 +14,7 @@ import { Modal, ModalBody, ModalHeader } from "shards-react";
 import FloatButton from './Floatbutton';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import { Button } from 'react-floating-action-button';
 
 
 
@@ -281,15 +282,15 @@ class Welcome extends Component {
             </ul>
           </div>
           <div className={classes.buts}>
-           <Fab 
-              color="primary" 
-              aria-label="add"
-              onClick={this.addideahandler.bind(this)}>
-             <AddIcon />
-           </Fab>
-           {this.addidearedirecthandler()}
-           </div>
-   
+            <Container>
+              <Button
+                tooltip="The big plus button!"
+                icon="fas fa-plus"
+                onClick={this.addideahandler.bind(this)} />
+            </Container>
+            {this.addidearedirecthandler()}
+          </div>
+
           {ideas}
           <div className={classes.side}>
             <div className={classes.plane}>

@@ -213,7 +213,7 @@ width: 100%;
   margin-left: 65%;
   margin-top: 90%;
   object-position: bottom;
-  opacity: 100%;
+  opacity: 100% !important;
 }
 
 .buts:active{

@@ -8,7 +8,10 @@ import TwitterLogin from 'react-twitter-auth';
 import Cookies from 'js-cookie';
 import jwt from 'jsonwebtoken';
 import { Button } from 'react-bootstrap';
+import Cryptr from 'cryptr';
 
+
+const cryptr = new Cryptr('heyphil123');
 const mainurl = require('../../links');
 
 class Login extends Component {
@@ -22,18 +25,25 @@ class Login extends Component {
   componentDidMount() {
     //console.log(window.location.pathname);
     var path = window.location.pathname;
-    var token = path.split('/login/')[1];
-    var decodedtoken;
-    try {
-      decodedtoken = jwt.verify(token, 'heyphil123');
-    } catch (err) {
-      console.log(err);
-    }
-    if (decodedtoken) {
-      this.setState({
-        redirect: true
-      });
-      Cookies.set('jwttoken', token);
+    var token, decodedtoken;
+    var enctoken = path.split('/login/')[1];
+    if (enctoken) {
+      fetch(mainurl + '/getusertoken/' + enctoken)
+        .then(res => {
+          return res.json();
+        })
+        .then(resdata => {
+          Cookies.set('jwttoken', resdata.decodedtoken);
+
+          this.setState({
+            redirect: true,
+            token: resdata.token
+          });
+
+          //this.props.updatestate(resdata.token);
+
+        });
+
     } else {
       this.setState({
         redirect: false
@@ -43,6 +53,7 @@ class Login extends Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
+      this.props.updatestate(this.state.token);
       return <Redirect to='/' />
     }
   }

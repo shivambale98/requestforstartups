@@ -12,10 +12,11 @@ import { Link } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Modal, ModalBody, ModalHeader } from "shards-react";
 import FloatButton from './Floatbutton';
-import Fab from '@material-ui/core/Fab';
+//import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import { Button } from 'react-floating-action-button';
-
+//import { Button } from 'react-floating-action-button';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import { Fab, F7Icon } from 'framework7-react';
 
 
 
@@ -282,12 +283,9 @@ class Welcome extends Component {
             </ul>
           </div>
           <div className={classes.buts}>
-            <Container>
-              <Button
-                tooltip="The big plus button!"
-                icon="fas fa-plus"
-                onClick={this.addideahandler.bind(this)} />
-            </Container>
+            <Fab position="right-bottom" slot="fixed" color="red" onClick={this.addideahandler.bind(this)} >
+              <AddCircleOutlineIcon fontSize='large' />
+            </Fab>
             {this.addidearedirecthandler()}
           </div>
 

@@ -14,7 +14,7 @@ import { Modal, ModalBody, ModalHeader } from "shards-react";
 import FloatButton from './Floatbutton';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-
+import Navigator from './Navigator.js';
 
 
 
@@ -59,7 +59,6 @@ class Welcome extends Component {
     } else {
       this.getallideas();
     }
-
   }
 
   getallideas = () => {
@@ -81,7 +80,6 @@ class Welcome extends Component {
     } else {
       this.setState({ loggedin: true });
     }
-
   }
 
 
@@ -118,7 +116,6 @@ class Welcome extends Component {
       .catch(err => {
         console.log(err);
       });
-
   }
 
   renderRedirect = () => {
@@ -258,6 +255,7 @@ class Welcome extends Component {
     return (
       <Aux>
         <div className={classes.main}>
+          <Navigator />
           {this.renderRedirect()}
           <Modal open={this.state.showupvotemodel} toggle={this.upvotebuttonHandler.bind(this)}>
             <ModalHeader>Login Error</ModalHeader>
@@ -270,16 +268,6 @@ class Welcome extends Component {
             <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
             <ModalBody><Link className={classes.liks} to='/login'><b>login</b></Link> to addIdea</ModalBody>
           </Modal>
-
-          <div className={classes.container}>
-            <ul className={classes.ul}>
-              <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'NEWEST')}> #NEWEST </a></li>
-              <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'TRENDING')}> #TRENDING </a></li>
-              <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'TOP')}> #TOP </a></li>
-              <div className={classes.fabu}>
-              </div>
-            </ul>
-          </div>
           <div className={classes.buts}>
             <Fab
               color="primary"
@@ -287,26 +275,10 @@ class Welcome extends Component {
               onClick={this.addideahandler.bind(this)}>
               <AddIcon />
             </Fab>
-            {this.addidearedirecthandler()}
           </div>
-
-          {ideas}
-          <div className={classes.side}>
-            <div className={classes.plane}>
-              <div className={classes.innerBox}>
-                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "ALL")} >#ALL</a> <br />
-                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Web-Mobile Development")} >#Web/mobile Dev</a> <br />
-                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Blockchain-Crypto")} >#blockchain/crypto</a>  <br />
-                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Hardware-Elctronics")} >#Elctronics</a>  <br />
-                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Social")} >#Social</a><br />
-                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Gaame Development")} >#Game-Dev</a> <br />
-                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "AI-ML")} >#AI/ML</a>
-                <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "IOT")} >#IOT</a>
-              </div>
-              <div>
-              </div>
-              {this.userprofile()}
-            </div>
+          <div className={classes.ideacard}>
+            {this.addidearedirecthandler()}
+            {ideas}
           </div>
         </div>
       </Aux>

@@ -5,73 +5,27 @@
   height: auto;
   display: table;
   width: 100%;
-  margin: 0px;
+  margin-top: 0px;
 }
-
-.container{
+.ideacard{
   display: block;
-  width: 84%;
-  height: 15vh;
-  box-sizing: border-box;
-  border: 0.5px ;
-  border:  0.5px  solid #e0e0e0;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-style: inherit;
-  color: #1a237e;
-  margin-left: 16%;
-  display: flex;
-  flex-direction: row;
-  margin-top: 0px;
-  position: static;
-}
+  height: auto;
 
-
-.container ul {
-  background: white;
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  color: #1a237e;
-  font-weight: bold;
-  font-size: 25px;
-  margin-left: 50px;
-  margin-top: 0px;
-}
-
-.container ul li {
-  list-style: none;
-  text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.7);
-  margin-left: 60px;
-  margin-top: 5px;
-}
-
-.links{
-  list-style: none;
-  text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.7);
-  margin-left: 0px;
-  margin-top: 5px;
-}
-
-.links:hover{
-  list-style: none;
-  color: #303030;
-  text-decoration: none;
+  margin-top: 15vh;
+  margin-left: 0%;
 }
 
 .side{
-  width: 20%;
-  height: 100vh;
+  width: 20vw;
+  height: 85vh;
+  margin-top: 15vh;
   box-sizing: content-box;
   border:  0.5px  solid #e0e0e0;
   flex-direction: column;
   justify-items: center;
-  display: table-cell;
-  position: sticky;
+  display: flex;
+  position: absolute;
   background-color:rgba(158, 158, 158, 0.1);
-  overflow-x: scroll;
 }
 
 .plane{

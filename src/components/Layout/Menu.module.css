@@ -4,9 +4,13 @@
     display: none;
 }
 .Menustyle{
-    widows: 18%;
+    background-image: url('../../assets/brain-smally.png');
+    background-repeat: no-repeat;
+    background-position-y: 80%;
+    background-position-x:50% ;
+    background-size: 140%;
+    width: 20%;
     height: 98vh;
-    background: white;
     color: #1a237e;
     display: flex;
     flex-direction: column;
@@ -14,7 +18,7 @@
     position: fixed;
     text-align: left;
     box-sizing: border-box;
-    border-right:  0.5px  solid #e0e0e0;
+    border-right:  1px  solid #e0e0e0;
     margin-top: 0px;
 } 
 
@@ -23,22 +27,23 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    width: auto;
-    height: 30vh;
-    margin-top: 10px;
+    width: 80%;
+    height: 20vh;
+    margin-top: 120px;
     align-items: center;
-    margin-left: 0px;
+    margin-left: 25px;
     justify-content: space-evenly;
     border-radius: 10px 0px 0px 10px ;
     color: #1a237e;
     font-weight: bold;
     font-size: 18px;
+    background-color: transparent;
 }
 
 .Menustyle ul li {
     list-style: none;
     text-transform: uppercase;
-    color: #1a237e;
+    color: black;
     margin-left: 0px;
     margin-top: 0px;
 }
@@ -46,7 +51,7 @@
 .links{
     list-style: none;
     text-transform: uppercase;
-    color: #1a237e;
+    color: black;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
     font-style: inherit;
     font-weight: bold;
@@ -73,29 +78,24 @@
 .addidea{
     list-style: none;
     text-transform: uppercase;
-    color: white;
+    color: black;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
     font-style: inherit;
     font-weight: bold;
     margin-left: 0px;
-    border: lightseagreen;
-    background-color: lightseagreen;
+    font-size: 20px;
+    border: #ffff00;
+    background-color: #ffff00;
     border-radius: 15px;
    height: 65px;
-   width: 78%;
+   width: 80%;
    align-items: center;
-   margin-left: 30px;
-    margin-top: 20px;
+   margin-left: 25px;
+    margin-top: 95px;
 }
-
 .addidea:hover{
     color: white;
-    background-color: #1a237e;
-    text-emphasis-color: white;
-
 }
-
-
 .logs{
     height: 5vh;
     width: 50%;
@@ -112,12 +112,12 @@
     font-weight: bold;
     margin-left: 0px;
     border: white;
-    background-color: white;
+    background-color:white;
     border-radius: 15px;
-   height: 75px;
+   height: 65px;
    width: 80%;
    align-items: center;
-   margin-left: 22px;
+   margin-left: 32px;
     margin-top: 0px;
     -webkit-transition: 0.3s ease;
     transition: 0.3s ease;
@@ -125,7 +125,7 @@
 
 .nots:hover{
     color: white;
-    background-color: lightseagreen;
+    background-color: #ffff00;
     text-decoration: none;
 }
 

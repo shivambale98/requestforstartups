@@ -10,6 +10,7 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import Cookies from 'js-cookie';
 import Mobilelogo from './mobilelogo';
+import background from '../../assets/brain-2062056_1920.png';
 import MenuIcon from '@material-ui/icons/Menu';
 const jwt = require('jsonwebtoken');
 const mainurl = require('../../links');
@@ -118,13 +119,20 @@ class Menu extends Component {
                     </Navbar>
                 </div>
                 {/* mobile navbar */}
-                <div className={classes.Menustyle}>
+
+                <div className={classes.Menustyle} >
                     <Logo className={classes.logs} />
                     {this.renderRedirect()}
                     <ul className={classes.ul}>
                         <Link className={classes.links} to='/' ><button className={classes.nots}><li className={classes.li}> <HomeOutlinedIcon style={{ fontSize: 50 }} />  HOME  </li> </button></Link>
                         <Link className={classes.links} to={this.state.loglink}> <button onClick={this.logout} className={classes.nots}> <li className={classes.li}> <LockOpenIcon style={{ fontSize: 50 }} /> {this.state.logstatus} </li> </button></Link>
                     </ul>
+                    <Link to='/addidea' className={classes.links} >
+                <button className={classes.addidea}>
+                    <EmojiObjectsIcon style={{ fontSize: 50 }} />
+                    ADD-IDEA
+                </button>
+            </Link >
                     {this.addideabut()}
                 </div>
             </Fragment>

@@ -2,13 +2,21 @@
 
 .loginstuff {
 height: 100%;
-width: 83%;
-margin-left: 16%;
+width: 80%;
+margin-left: 20%;
 margin-top: 0px;
 position: absolute;
-background-color: #e0e0e0;
 }
-
+.back{
+    background-image: url('../../assets/man.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 60%;
+    width: 100%;
+    margin-top: 0px;
+    position: absolute;
+}
 .head{
     margin-top:10%;
     margin-left: 17%;
@@ -36,7 +44,7 @@ background-color: #e0e0e0;
 }
 .button{
     display: block;
-    margin-top: 12%;
+    margin-top: 5%;
     margin-left: 40%;
 }
 .buts{

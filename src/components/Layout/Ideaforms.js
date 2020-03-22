@@ -5,16 +5,14 @@ import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
-
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 
 
 
 const Ideaforms = (props) => (
     <Aux>
-
         <div className={classes.righttoolbar}>
             <div className={classes.parent}>
-
                 <div >
                     <img className={classes.img}
                           src={props.pic}
@@ -35,9 +33,14 @@ const Ideaforms = (props) => (
                     <a className={classes.comment} onClick={props.onComment} class="fa fa-comment" ><b> Comment</b></a>
                 </div>
                 <div className={classes.buttn}>
-                    <button className={classes.btn} onClick={props.onUpvote} style={{ background: props.upvotecolor }}>
-                        {props.upvote}   Upvote
-                    </button>
+                    <button className={classes.btn} onClick={props.onUpvote} style={{ background: props.upvotecolor }}>  
+                        <div className={classes.icon}>
+                        < ArrowDropUpIcon/>
+                        <p className={classes.vote}>
+                        {props.upvote}
+                         </p>
+                        </div>
+                </button>
                 </div>
             </div>
 

@@ -104,18 +104,8 @@ class Welcome extends Component {
 
   }
 
-  orderideas(type) {
-    fetch(mainurl + '/idea/orderideas/' + type)
-      .then(res => {
-        return res.json();
-      })
-      .then(resdata => {
-        this.setState({ records: resdata.ideas });
-        console.log(resdata);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  setideas = (ideas) => {
+    this.setState({ records: ideas });
   }
 
   renderRedirect = () => {
@@ -255,7 +245,7 @@ class Welcome extends Component {
     return (
       <Aux>
         <div className={classes.main}>
-          <Navigator />
+          <Navigator setideas={this.setideas} />
           {this.renderRedirect()}
           <Modal open={this.state.showupvotemodel} toggle={this.upvotebuttonHandler.bind(this)}>
             <ModalHeader>Login Error</ModalHeader>

@@ -18,7 +18,7 @@
 .side{
   margin-left: 1069px;
   width: 18vw;
-  height: 100vh;
+  height: 83vh;
   box-sizing: content-box;
   flex-direction: column;
   justify-items: center;
@@ -30,8 +30,8 @@
 .plane{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-style: oblique;
-  color: #424242;
-  font-size: 18px;
+  color: black;
+  font-size: 20px;
   font-weight: bold;
  /* padding-top: 10px ; */
   margin-top: 0px;
@@ -54,26 +54,29 @@
 .innerBox{
   box-sizing: border-box;
   border-radius: 10px;
-  background-color:#bdbdbd;
-  margin: 15px;
-  height: 50vh;
-  padding: 15px;
+  background-color:#e0e0e0;
+  margin-left: 5px;
+  height: 35vh;
+  padding: 10px;
+  width: 100%;
 }
 .innerBox2{
   box-sizing: border-box;
   border-radius: 10px;
-  background-color:#bdbdbd;
-  margin: 15px;
+  background-color:#e0e0e0;
+  margin-top: 30px;
   height: 40vh;
   display: flex;
   flex-direction: row;
+  width: 100%;
+  margin-left: 5px;
 }
 
 .img{
 position: absolute;
   height: 70px;
   width: 70px;
-  margin-left: 75px;
+  margin-left: 70px;
   margin-top: 50px;
   margin-bottom: 0px;
   position: absolute;
@@ -81,15 +84,31 @@ position: absolute;
    border-radius: 50px;
 }
 .heading{
+  font-family:  'Times New Roman';
+  font-style: normal;
   position: absolute;
   margin-top: 15px;
- margin-left: 80px;
+ margin-left: 75px;
 }
 
-.heading1{
-  margin-left: 25px;
-  margin-top: 130px;
+.heading2{
+  font-family:  'Times New Roman';
+  font-style: normal;
   position: absolute;
+  margin-top: 150px;
+ margin-left: 80px;
+ font-size: 20px;
+ color: #1a237e;
+ font-weight: bold;
+}
+.heading1{
+  margin-left: 5px;
+  margin-top: 200px;
+  position: absolute;
+  font-size: 18px;
+  color: #1a237e;
+  font-family:  'Times New Roman';
+  font-style: normal;
 }
 
 .liks{
@@ -110,7 +129,7 @@ position: absolute;
 @media (max-width: 768px){
   
   .ideacard{
-    margin-top: 22vh;
+    margin-top: 24vh;
   }
   .side{
    display: none;

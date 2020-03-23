@@ -56,7 +56,6 @@
     text-transform: uppercase;
     color: rgba(0, 0, 0, 0.7);
     margin-left: 0px;
-    margin-top: 5px;
   }
   
   .links:hover{
@@ -64,13 +63,36 @@
     color: #ffff00 ;
     text-decoration: none;
   }
-
+  .addidea{
+    list-style: none;
+    text-transform: uppercase;
+    color: black;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+    font-style: inherit;
+    font-weight: bold;
+    margin-left: 0px;
+    font-size: 20px;
+    border: #ffff00;
+    background-color: #ffff00;
+    border-radius: 15px;
+   height: 65px;
+   width: 40%;
+   align-items: center;
+   margin-left: 290px;
+    margin-top:5px;
+}
+.addidea:hover{
+    color: white;
+}
 
   /*-----------mobile-responsive-----------*/
 
   @media (max-width: 768px){
+    .adds{
+      display: none;
+    }
     .container{
-      margin-top: 10vh;
+      margin-top: 12vh;
       margin-left: 0px;
       width: 100%;
     }
@@ -90,7 +112,7 @@
       list-style: none;
       text-transform: uppercase;
       color: black;
-      margin-left: 20px;
+      margin-left: 10px;
       margin-top: 5px;
     }
     .container ul .links:hover{

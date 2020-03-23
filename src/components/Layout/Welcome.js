@@ -191,6 +191,7 @@ class Welcome extends Component {
       return <div className={classes.innerBox2}>
         <h5 className={classes.heading}>Profile</h5>
         <div >
+          <h5 className={classes.heading2}>User:</h5>
           <img className={classes.img}
             src={this.props.user.user.profile_image_url}
             alt="image"

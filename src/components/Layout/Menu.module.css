@@ -145,7 +145,8 @@
     .inner{
         display: flex;
         flex-direction: row;
-        margin-left:auto;
+        margin-left:0px;
+        width: auto;
     }
     .container{
        margin-left: 70%;

@@ -6,7 +6,7 @@ import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap';
 class Navigator extends Component {
     render() {
         return(
-<Container>
+<Container className={classes.main}>
   <Navbar  className={classes.container} fixed="top" expand="md" variant="light">
   <ul className={classes.ul}>
       <li className={classes.li}><a className={classes.links} > #NEWEST </a></li>

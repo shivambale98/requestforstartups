@@ -4,7 +4,7 @@ body{
 
 
 .righttoolbar{
-    width:901px;
+    width:800px;
     height: auto;
     box-sizing: border-box;
     border-right:  0.5px  solid #e0e0e0;
@@ -32,7 +32,7 @@ body{
    height: auto;
    margin: 10px;
    margin-left: 20%; 
-   margin-top: 15px;
+   margin-top: 25px;
    display: flex;
    flex-direction: column; 
    align-items: left;
@@ -67,9 +67,9 @@ body{
     height: auto;
     width: auto;
     align-items: right;
-    margin-top: 5px;
+    margin-top: 15px;
     position: absolute;
-    margin-left: 50%;
+    margin-left: 85%;
 }
 
 .btn{
@@ -127,7 +127,7 @@ body{
     color: #616161  ;
     box-sizing: border-box;
     justify-content: space-between;
-    margin-left: 20%;
+    margin-left: 22%;
     margin-top: 0px;
     align-self: auto;
     margin-bottom: 10px;
@@ -163,8 +163,8 @@ body{
 .img{
     height: 70px;
     width: 70px;
-    margin-left: 6%;
-    margin-top: 15px;
+    margin-left: 12%;
+    margin-top: 25px;
     margin-bottom: 0px;
     position: absolute;
      border: 3px solid rgba(62, 69, 81, 0.3);

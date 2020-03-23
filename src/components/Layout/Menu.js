@@ -45,7 +45,7 @@ class Menu extends Component {
                 src={this.props.user.user.profile_image_url}
                 alt="image"
                 width={50}
-                height={60}
+                height={50}
             />
         }
     }
@@ -100,22 +100,20 @@ class Menu extends Component {
         return (
             <Fragment>
                 {/* mobile navbar */}
-                <div className={classes.mobile}>
+                <div className={classes.mobile} >
                     {this.renderRedirect()}
-                    <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
+                    <Navbar className={classes.mobile} fixed="top"  bg="dark" variant="dark">
                         <Navbar.Brand href="/">
                         {this.menulogo()}
                             <Mobilelogo className={classes.moblogo} />
-                           
                         </Navbar.Brand>
-                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                        <Navbar.Collapse id="responsive-navbar-nav">
+                        <div className={classes.inner}>
                             <Nav className="mr-auto">
-                                <Nav.Link href="/">HOME</Nav.Link>
+                                <Nav.Link href="/">Home</Nav.Link>
                                 <Nav.Link href={this.state.loglink} onClick={this.logout}>{this.state.logstatus}</Nav.Link>
                                 {this.addideabutmobile()}
                             </Nav>
-                        </Navbar.Collapse>
+                            </div>
                     </Navbar>
                 </div>
                 {/* mobile navbar */}

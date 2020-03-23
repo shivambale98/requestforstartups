@@ -8,24 +8,23 @@
   margin-top: 0px;
 }
 .ideacard{
-  display: block;
+  display: flex;
+  flex-direction: column;
   height: auto;
-
-  margin-top: 15vh;
+  margin-top: 12vh;
   margin-left: 0%;
 }
 
 .side{
-  width: 20vw;
-  height: 85vh;
-  margin-top: 15vh;
+  margin-left: 1069px;
+  width: 18vw;
+  height: 100vh;
   box-sizing: content-box;
-  border:  0.5px  solid #e0e0e0;
   flex-direction: column;
   justify-items: center;
-  display: flex;
+  display:table-cell;
+  flex-direction: column;
   position: absolute;
-  background-color:rgba(158, 158, 158, 0.1);
 }
 
 .plane{
@@ -109,8 +108,14 @@ position: absolute;
 
 
 @media (max-width: 768px){
+  
+  .ideacard{
+    margin-top: 22vh;
+  }
   .side{
    display: none;
+   position: fixed;
+
   }
   
 .container{
@@ -159,29 +164,13 @@ width: 100%;
   color: rgba(0, 0, 0, 0.7);
   margin-left: 0px;
   margin-top: 10px;
-}
-/*floating button css */
-.buts{
-  display:flex;
-  position: fixed; 
-  margin-left: 65%;
-  margin-top: 90%;
-  object-position: bottom;
-
-}
-
-.buts:active{
-  text-decoration: none;
-  list-style: none;
 } 
 }
-
+/*
 @media (height:731px) and (max-width:786px){
   .buts{
       display: block;
       position: fixed; 
-      margin-left: 65%;
-      margin-top: 500px;
       object-position: bottom;
      
   }
@@ -241,5 +230,5 @@ width: 100%;
               }
               }
   
-  
+  */
 

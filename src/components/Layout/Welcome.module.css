@@ -1,5 +1,4 @@
 *{ margin: 0; padding: 0; }
-
 .main{
   width: auto;
   height: auto;
@@ -8,31 +7,30 @@
   margin-top: 0px;
 }
 .ideacard{
-  display: block;
+  display: flex;
+  flex-direction: column;
   height: auto;
-
-  margin-top: 15vh;
+  margin-top: 12vh;
   margin-left: 0%;
 }
 
 .side{
-  width: 20vw;
-  height: 85vh;
-  margin-top: 15vh;
+  margin-left: 1069px;
+  width: 18vw;
+  height: 83vh;
   box-sizing: content-box;
-  border:  0.5px  solid #e0e0e0;
   flex-direction: column;
   justify-items: center;
-  display: flex;
+  display:table-cell;
+  flex-direction: column;
   position: absolute;
-  background-color:rgba(158, 158, 158, 0.1);
 }
 
 .plane{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-style: oblique;
-  color: #424242;
-  font-size: 18px;
+  color: black;
+  font-size: 20px;
   font-weight: bold;
  /* padding-top: 10px ; */
   margin-top: 0px;
@@ -55,26 +53,29 @@
 .innerBox{
   box-sizing: border-box;
   border-radius: 10px;
-  background-color:#bdbdbd;
-  margin: 15px;
-  height: 50vh;
-  padding: 15px;
+  background-color:#e0e0e0;
+  margin-left: 5px;
+  height: 35vh;
+  padding: 10px;
+  width: 100%;
 }
 .innerBox2{
   box-sizing: border-box;
   border-radius: 10px;
-  background-color:#bdbdbd;
-  margin: 15px;
+  background-color:#e0e0e0;
+  margin-top: 30px;
   height: 40vh;
   display: flex;
   flex-direction: row;
+  width: 100%;
+  margin-left: 5px;
 }
 
 .img{
 position: absolute;
   height: 70px;
   width: 70px;
-  margin-left: 75px;
+  margin-left: 70px;
   margin-top: 50px;
   margin-bottom: 0px;
   position: absolute;
@@ -82,15 +83,31 @@ position: absolute;
    border-radius: 50px;
 }
 .heading{
+  font-family:  'Times New Roman';
+  font-style: normal;
   position: absolute;
   margin-top: 15px;
- margin-left: 80px;
+ margin-left: 75px;
 }
 
-.heading1{
-  margin-left: 25px;
-  margin-top: 130px;
+.heading2{
+  font-family:  'Times New Roman';
+  font-style: normal;
   position: absolute;
+  margin-top: 150px;
+ margin-left: 80px;
+ font-size: 20px;
+ color: #1a237e;
+ font-weight: bold;
+}
+.heading1{
+  margin-left: 5px;
+  margin-top: 200px;
+  position: absolute;
+  font-size: 18px;
+  color: #1a237e;
+  font-family:  'Times New Roman';
+  font-style: normal;
 }
 
 .liks{
@@ -103,14 +120,27 @@ position: absolute;
   display: none;
 }
 
-
 /*----------------------------mobile version-----------------------------------------*/
 
 
 
 @media (max-width: 768px){
+  
+.main{
+  width: auto;
+  height: auto;
+  display: table;
+  width: 100%;
+  margin-top: 0px;
+
+}
+  .ideacard{
+    margin-top: 24vh;
+  }
   .side{
    display: none;
+   position: fixed;
+
   }
   
 .container{
@@ -159,30 +189,25 @@ width: 100%;
   color: rgba(0, 0, 0, 0.7);
   margin-left: 0px;
   margin-top: 10px;
-}
-/*floating button css */
+} 
 .buts{
-  display:flex;
+  display: block;
   position: fixed; 
-  margin-left: 65%;
-  margin-top: 90%;
+  margin-left: 80%;
+  margin-top: 60vh;
   object-position: bottom;
 }
 
-.buts:active{
-  text-decoration: none;
-  list-style: none;
-} 
 }
+
 
 @media (height:731px) and (max-width:786px){
   .buts{
-      display: block;
+    display: block;
       position: fixed; 
-      margin-left: 65%;
-      margin-top: 500px;
       object-position: bottom;
-     
+      margin-left: 80%;
+      margin-top: 60vh;
   }
   
   .buts:active{
@@ -193,10 +218,10 @@ width: 100%;
   
   @media (height:812px) and (max-width:786px){
       .buts{
-        display: block; 
+        display: block;
           position: fixed; 
-          margin-left: 65%;
-          margin-top: 500px;
+          margin-left: 80vw;
+          margin-top: 55vh;
           object-position: bottom;
          
       }
@@ -209,10 +234,10 @@ width: 100%;
   
       @media (height:568px) and (max-width:786px) {
           .buts{
-            display: block; 
+            display: block;
             position: fixed; 
               margin-left: 60%;
-              margin-top: 350px;
+              margin-top: 35vh;
               object-position: bottom;
              
           }
@@ -226,10 +251,10 @@ width: 100%;
   
           @media (height:783px) and (max-width:470px) {
               .buts{
-                  display: block;
+                display: block;
                   position: fixed; 
                   margin-left: 65%;
-                  margin-top: 550px;
+                  margin-top: 55vh;
                   object-position: bottom;
                  
               }
@@ -240,5 +265,5 @@ width: 100%;
               }
               }
   
-  
+
 

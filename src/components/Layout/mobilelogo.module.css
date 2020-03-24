@@ -1,19 +1,19 @@
 .logs{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    margin-left: 120px;
 }
 .Logo{
     height: 60px;
     width: 70px;
-    margin-left: 2px;
+    margin-left: 0px;
     margin-top: 0px;
     position: relative; 
 }
 .img{
     height: 60px;
     width: 60px;
-    margin-left: 60%;
+    margin-left: 10px;
     margin-bottom: 0px;
     margin-top: 0%;
     position: absolute;

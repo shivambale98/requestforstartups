@@ -2,7 +2,7 @@
 .container{
     display: block;
     width: 80%;
-    height: 15vh;
+    height: 12vh;
     box-sizing: border-box;
     border: 0.5px ;
     border:  0.5px  solid #e0e0e0;
@@ -14,7 +14,6 @@
     position: fixed;
     flex-direction: row;
     margin-top: 0px;
-    opacity: 100%;
     margin-bottom: 15hv;
     background: white;
   }
@@ -46,7 +45,7 @@
     text-decoration: none;
   }
   .image{
-    height: 95%;
+    height: 100%;
     width: auto;
     position: relative;
     margin-left: 30%;
@@ -57,11 +56,84 @@
     text-transform: uppercase;
     color: rgba(0, 0, 0, 0.7);
     margin-left: 0px;
-    margin-top: 5px;
   }
   
   .links:hover{
     list-style: none;
     color: #ffff00 ;
     text-decoration: none;
+  }
+  .addidea{
+    list-style: none;
+    text-transform: uppercase;
+    color: black;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+    font-style: inherit;
+    font-weight: bold;
+    margin-left: 0px;
+    font-size: 20px;
+    border: #ffff00;
+    background-color: #ffff00;
+    border-radius: 15px;
+   height: 65px;
+   width: 40%;
+   align-items: center;
+   margin-left: 290px;
+    margin-top:5px;
+}
+.addidea:hover{
+    color: white;
+}
+
+  /*-----------mobile-responsive-----------*/
+
+  @media (max-width: 768px){
+    .adds{
+      display: none;
+    }
+    .container{
+      margin-top: 12vh;
+      margin-left: 0px;
+      width: 100%;
+    }
+    .container ul{
+      width: 50%;
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      color: #1a237e;
+      font-weight: bold;
+      font-size: 25px;
+      margin-left: 2px;
+      margin-top: 0px;
+    } 
+    .container ul li {
+      list-style: none;
+      text-transform: uppercase;
+      color: black;
+      margin-left: 10px;
+      margin-top: 5px;
+    }
+    .container ul .links:hover{
+      list-style: none;
+      color: #ffea00;
+      text-decoration: none;
+    }
+    .image{
+    display: none;
+    }
+    .links{
+      list-style: none;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.7);
+      margin-left: 0px;
+      margin-top: 5px;
+    }
+    
+    .links:hover{
+      list-style: none;
+      color: #ffff00 ;
+      text-decoration: none;
+    }
   }

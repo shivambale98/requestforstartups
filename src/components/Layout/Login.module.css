@@ -6,6 +6,10 @@ width: 80%;
 margin-left: 20%;
 margin-top: 0px;
 position: absolute;
+background-color: #e0e0e0;
+}
+.mobile{
+    display: none;
 }
 .back{
     background-image: url('../../assets/man.jpg');
@@ -18,7 +22,7 @@ position: absolute;
     position: absolute;
 }
 .head{
-    margin-top:10%;
+    margin-top:10px;
     margin-left: 17%;
     color: #212121;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -32,23 +36,32 @@ position: absolute;
     color: #212121;
 }
 .head3{
-    margin-top:30px;
-    margin-left: 20%;
+    margin-top:5px;
+    margin-left: 18%;
     color: #212121;
     font-weight: bold;
+    position: relative;
 }
 .head4{
     margin-top:5px;
     margin-left: 23%;
     color: #212121;
 }
+.Cards{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10px;
+    width: auto;
+}
+.man{
+    height: 330px;
+}
 .button{
     display: block;
-    margin-top: 5%;
-    margin-left: 40%;
+    margin-top: 0%;
+    margin-left: 45%;
 }
 .buts{
-    background-color: rgba(244, 67, 54, 0.7);
     color: #e0e0e0;
     text-decoration: none;
     text-transform: capitalize;
@@ -60,13 +73,20 @@ position: absolute;
 @media only screen and (max-width:767px) {
     .loginstuff {
         background-color: #e0e0e0;
-        height: 90%;
+        height: 88%;
         width: 100%;
         margin-left: 0px;
-        margin-top: 0px;
+        margin-top: 12vh;
         position: absolute;
      }
-    
+     .mobile{
+         display: block;
+         margin-left: 5%;
+         margin-right: 5%;
+     }
+     .smallman{
+         height: 250px;
+     }
 .head{
     margin-top:20px;
     margin-left: 5%;
@@ -74,9 +94,12 @@ position: absolute;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-style: inherit;
     font-weight: bold;
+    font-size: 14px;
 }
 
 .head2{
+    font-size: 14px;
+    font-weight: bold;
     margin-top:10px;
     margin-left: 5%;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -84,6 +107,7 @@ position: absolute;
     color: #212121;
 }
 .head3{
+    font-size: 14px;
     margin-top:15px;
     margin-left: 5%;
     color: #212121;
@@ -98,11 +122,14 @@ position: absolute;
     color: black;
     font-size: 24px;
 }
+.Cards{
+   display: none;
+}
 
 .button{
     display: block;
-    margin-top: 30%;
-    margin-left: 30%;
+    margin-top: 0%;
+    margin-left: 40%;
     width: auto;
     align-items: center;
     font-size: 14px;

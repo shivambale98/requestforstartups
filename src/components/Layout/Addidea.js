@@ -56,7 +56,6 @@ class Addidea extends Component {
           </ul>
         </div>
         <div className={classes.main}>
-
           <div className={classes.form}>
             <MDBContainer>
               <MDBRow>

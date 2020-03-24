@@ -66,22 +66,23 @@
   .addidea{
     list-style: none;
     text-transform: uppercase;
-    color: black;
+    color:white;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
     font-style: inherit;
     font-weight: bold;
     margin-left: 0px;
     font-size: 20px;
     border: #ffff00;
-    background-color: #ffff00;
+    background-color: #0d47a1;
     border-radius: 15px;
    height: 65px;
    width: 40%;
    align-items: center;
    margin-left: 290px;
-    margin-top:5px;
+    margin-top:0px;
 }
 .addidea:hover{
+  background-color: #90caf9 ;
     color: white;
 }
 

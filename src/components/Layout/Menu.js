@@ -125,12 +125,6 @@ class Menu extends Component {
                         <Link className={classes.links} to='/' ><button className={classes.nots}><li className={classes.li}> <HomeOutlinedIcon style={{ fontSize: 50 }} />  HOME  </li> </button></Link>
                         <Link className={classes.links} to={this.state.loglink}> <button onClick={this.logout} className={classes.nots}> <li className={classes.li}> <LockOpenIcon style={{ fontSize: 50 }} /> {this.state.logstatus} </li> </button></Link>
                     </ul>
-                    <Link to='/addidea' className={classes.links} >
-                <button className={classes.addidea}>
-                    <EmojiObjectsIcon style={{ fontSize: 50 }} />
-                    ADD-IDEA
-                </button>
-            </Link >
                     {this.addideabut()}
                 </div>
             </Fragment>

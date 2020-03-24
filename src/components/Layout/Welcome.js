@@ -247,7 +247,7 @@ class Welcome extends Component {
     return (
       <Aux>
         <div className={classes.main}>
-          <Navigator setideas={this.setideas} />
+          <Navigator setideas={this.setideas} user={this.props.user} />
 
           {this.renderRedirect()}
           <Modal open={this.state.showupvotemodel} toggle={this.upvotebuttonHandler.bind(this)}>

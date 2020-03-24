@@ -117,7 +117,6 @@ class Menu extends Component {
                     </Navbar>
                 </div>
                 {/* mobile navbar */}
-
                 <div className={classes.Menustyle} >
                     <Logo className={classes.logs} />
                     {this.renderRedirect()}

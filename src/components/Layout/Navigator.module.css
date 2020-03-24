@@ -93,7 +93,6 @@
     }
     .container{
       display: flex;
-      position: relative;
       margin-top: 12vh;
       margin-left: 0px;
       width: 100%;

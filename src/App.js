@@ -96,6 +96,7 @@ class App extends Component {
           <Route path="/" exact component={welcome} />
           <Route path="/ideas" component={welcome} />
           <Route path="/login" component={login} />
+          <Route path="/login/:token" component={login} />
           <Route path="/addidea" component={Addidea} />
           <Route path='/logout' component={welcome} />
           <Route path='/myideas' component={my_ideas} />

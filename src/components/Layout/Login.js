@@ -8,6 +8,7 @@ import TwitterLogin from 'react-twitter-auth';
 import Cookies from 'js-cookie';
 import jwt from 'jsonwebtoken';
 import { Button } from 'react-bootstrap';
+
 import Card from 'react-bootstrap/Card'
 import man from '../../assets/man.jpg';
 import small_man from '../../assets/small_man.png';
@@ -66,37 +67,37 @@ class Login extends Component {
         <h3 className={classes.head2}>then rub a genie lamp</h3>
         <h4 className={classes.head3}>Incase of lack in genie lamps you can Login and add your idea here</h4>
         <div className={classes.Cards}>
-        <Card>
-        <Card.Img className={classes.man} variant="top" src={man} />
-        <Card.Body>
-        <Card.Title>Let's go login Using Twitter</Card.Title>
-        <Card.Text>
-         Enter the coolest startup ideas that could some day take you to unbelievable heights
+          <Card>
+            <Card.Img className={classes.man} variant="top" src={man} />
+            <Card.Body>
+              <Card.Title>Let's go login Using Twitter</Card.Title>
+              <Card.Text>
+                Enter the coolest startup ideas that could some day take you to unbelievable heights
         </Card.Text>
-        <div className={classes.button}>
-          <a href={mainurl + '/auth/twitter/reverse'} >
-            <Button variant="danger" className={classes.buts}>LOGIN</Button>
-          </a>
+              <div className={classes.button}>
+                <a href={mainurl + '/auth/twitter/reverse'} >
+                  <Button variant="danger" className={classes.buts}>LOGIN</Button>
+                </a>
+              </div>
+            </Card.Body>
+          </Card>
         </div>
-      </Card.Body>
-      </Card>
-      </div>
-      <div className={classes.mobile}>
-      <Card>
-      <Card.Img className={classes.smallman} variant="top" src={small_man} />
-      <Card.Body>
-      <Card.Title>Let's go login Using Twitter</Card.Title>
-        <Card.Text>
-         Enter the coolest startup ideas that could some day take you to unbelievable heights
+        <div className={classes.mobile}>
+          <Card>
+            <Card.Img className={classes.smallman} variant="top" src={small_man} />
+            <Card.Body>
+              <Card.Title>Let's go login Using Twitter</Card.Title>
+              <Card.Text>
+                Enter the coolest startup ideas that could some day take you to unbelievable heights
         </Card.Text>
-     <div className={classes.button}>
-          <a href={mainurl + '/auth/twitter/reverse'} >
-            <Button variant="danger" className={classes.buts}>LOGIN</Button>
-          </a>
+              <div className={classes.button}>
+                <a href={mainurl + '/auth/twitter/reverse'} >
+                  <Button variant="danger" className={classes.buts}>LOGIN</Button>
+                </a>
+              </div>
+            </Card.Body>
+          </Card>
         </div>
-  </Card.Body>
-</Card>      
-      </div>
       </div>
     )
   };

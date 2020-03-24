@@ -15,10 +15,10 @@ const Ideaforms = (props) => (
             <div className={classes.parent}>
                 <div >
                     <img className={classes.img}
-                          src={props.pic}
-                          alt="image"
-                          width={70}
-                          height={70}
+                        src={props.pic}
+                        alt="image"
+                        width={70}
+                        height={70}
                     />
                 </div>
                 <Container maxWidth="lg">
@@ -33,14 +33,14 @@ const Ideaforms = (props) => (
                     <a className={classes.comment} onClick={props.onComment} class="fa fa-comment" ><b> Comment</b></a>
                 </div>
                 <div className={classes.buttn}>
-                    <button className={classes.btn} onClick={props.onUpvote} style={{ background: props.upvotecolor }}>  
+                    <button className={classes.btn} onClick={props.onUpvote} style={{ color: props.upvotecolor }}>
                         <div className={classes.icon}>
-                        < ArrowDropUpIcon/>
-                        <p className={classes.vote}>
-                        {props.upvote}
-                         </p>
+                            < ArrowDropUpIcon />
+                            <p className={classes.vote}>
+                                {props.upvote}
+                            </p>
                         </div>
-                </button>
+                    </button>
                 </div>
             </div>
 

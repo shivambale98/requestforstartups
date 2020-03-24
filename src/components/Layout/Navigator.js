@@ -65,27 +65,31 @@ class Navigator extends Component {
 
   render() {
     return (
-      <Container>
-        <Navbar className={classes.container} fixed="top" expand="md" variant="light">
-          <ul className={classes.ul}>
-            <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'NEWEST')}> #NEWEST </a></li>
-            <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'TRENDING')}> #TRENDING </a></li>
-            <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'TOP')}> #TOP </a></li>
-          </ul>
-          <div className={classes.adds}>
-            <button className={classes.addidea} onClick={this.addideahandler.bind(this)}>
-              <EmojiObjectsIcon style={{ fontSize: 50 }} />
+      <div>
+        <Container>
+          <Navbar className={classes.container} fixed="top" expand="md" variant="light">
+            <ul className={classes.ul}>
+              <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'NEWEST')}> #NEWEST </a></li>
+              <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'TRENDING')}> #TRENDING </a></li>
+              <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'TOP')}> #TOP </a></li>
+            </ul>
+            <div className={classes.adds}>
+              <button className={classes.addidea} onClick={this.addideahandler.bind(this)}>
+                <EmojiObjectsIcon style={{ fontSize: 50 }} />
                     ADD-IDEA
                 </button>
-          </div>
-        </Navbar>
-        <Modal open={this.state.addideamodel} toggle={this.addideahandler.bind(this)}>
-          <ModalHeader>Login Error</ModalHeader>
-          <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
-          <ModalBody><Link className={classes.liks} to='/login'><b>login</b></Link> to addIdea</ModalBody>
-        </Modal>
-        {this.addidearedirecthandler()}
-      </Container>
+            </div>
+          </Navbar>
+        </Container>
+        <div>
+          <Modal open={this.state.addideamodel} toggle={this.addideahandler.bind(this)}>
+            <ModalHeader>Login Error</ModalHeader>
+            <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
+            <ModalBody><Link className={classes.liks} to='/login'><b>login</b></Link> to addIdea</ModalBody>
+          </Modal>
+          {this.addidearedirecthandler()}
+        </div>
+      </div>
     );
   }
 }

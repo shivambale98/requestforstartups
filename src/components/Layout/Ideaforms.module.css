@@ -184,6 +184,7 @@ body{
         margin-bottom: 0px;
         display: flex;
         margin-left: 0%; 
+        position: relative;
     }
     
     .parent{

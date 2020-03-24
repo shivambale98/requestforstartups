@@ -11,11 +11,12 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Modal, ModalBody, ModalHeader } from "shards-react";
-import FloatButton from './Floatbutton';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
 import Navigator from './Navigator.js';
 import { TableCell } from '@material-ui/core';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+
+
 
 
 const jwt = require('jsonwebtoken');
@@ -269,10 +270,15 @@ class Welcome extends Component {
             <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
             <ModalBody><Link className={classes.liks} to='/login'><b>login</b></Link> to addIdea</ModalBody>
           </Modal>
+         
            {this.addidearedirecthandler()}
            <div className={classes.ideacard}>
           {ideas}
-          
+          <div className={classes.buts}>
+          <Fab color="primary" aria-label="add">
+          <AddIcon />
+          </Fab>
+          </div>
           <TableCell className={classes.side}>
           <div>
             <div className={classes.plane}>

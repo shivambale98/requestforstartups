@@ -1,7 +1,7 @@
 .logs{
     display: flex;
     flex-direction: row;
-    margin-left: 120px;
+    margin-left: 0%;
 }
 .Logo{
     height: 60px;
@@ -13,9 +13,9 @@
 .img{
     height: 60px;
     width: 60px;
-    margin-left: 10px;
     margin-bottom: 0px;
     margin-top: 0%;
+    margin-left: 80%;
     position: absolute;
      border: 3px solid rgba(62, 69, 81, 0.3);
      border-radius: 50px;

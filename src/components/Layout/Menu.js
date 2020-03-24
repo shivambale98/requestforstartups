@@ -100,19 +100,19 @@ class Menu extends Component {
         return (
             <Fragment>
                 {/* mobile navbar */}
-                <div className={classes.mobile} >
+                <div className={classes.mobile}>
                     {this.renderRedirect()}
                     <Navbar className={classes.mobile} fixed="top"  bg="dark" variant="dark">
+                    <Navbar.Brand href="/">
+                        <Mobilelogo className={classes.moblogo} />
+                 </Navbar.Brand>
+                 {this.menulogo()}
                     <div className={classes.inner}>
                             <Nav className="mr-auto">
                                 <Nav.Link href="/">Home</Nav.Link>
                                 <Nav.Link href={this.state.loglink} onClick={this.logout}>{this.state.logstatus}</Nav.Link>
                                 {this.addideabutmobile()}
                             </Nav>
-                            <Navbar.Brand href="/">
-                        {this.menulogo()}
-                        <Mobilelogo className={classes.moblogo} />
-                        </Navbar.Brand>
                      </div>
                  </Navbar>
                 </div>

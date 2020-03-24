@@ -138,7 +138,8 @@
   @media (max-width: 768px)
   {
     .mobile{
-        display: block;
+        display: flex;
+        flex-direction: row;
         margin: 0px;
         width: 100%;
     }

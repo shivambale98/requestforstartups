@@ -83,7 +83,7 @@ class Navigator extends Component {
               <button className={classes.addidea} onClick={this.addideahandler.bind(this)}>
                 <EmojiObjectsIcon style={{ fontSize: 50 }} />
                     ADD-IDEA
-                </button>
+               </button>
             </div>
           </Navbar>
         </Container>

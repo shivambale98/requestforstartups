@@ -16,9 +16,6 @@ import { TableCell } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
-
-
-
 const jwt = require('jsonwebtoken');
 var decodedtoken, upvotecolor;
 const mainurl = require('../../links');

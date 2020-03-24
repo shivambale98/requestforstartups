@@ -66,13 +66,6 @@ class Navigator extends Component {
   render() {
     return (
       <Container>
-
-        <Modal open={this.state.addideamodel} toggle={this.addideahandler.bind(this)}>
-          <ModalHeader>Login Error</ModalHeader>
-          <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
-          <ModalBody><Link className={classes.liks} to='/login'><b>login</b></Link> to addIdea</ModalBody>
-        </Modal>
-        {this.addidearedirecthandler()}
         <Navbar className={classes.container} fixed="top" expand="md" variant="light">
           <ul className={classes.ul}>
             <li className={classes.li}><a className={classes.links} onClick={this.orderideas.bind(this, 'NEWEST')}> #NEWEST </a></li>
@@ -86,6 +79,12 @@ class Navigator extends Component {
                 </button>
           </div>
         </Navbar>
+        <Modal open={this.state.addideamodel} toggle={this.addideahandler.bind(this)}>
+          <ModalHeader>Login Error</ModalHeader>
+          <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
+          <ModalBody><Link className={classes.liks} to='/login'><b>login</b></Link> to addIdea</ModalBody>
+        </Modal>
+        {this.addidearedirecthandler()}
       </Container>
     );
   }

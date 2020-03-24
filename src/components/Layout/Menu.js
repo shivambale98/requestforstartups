@@ -100,19 +100,19 @@ class Menu extends Component {
         return (
             <Fragment>
                 {/* mobile navbar */}
-                <div className={classes.mobile} >
+                <div className={classes.mobile}>
                     {this.renderRedirect()}
                     <Navbar className={classes.mobile} fixed="top" bg="dark" variant="dark">
+                        <Navbar.Brand href="/">
+                            <Mobilelogo className={classes.moblogo} />
+                        </Navbar.Brand>
+                        {this.menulogo()}
                         <div className={classes.inner}>
                             <Nav className="mr-auto">
                                 <Nav.Link href="/">Home</Nav.Link>
                                 <Nav.Link href={this.state.loglink} onClick={this.logout}>{this.state.logstatus}</Nav.Link>
                                 {this.addideabutmobile()}
                             </Nav>
-                            <Navbar.Brand href="/">
-                                {this.menulogo()}
-                                <Mobilelogo className={classes.moblogo} />
-                            </Navbar.Brand>
                         </div>
                     </Navbar>
                 </div>
@@ -125,13 +125,7 @@ class Menu extends Component {
                         <Link className={classes.links} to='/' ><button className={classes.nots}><li className={classes.li}> <HomeOutlinedIcon style={{ fontSize: 50 }} />  HOME  </li> </button></Link>
                         <Link className={classes.links} to={this.state.loglink}> <button onClick={this.logout} className={classes.nots}> <li className={classes.li}> <LockOpenIcon style={{ fontSize: 50 }} /> {this.state.logstatus} </li> </button></Link>
                     </ul>
-                    {/* <Link to='/addidea' className={classes.links} >
-                <button className={classes.addidea}>
-                    <EmojiObjectsIcon style={{ fontSize: 50 }} />
-                    ADD-IDEA
-                </button>
-            </Link >
-                    {this.addideabut()} */}
+                    {this.addideabut()}
                 </div>
             </Fragment>
         )

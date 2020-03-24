@@ -114,8 +114,7 @@ body{
     font-weight: bold;
 }
 .btn:hover {
-    color:#ffea00;
-    
+    color:#0d47a1;
 }
 
 
@@ -220,21 +219,21 @@ body{
     
     .title{
         font-weight: normal;
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
+        font-family: sans-serif;
         font-style: inherit;
         color: black;
         text-align: left;
-        font-size: 16px;
+        font-size: 18px;
         margin-top: 0px;
         padding: 5px;
     }
     .head {
         font-weight: bold;
-        font-family: 'Times New Roman', Times, serif;
+        font-family: 'Times New Roman';
         font-style: inherit;
         color: #1a237e;
         text-align: left;
-        font-size: 18px;
+        font-size: 20px;
         margin-top: 2px;
         padding: 5px;
     }
@@ -268,7 +267,7 @@ body{
     }
     
 .btn:hover {
-    color:#ffea00;
+    color:#0d47a1;
     background-color: transparent;
 }
 

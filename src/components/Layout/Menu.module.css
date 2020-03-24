@@ -6,7 +6,7 @@
 .Menustyle{
     background-image: url('../../assets/brain-smally.png');
     background-repeat: no-repeat;
-    background-position-y: 80%;
+    background-position-y: 90%;
     background-position-x:50% ;
     background-size: 140%;
     width: 20%;
@@ -111,7 +111,7 @@
     font-style: inherit;
     font-weight: bold;
     margin-left: 0px;
-    border: white;
+    border: black;
     background-color:white;
     border-radius: 15px;
    height: 65px;
@@ -125,7 +125,7 @@
 
 .nots:hover{
     color: white;
-    background-color: #ffff00;
+    background-color: #0d47a1;
     text-decoration: none;
 }
 
@@ -146,17 +146,15 @@
         display: flex;
         flex-direction: row;
         margin-left:0px;
-        width: auto;
+        width: 80%;
     }
-    .container{
-       margin-left: 70%;
-      }
       .Menustyle{
         display: none;
     } 
     .moblogo{
         width: auto;
         height: auto;
+        margin-right: 2px;
     }
     .mrauto{
         margin-top: 5px;

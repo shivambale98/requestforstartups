@@ -1,114 +1,104 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
 import classes from './Login.module.css';
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import nsVerticalLogo from '../../assets/NS_logo_Vertical.svg';
 import LoginFormError from '../Layout/LoginFormError';
+import TwitterLogin from 'react-twitter-auth';
 import Cookies from 'js-cookie';
 import jwt from 'jsonwebtoken';
-const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-//const mainurl = 'http://localhost:5000';//
-//import * as EmailValidator from "email-validator";
-//import * as Yup from "yup";
+import { Button } from 'react-bootstrap';
 
+import Card from 'react-bootstrap/Card'
+import man from '../../assets/man.jpg';
+import small_man from '../../assets/small_man.png';
+
+
+const mainurl = require('../../links');
 class Login extends Component {
-
   state = {
-    email: '',
-    password: '',
-    redirect: false,
-    errormsg: undefined
+    isAuthenticated: false,
+    user: null,
+    token: '',
+    redirect: false
   }
 
-  handelchnage = (event) => {
-    if (event.target.name == 'email') {
-      this.setState({ email: event.target.value });
-    }
-    if (event.target.name == 'password') {
-      this.setState({ password: event.target.value });
-    }
-  }
+  componentDidMount() {
+    //console.log(window.location.pathname);
+    var path = window.location.pathname;
+    var token, decodedtoken;
+    var enctoken = path.split('/login/')[1];
+    if (enctoken) {
+      fetch(mainurl + '/getusertoken/' + enctoken)
+        .then(res => {
+          return res.json();
+        })
+        .then(resdata => {
+          Cookies.set('jwttoken', resdata.decodedtoken);
 
-  submit = () => {
-    fetch(mainurl + '/login', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password
-      })
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(resdata => {
-        var message = resdata.message;
-        if (message === 'done') {
-          const token = resdata.token;
-          Cookies.set('jwttoken', token);
-          this.props.updatestate(true);
-        } else {
           this.setState({
-            errormsg: message
+            redirect: true,
+            token: resdata.token
           });
-          console.log(message);
-        }
-        //this.props.history.push('/');
-      })
-      .catch(err => {
-        console.log(err);
+
+          //this.props.updatestate(resdata.token);
+
+        });
+
+    } else {
+      this.setState({
+        redirect: false
       });
+    }
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      this.props.updatestate(this.state.token);
+      return <Redirect to='/' />
+    }
   }
 
   render() {
-
-    const errorb = <LoginFormError error={this.state.errormsg} />
-
     return (
-      < div className={classes.back} >
-        <h1 className={classes.header}>Request for startups </h1>
-        <img src={nsVerticalLogo} className={classes.images} alt="NS_Logo" />
-        <div className={classes.Loginstyle}>
-          <MDBContainer>
-            <MDBRow>
-              <MDBCol md="12">
-                <form class="login-form" action={mainurl + '/login'} method="POST">
-                  {errorb}
-                  <p className="h2 text-center mb-4">Sign in</p>
-                  <div className="grey-text">
-                    <MDBInput class="form-control"
-                      label="Email"
-                      type="text"
-                      icon="user"
-                      id="email"
-                      name="email"
-                      placeholder="Email"
-                      value={this.state.email}
-                      onChange={this.handelchnage}
-                      validate='true'
-                    />
-                    <MDBInput class="form-control"
-                      label="Password"
-                      icon="lock"
-                      type="password"
-                      id="password"
-                      name="password"
-                      placeholder="password"
-                      value={this.state.password}
-                      onChange={this.handelchnage}
-                    />
-                  </div>
-                  <div className="text-center">
-                    <MDBBtn onClick={this.submit}>Login</MDBBtn>
-                  </div>
-                </form>
-              </MDBCol>
-            </MDBRow>
-          </MDBContainer>
-        </div >
-      </div >
+      <div className={classes.loginstuff}>
+        {this.renderRedirect()}
+        <h2 className={classes.head}>Want to see your startup idea become a reality?</h2>
+        <h3 className={classes.head2}>then rub a genie lamp</h3>
+        <h4 className={classes.head3}>Incase of lack in genie lamps you can Login and add your idea here</h4>
+        <div className={classes.Cards}>
+          <Card>
+            <Card.Img className={classes.man} variant="top" src={man} />
+            <Card.Body>
+              <Card.Title>Let's go login Using Twitter</Card.Title>
+              <Card.Text>
+                Enter the coolest startup ideas that could some day take you to unbelievable heights
+        </Card.Text>
+              <div className={classes.button}>
+                <a href={mainurl + '/auth/twitter/reverse'} >
+                  <Button variant="danger" className={classes.buts}>LOGIN</Button>
+                </a>
+              </div>
+            </Card.Body>
+          </Card>
+        </div>
+        <div className={classes.mobile}>
+          <Card>
+            <Card.Img className={classes.smallman} variant="top" src={small_man} />
+            <Card.Body>
+              <Card.Title>Let's go login Using Twitter</Card.Title>
+              <Card.Text>
+                Enter the coolest startup ideas that could some day take you to unbelievable heights
+        </Card.Text>
+              <div className={classes.button}>
+                <a href={mainurl + '/auth/twitter/reverse'} >
+                  <Button variant="danger" className={classes.buts}>LOGIN</Button>
+                </a>
+              </div>
+            </Card.Body>
+          </Card>
+        </div>
+      </div>
     )
   };
 }

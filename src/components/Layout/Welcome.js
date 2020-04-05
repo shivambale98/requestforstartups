@@ -1,37 +1,24 @@
 import React, { Component } from 'react';
-import './Welcome.css';
+import classes from './Welcome.module.css';
 import { BrowserRouter as Router, Redirect } from "react-router-dom";
-import {
-  MDBNavbar,
-  MDBNavbarBrand,
-  MDBNavbarNav,
-  MDBNavItem,
-  MDBNavLink,
-  MDBNavbarToggler,
-  MDBCollapse,
-  MDBMask,
-  MDBRow,
-  MDBCol,
-  MDBIcon,
-  MDBBtn,
-  MDBView,
-  MDBContainer,
-  MDBCard,
-  MDBCardBody,
-  MDBInput,
-  MDBFormInline,
-  MDBAnimation
-} from "mdbreact";
 import Ideaforms from './Ideaforms';
 import Aux from '../../hoc/Auxiliary';
 import Pagination from './Pagination';
-
-
 import Cookies from 'js-cookie';
-const jwt = require('jsonwebtoken');
+import { Col, Row, Container } from 'react-bootstrap';
+import Menu from './Menu';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import MenuIcon from '@material-ui/icons/Menu';
+import { Modal, ModalBody, ModalHeader } from "shards-react";
+import Navigator from './Navigator.js';
+import { TableCell } from '@material-ui/core';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
-const mainurl = 'https://gentle-retreat-77560.herokuapp.com';
-//const mainurl = 'http://localhost:5000';//
+const jwt = require('jsonwebtoken');
+var decodedtoken, upvotecolor;
+const mainurl = require('../../links');
 
 var recordlist = [];
 
@@ -41,7 +28,11 @@ class Welcome extends Component {
     records: [],
     link: '',
     redirect: false,
-    id: ''
+    id: '',
+    loggedin: false,
+    showupvotemodel: false,
+    addideamodel: false,
+    addidearedirect: false
   };
   //pagination
   //const [currentPage, setCurrentPage] = useState(1);
@@ -59,6 +50,16 @@ class Welcome extends Component {
   //pagination
 
   componentDidMount() {
+    var path = window.location.href;
+    var dom = path.split('ideas/')[1];
+    if (dom) {
+      this.getfilteredideas(dom);
+    } else {
+      this.getallideas();
+    }
+  }
+
+  getallideas = () => {
     const ideasurl = mainurl + '/';
     fetch(ideasurl)
       .then(res => {
@@ -66,12 +67,43 @@ class Welcome extends Component {
       })
       .then(resdata => {
         console.log(resdata);
-        this.setState({ records: resdata.recordlist });
+        this.setState({ records: resdata.ideas });
       })
       .catch(err => {
         console.log(err);
       });
 
+    if (!this.props.user) {
+      this.setState({ loggedin: false });
+    } else {
+      this.setState({ loggedin: true });
+    }
+  }
+
+
+  getfilteredideas(domain) {
+    console.log(domain);
+    if (domain === "ALL") {
+      this.getallideas();
+    } else {
+      fetch(mainurl + '/idea/filterideas/' + domain)
+        .then(res => {
+          return res.json();
+        })
+        .then(resdata => {
+          this.setState({ records: resdata.ideas });
+          //console.log(resjson);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+    }
+
+  }
+
+  setideas = (ideas) => {
+    this.setState({ records: ideas });
   }
 
   renderRedirect = () => {
@@ -80,61 +112,56 @@ class Welcome extends Component {
     }
   }
 
-  upvotebuttonHandler = recordid => {
-    const token = Cookies.get('jwttoken');
-    var decodedtoken;
-    try {
-      decodedtoken = jwt.verify(token, 'heyphil123');
-    } catch (err) {
-      console.log(err);
+  upvotebuttonHandler = (recordid, index) => {
+    var user;
+    if (this.props.user) {
+      var user = this.props.user.user;
     }
-    if (decodedtoken) {
-      this.setState({
-        loggedin: true
-      });
-    } else {
-      this.setState({
-        loggedin: false
-      });
-    }
-    if (this.state.loggedin) {
+    if (this.props.user) {
       var formdate = new FormData();
-      formdate.append('userid', decodedtoken.userid);
-      if (this.state.loggedin) {
-        const url = mainurl + "/idea/upvote/" + recordid;
-        fetch(url, {
-          method: 'POST',
-          body: formdate
+      formdate.append('userid', this.props.user.record_id);
+      const url = mainurl + "/idea/upvote/" + recordid;
+      fetch(url, {
+        method: 'POST',
+        body: formdate
+      })
+        .then(res => {
+          return res.json();
         })
-          .then(res => {
-            return res.json();
-          })
-          .then(resdata => {
-            var { record } = resdata;
-            var { id } = record;
-            var { link } = resdata;
-            console.log(resdata);
-            var temp = [];
-            this.state.records.map(recordt => {
-              if (recordt.id === id) {
-                var temprecord = recordt;
-                recordt = record;
-                recordt.email = temprecord.email;
-                temp.push(recordt);
-              } else {
-                temp.push(recordt);
-              }
-            });
-            console.log(temp);
+        .then(resdata => {
+          if (resdata.idea.upvote > this.state.records[index].upvote) {
+            var psudoupvoters = [{ id: this.props.user.record_id }];
+          } else {
+            var psudoupvoters = [{ id: 0 }];
+          }
+          var psudouser = this.state.records[index].user;
+          resdata.idea.user = psudouser;
+          resdata.idea.Upvoters = psudoupvoters;
+          this.state.records[index] = resdata.idea;
+          this.setState({ records: this.state.records });
+        })
+        .catch(err => {
+          console.log(err);
+        });
 
-            this.setState({ records: temp });
-            this.setState({ link: link });
-          })
-          .catch(err => {
-            console.log(err);
-          });
+    } else {
+      this.setState({ showupvotemodel: !this.state.showupvotemodel });
+    }
 
-      }
+  }
+
+  addideahandler() {
+    if (this.props.user) {
+      this.setState({ addidearedirect: true });
+    } else {
+      this.setState({ addideamodel: !this.state.addideamodel });
+    }
+
+  }
+
+  addidearedirecthandler = () => {
+    if (this.state.addidearedirect) {
+      return <Redirect to={'/addidea'} />
     }
   }
 
@@ -145,6 +172,26 @@ class Welcome extends Component {
     });
     //this.props.history.push();
   }
+
+
+  userprofile = () => {
+    if (this.props.user) {
+      return <div className={classes.innerBox2}>
+        <h5 className={classes.heading}>Profile</h5>
+        <div >
+          <h5 className={classes.heading2}>User:</h5>
+          <img className={classes.img}
+            src={this.props.user.user.profile_image_url}
+            alt="image"
+            width={30}
+            height={30}
+          />
+        </div>
+        <p className={classes.heading1}>{this.props.user.user.screen_name}: loggedin</p>
+      </div>
+
+    }
+  };
 
   toggleCollapse = collapseID => () =>
     this.setState(prevState => ({
@@ -160,81 +207,93 @@ class Welcome extends Component {
       />
     );
 
+
     //console.log(this.state.records);
     const ideas = this.state.records.map((record, index) => {
-      return <Ideaforms
-        email={record.data.userlu || record.data.screen_name}
-        problem={record.data.Problem}
-        upvote={record.data.upvote}
-        onUpvote={this.upvotebuttonHandler.bind(this, record.id)}
-        onComment={this.onComment.bind(this, record.id)}
-      />
+      upvotecolor = undefined;
+      if (!this.state.loggedin) {
+        return <Ideaforms
+          name={record.user.name}
+          problem={record.problem}
+          upvote={record.upvote}
+          onUpvote={this.upvotebuttonHandler.bind(this, record.id, index)}
+          onComment={this.onComment.bind(this, record.id)}
+          pic={record.user.profilePicture}
+        />
+      } else {
+        if (record.Upvoters) {
+          record.Upvoters.forEach(voter => {
+            if (voter.id === this.props.user.record_id) {
+              upvotecolor = '#ffff00';
+            }
+          });
+          //console.log(upvotecolor);
+        }
+        return <Ideaforms
+          name={record.user.name}
+          problem={record.problem}
+          upvote={record.upvote}
+          onUpvote={this.upvotebuttonHandler.bind(this, record.id, index)}
+          onComment={this.onComment.bind(this, record.id)}
+          pic={record.user.profilePicture}
+          upvotecolor={upvotecolor}
+        />
+      }
     });
 
     return (
       <Aux>
-        {this.renderRedirect()}
-        <div id="classicformpage">
-          <MDBView>
-            <MDBMask className="d-flex justify-content-center align-items-center gradient">
-              <MDBContainer>
-                <MDBRow>
+        <div className={classes.main}>
+          <Navigator setideas={this.setideas} user={this.props.user} />
 
-                  <MDBAnimation
-                    type="fadeInLeft"
-                    delay=".3s"
-                    className="white-text text-center text-md-left col-md-6 mt-xl-5 mb-5"
-                  >
-                    <h1 className="h1-responsive font-weight-bold">
-                      Welcome To Request For Startups
-                </h1>
-                    <hr className="hr-light" />
-                    <h6 className="mb-4">
-                      "Bad shit is coming. It always is in a startup. The odds of getting from launch to liquidity without some kind of disaster happening are one in a thousand. So don't get demoralized."--Paul Graham, co-founder of Y Combinator
-                <br />
-                      <br />
-                      <br />
-                      Please Sign-Up to Add Your startup Idea
-                </h6>
-
-                  </MDBAnimation>
-                </MDBRow>
-              </MDBContainer>
-            </MDBMask>
-          </MDBView>
+          {this.renderRedirect()}
+          <Modal open={this.state.showupvotemodel} toggle={this.upvotebuttonHandler.bind(this)}>
+            <ModalHeader>Login Error</ModalHeader>
+            <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
+            <ModalBody><Link className={classes.liks} to='/login'><b>login</b></Link> to upvote</ModalBody>
+          </Modal>
+          <Modal open={this.state.addideamodel} toggle={this.addideahandler.bind(this)}>
+            <ModalHeader>Login Error</ModalHeader>
+            <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
+            <ModalBody><Link className={classes.liks} to='/login'><b>login</b></Link> to addIdea</ModalBody>
+          </Modal>
+          {this.addidearedirecthandler()}
+          <div className={classes.ideacard}>
+            {ideas}
+            <div className={classes.buts}>
+              <Fab color="primary" aria-label="add"
+                onClick={this.addideahandler.bind(this)}
+              >
+                <AddIcon />
+              </Fab>
+            </div>
+            <TableCell className={classes.side}>
+              <div>
+                <div className={classes.plane}>
+                  <div className={classes.innerBox}>
+                    <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "ALL")} >#ALL</a> <br />
+                    <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Web-Mobile Development")} >#Web/mobile Dev</a> <br />
+                    <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Blockchain-Crypto")} >#blockchain/crypto</a>  <br />
+                    <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Hardware-Elctronics")} >#Elctronics</a>  <br />
+                    <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Social")} >#Social</a><br />
+                    <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Gaame Development")} >#Game-Dev</a> <br />
+                    <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "AI-ML")} >#AI/ML</a>
+                    <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "IOT")} >#IOT</a>
+                  </div>
+                  <div>
+                  </div>
+                  {this.userprofile()}
+                </div>
+              </div>
+            </TableCell>
+          </div>
         </div>
-        <div id="text">
-          <h2>This is where we provide the solution to every problem </h2>
-        </div>
-        <aside id="words">
-          <h2 id="question">Got a startup idea?</h2>
-          <p id="answer">Click the Add Idea Button above and post your startup Idea also  listen to solutions that other users have to offer in the comments section.</p>
-          <h2 id="question1">wanna Tweet your idea?</h2>
-          <p id="answers"><a href="#" id="link"><u><b>Tweet it</b></u></a> and include @startuprequest
-      <br />Upvote if you find the best of the
-      <br />solution to your problem.
-      <br />help developers
-      <br />create better products.
-      <br />
-            <br />
-            <br />
-            <br />Made by <a href="https://twitter.com/RohitMartires?s=08" id="link"><u><b>Rohit Martires</b></u></a> and
-      <br /><a href="https://twitter.com/BaleShivam" id="link"><u><b>Shivam Bale</b></u></a> under the
-      <br /> guidance of <a href="https://twitter.com/NovaSemitaHQ?s=08" id="link"><u><b>Nova Semita.</b></u></a>
-            <br /> Follow us on Twitter to
-      <br />see other things we do.
-      </p>
-        </aside>
-        {ideas}
-        <Pagination />
       </Aux>
+
     );
   }
+
 }
 
 
 export default Welcome;
-
-
-
-//postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} //

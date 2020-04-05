@@ -45,7 +45,7 @@ class Menu extends Component {
                 src={this.props.user.user.profile_image_url}
                 alt="image"
                 width={50}
-                height={60}
+                height={50}
             />
         }
     }
@@ -102,24 +102,21 @@ class Menu extends Component {
                 {/* mobile navbar */}
                 <div className={classes.mobile}>
                     {this.renderRedirect()}
-                    <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
+                    <Navbar className={classes.mobile} fixed="top" bg="dark" variant="dark">
                         <Navbar.Brand href="/">
-                        {this.menulogo()}
                             <Mobilelogo className={classes.moblogo} />
-                           
                         </Navbar.Brand>
-                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                        <Navbar.Collapse id="responsive-navbar-nav">
+                        {this.menulogo()}
+                        <div className={classes.inner}>
                             <Nav className="mr-auto">
-                                <Nav.Link href="/">HOME</Nav.Link>
+                                <Nav.Link href="/">Home</Nav.Link>
                                 <Nav.Link href={this.state.loglink} onClick={this.logout}>{this.state.logstatus}</Nav.Link>
                                 {this.addideabutmobile()}
                             </Nav>
-                        </Navbar.Collapse>
+                        </div>
                     </Navbar>
                 </div>
                 {/* mobile navbar */}
-
                 <div className={classes.Menustyle} >
                     <Logo className={classes.logs} />
                     {this.renderRedirect()}
@@ -127,13 +124,7 @@ class Menu extends Component {
                         <Link className={classes.links} to='/' ><button className={classes.nots}><li className={classes.li}> <HomeOutlinedIcon style={{ fontSize: 50 }} />  HOME  </li> </button></Link>
                         <Link className={classes.links} to={this.state.loglink}> <button onClick={this.logout} className={classes.nots}> <li className={classes.li}> <LockOpenIcon style={{ fontSize: 50 }} /> {this.state.logstatus} </li> </button></Link>
                     </ul>
-                    <Link to='/addidea' className={classes.links} >
-                <button className={classes.addidea}>
-                    <EmojiObjectsIcon style={{ fontSize: 50 }} />
-                    ADD-IDEA
-                </button>
-            </Link >
-                    {this.addideabut()}
+                    {/* {this.addideabut()} */}
                 </div>
             </Fragment>
         )

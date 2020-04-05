@@ -11,7 +11,7 @@ import AddComment from './Addcomment';
 import Paper from '@material-ui/core/Paper';
 import Commentbox from './commentbox';
 import Container from '@material-ui/core/Container';
-
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 
 
 const jwt = require('jsonwebtoken');
@@ -176,6 +176,7 @@ class Comment extends Component {
       return <div className={classes.innerBox2}>
         <h5 className={classes.heading}>Profile</h5>
         <div >
+        <h5 className={classes.heading2}>User:</h5>
           <img className={classes.img23}
             src={this.props.user.user.profile_image_url}
             alt="image"
@@ -230,12 +231,17 @@ class Comment extends Component {
                   </Paper>
                 </div>
               </ Container>
-              <div className={classes.ThumbsUp}>
-                <div className={classes.buttn}>
-                  <button className={classes.btn} onClick={this.upvotebuttonHandler.bind(this)} style={{ background: upvotecolor }}>
-                    {this.state.upvote}   Upvote
+              <div className={classes.buttn}>
+                  <button className={classes.btn} onClick={this.upvotebuttonHandler.bind(this)} >
+                  <div className={classes.icon}>
+                  < ArrowDropUpIcon/>
+                  <p className={classes.vote}>
+                    {this.state.upvote}  
+                    </p>
+                    </div> 
                     </button>
                 </div>
+              <div className={classes.ThumbsUp}>
                 <Link
                   onClick={this.clickmodel}
                   className={classes.titles}>

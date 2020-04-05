@@ -11,12 +11,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Modal, ModalBody, ModalHeader } from "shards-react";
-import FloatButton from './Floatbutton';
+import Navigator from './Navigator.js';
+import { TableCell } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import Navigator from './Navigator.js';
-
-
 
 const jwt = require('jsonwebtoken');
 var decodedtoken, upvotecolor;
@@ -51,7 +49,7 @@ class Welcome extends Component {
 
   //pagination
 
- componentDidMount() {
+  componentDidMount() {
     var path = window.location.href;
     var dom = path.split('ideas/')[1];
     if (dom) {
@@ -59,7 +57,7 @@ class Welcome extends Component {
     } else {
       this.getallideas();
     }
-}
+  }
 
   getallideas = () => {
     const ideasurl = mainurl + '/';
@@ -80,7 +78,7 @@ class Welcome extends Component {
     } else {
       this.setState({ loggedin: true });
     }
-}
+  }
 
 
   getfilteredideas(domain) {
@@ -104,18 +102,8 @@ class Welcome extends Component {
 
   }
 
-  orderideas(type) {
-    fetch(mainurl + '/idea/orderideas/' + type)
-      .then(res => {
-        return res.json();
-      })
-      .then(resdata => {
-        this.setState({ records: resdata.ideas });
-        console.log(resdata);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  setideas = (ideas) => {
+    this.setState({ records: ideas });
   }
 
   renderRedirect = () => {
@@ -191,6 +179,7 @@ class Welcome extends Component {
       return <div className={classes.innerBox2}>
         <h5 className={classes.heading}>Profile</h5>
         <div >
+          <h5 className={classes.heading2}>User:</h5>
           <img className={classes.img}
             src={this.props.user.user.profile_image_url}
             alt="image"
@@ -235,7 +224,7 @@ class Welcome extends Component {
         if (record.Upvoters) {
           record.Upvoters.forEach(voter => {
             if (voter.id === this.props.user.record_id) {
-              upvotecolor = 'rgba(244, 3, 3, 0.3)';
+              upvotecolor = '#ffff00';
             }
           });
           //console.log(upvotecolor);
@@ -255,30 +244,48 @@ class Welcome extends Component {
     return (
       <Aux>
         <div className={classes.main}>
-        <Navigator />
+          <Navigator setideas={this.setideas} user={this.props.user} />
+
           {this.renderRedirect()}
           <Modal open={this.state.showupvotemodel} toggle={this.upvotebuttonHandler.bind(this)}>
             <ModalHeader>Login Error</ModalHeader>
             <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
             <ModalBody><Link className={classes.liks} to='/login'><b>login</b></Link> to upvote</ModalBody>
           </Modal>
-
           <Modal open={this.state.addideamodel} toggle={this.addideahandler.bind(this)}>
             <ModalHeader>Login Error</ModalHeader>
             <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
             <ModalBody><Link className={classes.liks} to='/login'><b>login</b></Link> to addIdea</ModalBody>
           </Modal>
-          <div className={classes.buts}>
-           <Fab 
-              color="primary" 
-              aria-label="add"
-              onClick={this.addideahandler.bind(this)}>
-             <AddIcon />
-           </Fab>
-           </div>
-           <div className={classes.ideacard}>
-           {this.addidearedirecthandler()}
-          {ideas}
+          {this.addidearedirecthandler()}
+          <div className={classes.ideacard}>
+            {ideas}
+            <div className={classes.buts}>
+              <Fab color="primary" aria-label="add"
+                onClick={this.addideahandler.bind(this)}
+              >
+                <AddIcon />
+              </Fab>
+            </div>
+            <TableCell className={classes.side}>
+              <div>
+                <div className={classes.plane}>
+                  <div className={classes.innerBox}>
+                    <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "ALL")} >#ALL</a> <br />
+                    <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Web-Mobile Development")} >#Web/mobile Dev</a> <br />
+                    <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Blockchain-Crypto")} >#blockchain/crypto</a>  <br />
+                    <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Hardware-Elctronics")} >#Elctronics</a>  <br />
+                    <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Social")} >#Social</a><br />
+                    <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "Gaame Development")} >#Game-Dev</a> <br />
+                    <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "AI-ML")} >#AI/ML</a>
+                    <a className={classes.fields} onClick={this.getfilteredideas.bind(this, "IOT")} >#IOT</a>
+                  </div>
+                  <div>
+                  </div>
+                  {this.userprofile()}
+                </div>
+              </div>
+            </TableCell>
           </div>
         </div>
       </Aux>
@@ -290,10 +297,3 @@ class Welcome extends Component {
 
 
 export default Welcome;
-
-
-
-
-
-
-

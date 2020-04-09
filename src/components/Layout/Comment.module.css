@@ -98,7 +98,7 @@ a:visited {
     
 }
 
-
+.btn:focus {outline:0;}
 
 .img{
   height: 70px;
@@ -400,6 +400,8 @@ align-items: left;
 justify-content: left;
 align-self: stretch;
 }
+
+.btn:focus {outline:0;}
 .icon{
   display: flex;
   flex-direction: row;
@@ -415,7 +417,7 @@ align-self: stretch;
   font-weight: bold;
 }
 .btn:hover {
-  color:#ffea00;
+  color:#0d47a1;
   background-color: transparent;
 }
 
@@ -677,6 +679,8 @@ margin-left: 0px;
   justify-content: left;
   align-self: stretch;
   }
+  
+.btn:focus {outline:0;}
   .icon{
     display: flex;
     flex-direction: row;

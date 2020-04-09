@@ -129,7 +129,7 @@
     text-decoration: none;
 }
 
-
+.nots:focus {outline:0;} 
 
 
 /*---------------------mobile resposive version*---------------------*/

@@ -84,6 +84,7 @@
   background-color: #90caf9 ;
     color: white;
 }
+.addidea:focus {outline:0;}
 
   /*-----------mobile-responsive-----------*/
 

@@ -165,7 +165,7 @@ class Comment extends Component {
   checkifupvote = () => {
     if (this.state.loggedin) {
       if (this.state.whoupvotelu.includes(this.state.decodedtoken.user_id)) {
-        upvotecolor = 'rgba(244, 3, 3, 0.3)';
+        upvotecolor = 'rgba(244, 3, 3, 0.3)';  vgt5 
       }
     }
   };
@@ -257,7 +257,6 @@ class Comment extends Component {
                   </ModalBody>
                 </Modal>
               </div>
-
               <div>
                 <Modal open={this.state.commmentmodel} toggle={this.togcommentmodel}>
                   <ModalHeader>Login Error</ModalHeader>
@@ -265,15 +264,12 @@ class Comment extends Component {
                   <ModalBody><Link to='/login'>login</Link> to comment</ModalBody>
                 </Modal>
               </div>
-
               <Modal open={this.state.showupvotemodel} toggle={this.upvotebuttonHandler.bind(this)}>
                 <ModalHeader>Login Error</ModalHeader>
                 <ModalBody>👋 Hello there, looks like your not logged in</ModalBody>
                 <ModalBody><Link to='/login'>login</Link> to upvote</ModalBody>
               </Modal>
-
             </div>
-
             {comments}
             <div className={classes.side}>
               <div className={classes.plane}>

@@ -165,7 +165,7 @@ class Comment extends Component {
   checkifupvote = () => {
     if (this.state.loggedin) {
       if (this.state.whoupvotelu.includes(this.state.decodedtoken.user_id)) {
-        upvotecolor = 'rgba(244, 3, 3, 0.3)';  vgt5 
+        upvotecolor = 'rgba(244, 3, 3, 0.3)';  //vgt5 
       }
     }
   };

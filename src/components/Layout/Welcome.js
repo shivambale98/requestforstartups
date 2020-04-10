@@ -15,15 +15,20 @@ import Navigator from './Navigator.js';
 import { TableCell } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+import Avatar from "@material-ui/core/Avatar";
 
 
 
 const jwt = require('jsonwebtoken');
 var decodedtoken, upvotecolor;
 const mainurl = require('../../links');
-
 var recordlist = [];
+
+
 
 class Welcome extends Component {
   state = {
@@ -37,6 +42,8 @@ class Welcome extends Component {
     addideamodel: false,
     addidearedirect: false
   };
+
+  
   //pagination
   //const [currentPage, setCurrentPage] = useState(1);
   //const [postPerPage, setPostsPerPage] = useState(10);
@@ -51,7 +58,6 @@ class Welcome extends Component {
   //const paginate = pageNumber => setCurrentPage(pageNumber)
 
   //pagination
-
   componentDidMount() {
     var path = window.location.href;
     var dom = path.split('ideas/')[1];
@@ -180,9 +186,10 @@ class Welcome extends Component {
   userprofile = () => {
     if (this.props.user) {
       return <div className={classes.innerBox2}>
+         <Card className={classes.card}>
+         <CardContent className={classes.card}>
         <h5 className={classes.heading}>Profile</h5>
         <div >
-          <h5 className={classes.heading2}>User:</h5>
           <img className={classes.img}
             src={this.props.user.user.profile_image_url}
             alt="image"
@@ -190,7 +197,9 @@ class Welcome extends Component {
             height={30}
           />
         </div>
-        <p className={classes.heading1}>{this.props.user.user.screen_name}: loggedin</p>
+        <p className={classes.heading1}>{this.props.user.user.screen_name}</p>
+        </CardContent>
+        </Card>
       </div>
 
     }

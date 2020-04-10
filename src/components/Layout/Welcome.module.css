@@ -60,23 +60,23 @@
   width: 100%;
 }
 .innerBox2{
-  box-sizing: border-box;
-  border-radius: 10px;
-  background-color:#e0e0e0;
   margin-top: 30px;
-  height: 40vh;
   display: flex;
   flex-direction: row;
-  width: 100%;
   margin-left: 5px;
 }
-
+.card{
+  height: 40vh;
+  width: 100%;
+  align-items: center;
+  background-color:#e0e0e0 ;
+}
 .img{
 position: absolute;
   height: 70px;
   width: 70px;
   margin-left: 70px;
-  margin-top: 50px;
+  margin-top: 70px;
   margin-bottom: 0px;
   position: absolute;
    border: 3px solid rgba(62, 69, 81, 0.3);
@@ -85,26 +85,17 @@ position: absolute;
 .heading{
   font-family:  'Times New Roman';
   font-style: normal;
+  font-size: 22px;
   position: absolute;
   margin-top: 15px;
  margin-left: 75px;
 }
 
-.heading2{
-  font-family:  'Times New Roman';
-  font-style: normal;
-  position: absolute;
-  margin-top: 150px;
- margin-left: 80px;
- font-size: 20px;
- color: #1a237e;
- font-weight: bold;
-}
+
 .heading1{
-  margin-left: 5px;
-  margin-top: 200px;
-  position: absolute;
-  font-size: 18px;
+  text-align: center;
+  margin-top: 180px;
+  font-size: 22px;
   color: #1a237e;
   font-family:  'Times New Roman';
   font-style: normal;
